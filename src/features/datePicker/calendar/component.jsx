@@ -16,7 +16,6 @@ export class CalendarComponent extends Component {
   }
 
   chooseDate = (e) => {
-    console.log(+e.currentTarget.firstElementChild.innerHTML);
     if(+e.currentTarget.firstElementChild.innerHTML >= 1 && +e.currentTarget.firstElementChild.innerHTML <= 31) {
       this.props.chooseDate(+e.currentTarget.firstElementChild.innerHTML);
       this.props.hideCalendar();
