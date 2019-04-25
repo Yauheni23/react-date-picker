@@ -19,6 +19,7 @@ export class CalendarComponent extends Component {
     console.log(+e.currentTarget.firstElementChild.innerHTML);
     if(+e.currentTarget.firstElementChild.innerHTML >= 1 && +e.currentTarget.firstElementChild.innerHTML <= 31) {
       this.props.chooseDate(+e.currentTarget.firstElementChild.innerHTML);
+      this.props.hideCalendar();
     }
   };
 
@@ -91,9 +92,7 @@ export class CalendarComponent extends Component {
   render() {
     const displayedDate = this.props.displayedDate;
     return (
-      <div className={'datepicker ' + ((this.props.isVisibleCalendar) ? 'activeBlock' : '')}
-           onClick={this.onClickByInput}
-      >
+      <div className={'datepicker ' + ((this.props.isVisibleCalendar) ? 'activeBlock' : '')}>
         <section className="dateInputWrapper">
           <select id="month"
                   defaultValue={displayedDate.getMonth()}

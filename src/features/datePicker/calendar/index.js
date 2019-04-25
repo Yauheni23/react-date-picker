@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { CalendarComponent } from './component';
 import { getSelectedDate, getDisplayedDate, getIsVisibleCalendar } from '../selector';
 import { createStructuredSelector } from 'reselect';
-import * as actions from './actions';
+import * as actions from '../actions';
 
-export { calendarActions, calendarReducer } from './reducer';
+export { datePickerActions, datePickerReducer } from '../reducer';
 
 export const mapStateToProps = createStructuredSelector({
   selectedDate: getSelectedDate(),

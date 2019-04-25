@@ -1,19 +1,18 @@
 import { createSelector } from 'reselect';
 
-export const selectCalendar = state => state.calendarReducer;
-export const selectInput = state => state.inputReducer;
+export const datePickerReducer = state => state.datePickerReducer;
 
 export const getSelectedDate = () => createSelector(
-  selectInput,
+  datePickerReducer,
   home => home.selectedDate,
 );
 
 export const getDisplayedDate = () => createSelector(
-  selectCalendar,
+  datePickerReducer,
   home => home.displayedDate,
 );
 
 export const getIsVisibleCalendar = () => createSelector(
-  selectInput,
+  datePickerReducer,
   home => home.isVisibleCalendar,
 );

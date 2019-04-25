@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import * as actions from './actions';
+import * as actions from '../actions';
 import { InputComponent } from './component';
 import { getSelectedDate } from '../selector';
 import { createStructuredSelector } from 'reselect';
 
-export { inputActions, inputReducer } from './reducer';
+export { datePickerActions, datePickerReducer } from '../reducer';
 
 export const mapStateToProps = createStructuredSelector({
   selectedDate: getSelectedDate(),

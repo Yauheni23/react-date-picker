@@ -6,7 +6,7 @@ import '../../App.css';
 export class DatePickerComponent extends Component {
   render() {
     return (
-      <div style={{width: '80px'}}>
+      <div style={{width: '80px', position: 'relative'}}>
         <InputComponent/>
         <CalendarComponent/>
       </div>

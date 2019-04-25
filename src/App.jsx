@@ -1,9 +1,8 @@
 import React from 'react';
-import { Provider } from 'react-redux'; //компонент для связзи React и Redux
-import { store } from './store/store'; // наш подготовленный стор
-import Router from './router'; // наш роутер
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import Router from './router';
 
-//наконец все подключаем
 const App = () => (
   <Provider store={store}>
     <Router/>

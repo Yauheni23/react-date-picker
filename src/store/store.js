@@ -1,11 +1,11 @@
-import {createStore, applyMiddleware, compose} from 'redux';//createStore - создает наше хранилище данных, applyMiddleware - подключает мидлвари
-import {createBrowserHistory} from 'history'; // позваляет подключиться истории браузера
-import rootReducer from './rootReducer'; // тут сборка из наших редюсеров
-import {routerMiddleware} from 'connected-react-router'; // перехватчик истории браузера для Redux
-import logger from 'redux-logger'; // Мидлваря для логирования изменений стора
+import {createStore, applyMiddleware, compose} from 'redux';
+import {createBrowserHistory} from 'history';
+import rootReducer from './rootReducer';
+import {routerMiddleware} from 'connected-react-router';
+import logger from 'redux-logger';
 import thunk from 'redux-thunk'; // мидлваря для асинхронных событий
 
-export const history = createBrowserHistory(); // создаем объект истории
+export const history = createBrowserHistory();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

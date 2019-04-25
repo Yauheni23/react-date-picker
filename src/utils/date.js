@@ -47,22 +47,3 @@ export function  getArrayDaysInMonth(date) {
   }
   return arrayDaysInMonth;
 }
-//
-// export function formatForInputTime(addHours = 0, addMinutes = 0) {
-//   let hours = this.getHours() + addHours;
-//   let minutes = this.getMinutes() + addMinutes;
-//
-//   if (minutes > 0 && minutes <= 30) {
-//     minutes = 30;
-//   } else if (minutes > 30) {
-//     minutes = 0;
-//     hours++;
-//   }
-//   if (hours >= 24) {
-//     hours = hours % 24;
-//   }
-//   (hours <= 9) ? hours = '0' + hours : hours + '';
-//   (minutes <= 9) ? minutes = '0' + minutes : minutes + '';
-//
-//   return `${ hours }:${ minutes }`;
-// }
