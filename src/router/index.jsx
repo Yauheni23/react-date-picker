@@ -4,13 +4,17 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { history } from '../store/store';
 
-import TestComponent from '../features/testFeature'; // импорт нашей новой фичи
+import InputComponent from '../features/datePicker/input'; // импорт нашей новой фичи
+import CalendarComponent from '../features/datePicker/calendar'
+import {DatePickerComponent} from '../features/datePicker/component'
 
 const Router = () => (
   <ConnectedRouter history={history}>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={TestComponent} />
+        <Route exact path="/" component={DatePickerComponent}/>
+        <Route exact path="/input" component={InputComponent}/>
+        <Route exact path="/calendar" component={CalendarComponent}/>
       </Switch>
     </BrowserRouter>
   </ConnectedRouter>
