@@ -6,14 +6,20 @@ import { getArrayDaysInMonth } from '../../../utils/date';
 import './style.css';
 
 export class CalendarComponent extends Component {
-  componentDidMount() {
-    document.addEventListener('click', (e) => {
-      const domNode = ReactDOM.findDOMNode(this);
-      if(!domNode || !domNode.parentElement.contains(e.target)) {
-          this.hideCalendar();
-      }
-    }, false);
+  componentDidUpdate() {
+    if(this.props.isVisibleCalendar) {
+      document.addEventListener('click', this.hideCalendarIfBlur, false);
+    } else {
+      document.removeEventListener('click', this.hideCalendarIfBlur, false);
+    }
   }
+
+  hideCalendarIfBlur = (e) => {
+    const domNode = ReactDOM.findDOMNode(this);
+    if(!domNode || !domNode.parentElement.contains(e.target)) {
+      this.hideCalendar();
+    }
+  };
 
   chooseDate = (e) => {
     if(+e.currentTarget.firstElementChild.innerHTML >= 1 && +e.currentTarget.firstElementChild.innerHTML <= 31) {
@@ -62,8 +68,8 @@ export class CalendarComponent extends Component {
       return (
         <div key={day + index}
              className={((day !== '') ? 'dayOfMonth enabled ' : 'dayOfMonth ')
-        + ((displayedDate.getFullYear() === selectedDate.getFullYear() && displayedDate.getMonth() === selectedDate.getMonth()
-          && +day === selectedDate.getDate()) ? 'selected ' : '')}
+             + ((displayedDate.getFullYear() === selectedDate.getFullYear() && displayedDate.getMonth() === selectedDate.getMonth()
+               && +day === selectedDate.getDate()) ? 'selected ' : '')}
              onClick={this.chooseDate}
         >
           <span className={((index === 0 || index === 6) ? 'weekend ' : '')
@@ -93,17 +99,10 @@ export class CalendarComponent extends Component {
     return (
       <div className={'datepicker ' + ((this.props.isVisibleCalendar) ? 'activeBlock' : '')}>
         <section className="dateInputWrapper">
-          <select id="month"
-                  defaultValue={displayedDate.getMonth()}
-                  onChange={this.changeMonth}
-          >
+          <select id="month" defaultValue={displayedDate.getMonth()} onChange={this.changeMonth}>
             {this.renderSelectMonth()}
           </select>
-          <input type="number"
-                 defaultValue={displayedDate.getFullYear()}
-                 id="year"
-                 onChange={this.changeYear}
-          />
+          <input type="number" defaultValue={displayedDate.getFullYear()} id="year" onChange={this.changeYear}/>
         </section>
         <section className="daysOfWeek">
           {this.renderDaysOfWeek()}

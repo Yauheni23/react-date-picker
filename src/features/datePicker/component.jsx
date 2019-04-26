@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import InputComponent from './input'
 import CalendarComponent from './calendar'
-import '../../App.css';
+import '../../App.less';
 
 export class DatePickerComponent extends Component {
   render() {
