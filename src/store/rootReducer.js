@@ -5,6 +5,8 @@ import { datePickerReducer} from '../features/datePicker';
 export default function rootReducer(history) {
   return combineReducers({
     router: connectRouter(history),
-    datePickerReducer: datePickerReducer,
+    '0':  datePickerReducer('0'),
+    '1':  datePickerReducer('1'),
+    '2':  datePickerReducer('2'),
   });
 }

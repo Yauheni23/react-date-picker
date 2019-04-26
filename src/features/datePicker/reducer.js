@@ -5,48 +5,57 @@ export const datePickerActions = {
   CHANGE_MONTH: 'CHANGE_MONTH',
   CHANGE_YEAR: 'CHANGE_YEAR',
   CHOOSE_DATE: 'CHOOSE_DATE',
+  SET_INIT_STATE: 'SET_INIT_STATE',
 };
 
 const initialState = {
-  selectedDate: new Date(),
-  displayedDate: new Date(),
-  isVisibleCalendar: false,
+  selectedDate: null,
+  displayedDate: null,
+  isVisibleCalendar: null,
+  uuid: null,
 };
 
-export function datePickerReducer(state = initialState, action) {
+export const datePickerReducer = (namespace) => (state = initialState, action) => {
   switch(action.type) {
-    case datePickerActions.SHOW_CALENDAR:
+    case `${namespace}/${datePickerActions.SHOW_CALENDAR}`:
       return {
         ...state,
         isVisibleCalendar: true,
       };
-    case datePickerActions.HIDE_CALENDAR:
+    case `${namespace}/${datePickerActions.HIDE_CALENDAR}`:
       return {
         ...state,
         isVisibleCalendar: false,
       };
-    case datePickerActions.CHANGE_SELECTED_DATE:
+    case `${namespace}/${datePickerActions.CHANGE_SELECTED_DATE}`:
       return {
         ...state,
         selectedDate: action.payload,
       };
-    case datePickerActions.CHANGE_MONTH:
+    case `${namespace}/${datePickerActions.CHANGE_MONTH}`:
       return {
         ...state,
         displayedDate: new Date(state.displayedDate.getFullYear(), action.payload),
       };
-    case datePickerActions.CHANGE_YEAR:
+    case `${namespace}/${datePickerActions.CHANGE_YEAR}`:
       return {
         ...state,
         displayedDate: new Date(action.payload, state.displayedDate.getMonth()),
       };
-    case datePickerActions.CHOOSE_DATE:
+    case `${namespace}/${datePickerActions.CHOOSE_DATE}`:
       return {
         ...state,
         selectedDate: new Date(state.displayedDate.getFullYear(), state.displayedDate.getMonth(), action.payload),
+      };
+    case `${namespace}/${datePickerActions.SET_INIT_STATE}`:
+      return {
+        ...state,
+        selectedDate: action.payload.selectedDate || new Date(),
+        displayedDate: action.payload.displayedDate || new Date(),
+        isVisibleCalendar: action.payload.isVisibleCalendar || false,
       };
 
     default:
       return state;
   }
-}
+};

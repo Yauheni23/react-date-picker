@@ -1,41 +1,47 @@
-import { datePickerActions} from './reducer'
+import { datePickerActions } from './reducer'
 
-export function changeMonth(month) {
+export function changeMonth(namespace,month) {
   return {
-    type: datePickerActions.CHANGE_MONTH,
+    type: `${namespace}/${datePickerActions.CHANGE_MONTH}`,
     payload: month,
   };
 }
 
-export function changeYear(year) {
+export function changeYear(namespace,year) {
   return {
-    type: datePickerActions.CHANGE_YEAR,
+    type: `${namespace}/${datePickerActions.CHANGE_YEAR}`,
     payload: year,
   };
 }
 
-export function chooseDate(day) {
+export function chooseDate(namespace,day) {
   return {
-    type: datePickerActions.CHOOSE_DATE,
+    type: `${namespace}/${datePickerActions.CHOOSE_DATE}`,
     payload: day,
   };
 }
 
-export function showCalendar() {
+export function showCalendar(namespace,) {
   return {
-    type: datePickerActions.SHOW_CALENDAR,
+    type: `${namespace}/${datePickerActions.SHOW_CALENDAR}`,
   };
 }
 
-export function hideCalendar() {
+export function hideCalendar(namespace,) {
   return {
-    type: datePickerActions.HIDE_CALENDAR,
+    type: `${namespace}/${datePickerActions.HIDE_CALENDAR}`,
   };
 }
 
-export function changeSelectedDate(date) {
+export function changeSelectedDate(namespace,date) {
   return {
-    type: datePickerActions.CHANGE_SELECTED_DATE,
+    type: `${namespace}/${datePickerActions.CHANGE_SELECTED_DATE}`,
     payload: date,
+  };
+}
+export function setInitState(namespace,state) {
+  return {
+    type: `${namespace}/${datePickerActions.SET_INIT_STATE}`,
+    payload: state,
   };
 }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  validateDateFromInput, convertFromFormatInputInDate,
-  convertFromDateInFormatInput,
-} from '../../../utils/date';
+import {validateDateFromInput, convertFromFormatInputInDate, convertFromDateInFormatInput} from '../../../utils/date';
+
 
 export class InputComponent extends Component {
+
   showCalendar = () => {
     this.props.showCalendar();
   };
