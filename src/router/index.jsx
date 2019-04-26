@@ -4,13 +4,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { history } from '../store/store';
 
-import {DatePickerComponent} from '../features/datePicker/component'
+import DatePickerComponent from '../features/datePicker';
+import TwoDatePickerComponent from '../features/component';
 
 const Router = () => (
   <ConnectedRouter history={history}>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={DatePickerComponent}/>
+        <Route exact path="/datepicker" component={DatePickerComponent}/>
+        <Route exact path="/" component={TwoDatePickerComponent}/>
       </Switch>
     </BrowserRouter>
   </ConnectedRouter>
