@@ -1,6 +1,9 @@
 import { createSelector } from 'reselect';
 
-export const datePickerReducer = state => state.datePickerReducer;
+export const datePickerReducer = (state, props) => {
+  return state.datePickerReducer.filter((el) => +props.id === +el.id)[0];
+};
+
 
 export const getSelectedDate = () => createSelector(
   datePickerReducer,

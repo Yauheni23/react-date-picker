@@ -4,6 +4,8 @@ import { CalendarComponent } from './calendar/component';
 
 export class DatePickerComponent extends Component {
   render() {
+    console.log(this.props)
+
     const calendar = (this.props.isVisibleCalendar) ?
       <CalendarComponent selectedDate={this.props.selectedDate}
                          displayedDate={this.props.displayedDate}
