@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
-import { validateDateFromInput, convertFromFormatInputInDate, convertFromDateInFormatInput } from '../../../utils/date';
+import { convertFromDateInFormatInput } from '../../../utils/date';
 
 export class InputComponent extends Component {
-  showCalendar = () => {
+  constructor(props) {
+    super(props);
+    this.showCalendar = this.showCalendar.bind(this);
+  }
+
+  showCalendar(){
     this.props.showCalendar();
-  };
-
-  hideCalendar = () => {
-    this.props.hideCalendar();
-  };
-
-  changeSelectedDate = (e) => {
-    if(validateDateFromInput(e.currentTarget.value)) {
-      this.props.changeSelectedDate(convertFromFormatInputInDate(e.currentTarget.value));
-    }
   };
 
   render() {
@@ -24,7 +19,7 @@ export class InputComponent extends Component {
              type="date_picker"
              onClick={this.showCalendar}
              value={selectedDate}
-             onChange={this.changeSelectedDate}
+             onChange={()=>{}}
       />
     );
   }
@@ -32,8 +27,6 @@ export class InputComponent extends Component {
 
 InputComponent.propTypes = {
   showCalendar: PropTypes.func.isRequired,
-  hideCalendar: PropTypes.func.isRequired,
-  changeSelectedDate: PropTypes.func.isRequired,
   selectedDate: PropTypes.any.isRequired,
 };
 

@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DatePickerComponent from './datePicker';
 
-export default class ManyDatePickerComponent extends Component {
-  render() {
+export default function ManyDatePickerComponent() {
     return (
       <>
         <DatePickerComponent id="0"/>
@@ -10,5 +9,4 @@ export default class ManyDatePickerComponent extends Component {
         <DatePickerComponent id="2"/>
       </>
     );
-  }
 }

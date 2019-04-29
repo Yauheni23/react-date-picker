@@ -1,7 +1,6 @@
 export const datePickerActions = {
   SHOW_CALENDAR: 'SHOW_CALENDAR',
   HIDE_CALENDAR: 'HIDE_CALENDAR',
-  CHANGE_SELECTED_DATE: 'CHANGE_SELECTED_DATE',
   CHANGE_MONTH: 'CHANGE_MONTH',
   CHANGE_YEAR: 'CHANGE_YEAR',
   CHOOSE_DATE: 'CHOOSE_DATE',
@@ -12,7 +11,6 @@ const initialState = {
   selectedDate: null,
   displayedDate: null,
   isVisibleCalendar: null,
-  uuid: null,
 };
 
 export const datePickerReducer = (namespace) => (state = initialState, action) => {
@@ -27,11 +25,6 @@ export const datePickerReducer = (namespace) => (state = initialState, action) =
       return {
         ...state,
         isVisibleCalendar: false,
-      };
-    case `${namespace}/${datePickerActions.CHANGE_SELECTED_DATE}`:
-      return {
-        ...state,
-        selectedDate: action.payload,
       };
     case `${namespace}/${datePickerActions.CHANGE_MONTH}`:
       return {

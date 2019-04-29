@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as PropTypes from 'prop-types';
 import { InputComponent } from './input/component';
 import { CalendarComponent } from './calendar/component';
 
@@ -21,11 +22,9 @@ export class DatePickerComponent extends Component {
       /> : null;
     return (
       (this.props.selectedDate) ?
-        <div style={{width: '80px', position: 'relative'}}>
+        <div style={{ width: '80px', position: 'relative' }}>
           <InputComponent selectedDate={this.props.selectedDate}
                           showCalendar={this.props.showCalendar}
-                          hideCalendar={this.props.hideCalendar}
-                          changeSelectedDate={this.props.changeSelectedDate}
           />
           {calendar}
         </div> :
@@ -34,5 +33,15 @@ export class DatePickerComponent extends Component {
   }
 }
 
-
+DatePickerComponent.propTypes = {
+  setInitState: PropTypes.func.isRequired,
+  selectedDate: PropTypes.object,
+  displayedDate: PropTypes.object,
+  isVisibleCalendar: PropTypes.bool,
+  changeMonth: PropTypes.func.isRequired,
+  changeYear: PropTypes.func.isRequired,
+  showCalendar: PropTypes.func.isRequired,
+  hideCalendar: PropTypes.func.isRequired,
+  chooseDate: PropTypes.func.isRequired,
+};
 

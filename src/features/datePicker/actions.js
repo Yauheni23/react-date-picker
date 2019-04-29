@@ -33,12 +33,6 @@ export function hideCalendar(namespace,) {
   };
 }
 
-export function changeSelectedDate(namespace,date) {
-  return {
-    type: `${namespace}/${datePickerActions.CHANGE_SELECTED_DATE}`,
-    payload: date,
-  };
-}
 export function setInitState(namespace,state) {
   return {
     type: `${namespace}/${datePickerActions.SET_INIT_STATE}`,
