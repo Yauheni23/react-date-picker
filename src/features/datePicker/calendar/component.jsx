@@ -6,10 +6,6 @@ import { getArrayDaysInMonth } from '../../../utils/date';
 import './style.css';
 
 export class CalendarComponent extends Component {
-  constructor(props){
-    super(props);
-  }
-
   componentDidMount() {
       document.addEventListener('click', this.hideCalendarIfBlur, false);
   }
