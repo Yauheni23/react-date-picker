@@ -3,20 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "connected-react-router": "^6.4.0",
-    "history": "^4.9.0",
-    "node-less-chokidar": "^0.4.1",
-    "npm-run-all": "^4.1.5",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.0.2",
-    "react-router-dom": "^5.0.0",
+    "connected-react-router": "6.4.0",
+    "history": "4.9.0",
+    "node-less-chokidar": "0.4.1",
+    "npm-run-all": "4.1.5",
+    "prop-types": "15.7.2",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-redux": "7.0.2",
+    "react-router-dom": "5.0.0",
     "react-scripts": "3.0.0",
-    "redux": "^4.0.1",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0"
+    "redux": "4.0.1",
+    "redux-logger": "3.0.6",
+    "redux-thunk": "2.3.0",
+    "reselect": "4.0.0"
   },
   "scripts": {
     "start": "npm run build-css && run-p -ncr watch-css start-js",
@@ -27,9 +27,6 @@
     "test-js": "react-scripts test --env=jsdom",
     "build-css": "node-less-chokidar src",
     "watch-css": "node-less-chokidar src --watch"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -44,6 +41,6 @@
     ]
   },
   "devDependencies": {
-    "uuid": "^3.3.2"
+    "eslint": "5.16.0"
   }
 }

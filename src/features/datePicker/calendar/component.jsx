@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { config } from '../../../config';
+import * as PropTypes from 'prop-types';
+import { constants } from '../../../constants';
 import { getArrayDaysInMonth } from '../../../utils/date';
 import './style.css';
 
 export class CalendarComponent extends Component {
   componentDidMount() {
-      document.addEventListener('click', this.hideCalendarIfBlur, false);
+    document.addEventListener('click', this.hideCalendarIfBlur, false);
   }
 
   componentWillUnmount() {
@@ -44,7 +44,7 @@ export class CalendarComponent extends Component {
   };
 
   renderSelectMonth = () => {
-    return config.MONTH.map((month, index) => {
+    return constants.MONTH.map((month, index) => {
       return (
         <option value={index} key={index}>{month}</option>
       );
@@ -52,7 +52,7 @@ export class CalendarComponent extends Component {
   };
 
   renderDaysOfWeek = () => {
-    return config.DAYS_OF_WEEK.map((dayOfWeek, index) => {
+    return constants.DAYS_OF_WEEK.map((dayOfWeek, index) => {
       return (
         <div key={index} className="dayOfWeek">{dayOfWeek}</div>
       );

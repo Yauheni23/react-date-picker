@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import DatePickerComponent from './datePicker'
+import React, { Component } from 'react';
+import DatePickerComponent from './datePicker';
 
-export default class TwoDatePickerComponent extends Component {
+export default class ManyDatePickerComponent extends Component {
   render() {
     return (
       <>
@@ -9,6 +9,6 @@ export default class TwoDatePickerComponent extends Component {
         <DatePickerComponent id="1"/>
         <DatePickerComponent id="2"/>
       </>
-    )
+    );
   }
 }
