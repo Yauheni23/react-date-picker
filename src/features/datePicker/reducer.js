@@ -21,6 +21,7 @@ export const datePickerReducer = (namespace) => (state = initialState, action) =
       return {
         ...state,
         isVisibleCalendar: true,
+        displayedDate: state.selectedDate,
       };
     case `${namespace}/${datePickerActions.HIDE_CALENDAR}`:
       return {
