@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { constants } from '../../../constants';
 import { getArrayDaysInMonth } from '../../../utils/date';
-import './style.less';
 
 export class CalendarComponent extends Component {
   constructor(props) {
@@ -100,7 +99,7 @@ export class CalendarComponent extends Component {
   render() {
     const displayedDate = this.props.displayedDate;
     return (
-      <div className={'datepicker ' + ((this.props.isVisibleCalendar) ? 'activeBlock' : '')}>
+      <div className={'calendar ' + ((this.props.isVisibleCalendar) ? 'activeBlock' : '')}>
         <section className="dateInputWrapper">
           <select id="month" value={displayedDate.getMonth()} onChange={::this.changeMonth}>
             {CalendarComponent.renderSelectMonth()}

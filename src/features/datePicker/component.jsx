@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
 import { InputComponent } from './input/component';
 import { CalendarComponent } from './calendar/component';
+import { ButtonComponent } from './input/button';
+import './style.less';
 
 export class DatePickerComponent extends Component {
   componentDidMount() {
@@ -32,7 +34,11 @@ export class DatePickerComponent extends Component {
 
   render() {
     return (
-      <div style={{ width: '100px', position: 'relative' }}>
+      <div className="datePicker">
+        <ButtonComponent showCalendar={this.props.showCalendar}
+                         hideCalendar={this.props.hideCalendar}
+                         isVisibleCalendar={this.props.isVisibleCalendar}
+        />
         {this.getViewInput()}
         {this.getViewCalendar()}
       </div>

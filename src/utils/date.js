@@ -1,18 +1,11 @@
 export function validateDateFromInput(date) {
-  const year = +(date[0] + date[1] + date[2] + date[3]);
-  const month = +(date[5] + date[6]);
-  const day = +(date[8] + date[9]);
-
-  return !isNaN(year + month + day)
-    && year >= 1000 && year <= 9999
-    && month >= 1 && month <= 12
-    && day >= 1 && day <= 31;
+  return date.search(/[1-9][0-9]{3}-((0[0-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))/) !== -1;
 }
 
 export function convertFromFormatInputInDate(date) {
-  const year = +(date[0] + date[1] + date[2] + date[3]);
-  const month = +(date[5] + date[6]) - 1;
-  const day = +(date[8] + date[9]);
+  const year = (date[0] + date[1] + date[2] + date[3]);
+  const month = (date[5] + date[6]) - 1;
+  const day = (date[8] + date[9]);
 
   return new Date(year, month, day);
 }
@@ -21,19 +14,18 @@ export function convertFromDateInFormatInput(date) {
   let month = date.getMonth() + 1;
   let day = date.getDate();
   if(month <= 9) {
-    month = '0' + month
+    month = '0' + month;
   }
 
-  if(day <= 9){
-    day = '0' + day
+  if(day <= 9) {
+    day = '0' + day;
   }
 
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
 export function daysInMonth(date) {
-  return 33
-    - new Date(date.getFullYear(), date.getMonth(), 33).getDate();
+  return 33 - new Date(date.getFullYear(), date.getMonth(), 33).getDate();
 }
 
 export function getArrayDaysInMonth(date) {
