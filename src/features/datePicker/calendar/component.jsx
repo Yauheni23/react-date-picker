@@ -6,6 +6,11 @@ import { getArrayDaysInMonth } from '../../../utils/date';
 import './style.less';
 
 export class CalendarComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.hideCalendarIfBlur = this.hideCalendarIfBlur.bind(this)
+  }
+
   componentDidMount() {
     document.addEventListener('click', this.hideCalendarIfBlur, false);
   }
@@ -14,7 +19,7 @@ export class CalendarComponent extends Component {
     document.removeEventListener('click', this.hideCalendarIfBlur, false);
   }
 
-  hideCalendarIfBlur = (e) => {
+  hideCalendarIfBlur(e) {
     const domNode = ReactDOM.findDOMNode(this);
     if(!domNode || !domNode.parentElement.contains(e.target)) {
       this.hideCalendar();
@@ -24,7 +29,7 @@ export class CalendarComponent extends Component {
   chooseDate(e) {
     if(+e.currentTarget.firstElementChild.innerHTML >= 1 && +e.currentTarget.firstElementChild.innerHTML <= 31) {
       this.props.chooseDate(+e.currentTarget.firstElementChild.innerHTML);
-      this.props.hideCalendar();
+      this.hideCalendar();
     }
   };
 
@@ -44,22 +49,18 @@ export class CalendarComponent extends Component {
   };
 
   static renderSelectMonth() {
-    return constants.MONTH.map((month, index) => {
-      return (
-        <option value={index} key={index}>{month}</option>
-      );
-    });
+    return constants.MONTH.map((month, index) => (
+      <option value={index} key={index}>{month}</option>
+    ));
   };
 
   static renderDaysOfWeek() {
-    return constants.DAYS_OF_WEEK.map((dayOfWeek, index) => {
-      return (
-        <div key={index} className="dayOfWeek">{dayOfWeek}</div>
-      );
-    });
+    return constants.DAYS_OF_WEEK.map((dayOfWeek, index) => (
+      <div key={index} className="dayOfWeek">{dayOfWeek}</div>
+    ));
   };
 
-  renderWeeksOfMonth = (week) => {
+  renderWeeksOfMonth(week) {
     const today = new Date();
     const selectedDate = this.props.selectedDate;
     const displayedDate = this.props.displayedDate;
@@ -68,13 +69,15 @@ export class CalendarComponent extends Component {
       return (
         <div key={day + index}
              className={((day !== '') ? 'dayOfMonth enabled ' : 'dayOfMonth ')
-             + ((displayedDate.getFullYear() === selectedDate.getFullYear() && displayedDate.getMonth() === selectedDate.getMonth()
+             + ((displayedDate.getFullYear() === selectedDate.getFullYear()
+               && displayedDate.getMonth() === selectedDate.getMonth()
                && +day === selectedDate.getDate()) ? 'selected ' : '')}
              onClick={::this.chooseDate}
         >
           <span className={((index === 0 || index === 6) ? 'weekend ' : '')
-          + ((today.getFullYear() === displayedDate.getFullYear() && today.getMonth() === displayedDate.getMonth()
-            && +day === today.getDate()) ? 'today ' : '')}
+          + ((today.getFullYear() === displayedDate.getFullYear()
+            && today.getMonth() === displayedDate.getMonth()
+            && today.getDate() === +day) ? 'today ' : '')}
           >
             {day}
           </span>
@@ -92,17 +95,17 @@ export class CalendarComponent extends Component {
         </div>
       );
     });
-  };
+  }
 
   render() {
     const displayedDate = this.props.displayedDate;
     return (
       <div className={'datepicker ' + ((this.props.isVisibleCalendar) ? 'activeBlock' : '')}>
         <section className="dateInputWrapper">
-          <select id="month" defaultValue={displayedDate.getMonth()} onChange={::this.changeMonth}>
+          <select id="month" value={displayedDate.getMonth()} onChange={::this.changeMonth}>
             {CalendarComponent.renderSelectMonth()}
           </select>
-          <input type="number" defaultValue={displayedDate.getFullYear()} id="year" onChange={::this.changeYear}/>
+          <input type="number" value={displayedDate.getFullYear()} id="year" onChange={::this.changeYear}/>
         </section>
         <section className="daysOfWeek">
           {CalendarComponent.renderDaysOfWeek()}

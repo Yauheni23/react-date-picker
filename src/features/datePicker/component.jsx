@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
 import { InputComponent } from './input/component';
 import { CalendarComponent } from './calendar/component';
-// import { autobind } from 'core-decorators';
-//
-// @autobind
+
 export class DatePickerComponent extends Component {
   componentDidMount() {
     this.props.setDatePickerInitialState({});
@@ -34,9 +32,9 @@ export class DatePickerComponent extends Component {
 
   render() {
     return (
-      <div style={{ width: '80px', position: 'relative' }}>
-        {::this.getViewInput()}
-        {::this.getViewCalendar()}
+      <div style={{ width: '100px', position: 'relative' }}>
+        {this.getViewInput()}
+        {this.getViewCalendar()}
       </div>
     );
   }
@@ -54,6 +52,3 @@ DatePickerComponent.propTypes = {
   chooseDate: PropTypes.func.isRequired,
   changeSelectedDate: PropTypes.func.isRequired,
 };
-
-
-

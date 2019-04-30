@@ -35,6 +35,7 @@ export function datePickerReducer(state = initialState, action) {
       datePickersState.datePickers[action.datePickerId] = {
         ...state.datePickers[action.datePickerId],
         selectedDate: action.payload,
+        displayedDate: action.payload,
       };
       return datePickersState;
     case datePickerActions.CHANGE_MONTH:
@@ -56,7 +57,7 @@ export function datePickerReducer(state = initialState, action) {
           state.datePickers[action.datePickerId].displayedDate.getFullYear(),
           state.datePickers[action.datePickerId].displayedDate.getMonth(),
           action.payload
-        ),
+        )
       };
       return datePickersState;
     case datePickerActions.SET_DATE_PICKER_INITIAL_STATE:
