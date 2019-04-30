@@ -1,47 +1,55 @@
 import { datePickerActions} from './reducer'
 
-export function changeMonth(id, month) {
+export function changeMonth(datePickerId, month) {
   return {
     type: datePickerActions.CHANGE_MONTH,
     payload: month,
-    id
+    datePickerId
   };
 }
 
-export function changeYear(id, year) {
+export function changeYear(datePickerId, year) {
   return {
     type: datePickerActions.CHANGE_YEAR,
     payload: year,
-    id
+    datePickerId
   };
 }
 
-export function chooseDate(id, day) {
+export function chooseDate(datePickerId, day) {
   return {
     type: datePickerActions.CHOOSE_DATE,
     payload: day,
-    id
+    datePickerId
   };
 }
 
-export function showCalendar(id, ) {
+export function showCalendar(datePickerId, ) {
   return {
     type: datePickerActions.SHOW_CALENDAR,
-    id
+    datePickerId
   };
 }
 
-export function hideCalendar(id, ) {
+export function hideCalendar(datePickerId) {
   return {
     type: datePickerActions.HIDE_CALENDAR,
-    id
+    datePickerId
   };
 }
 
-export function changeSelectedDate(id, date) {
+export function changeSelectedDate(datePickerId, date) {
   return {
     type: datePickerActions.CHANGE_SELECTED_DATE,
     payload: date,
-    id
+    datePickerId
+  };
+}
+
+export function setDatePickerInitialState(datePickerId, state) {
+  return {
+    type: datePickerActions.SET_DATE_PICKER_INITIAL_STATE,
+    payload: state,
+    datePickerId
   };
 }

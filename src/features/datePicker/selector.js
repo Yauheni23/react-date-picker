@@ -1,21 +1,26 @@
 import { createSelector } from 'reselect';
 
-export const datePickerReducer = (state, props) => {
-  return state.datePickerReducer.filter((el) => +props.id === +el.id)[0];
+export const datePickerReducer = (state) => {
+  return state.datePickerReducer;
 };
 
-
-export const getSelectedDate = () => createSelector(
+export const getSelectedDate = (datePickerId) => createSelector(
   datePickerReducer,
-  home => home.selectedDate,
+  datePickerReducer => {
+    return datePickerReducer.datePickers[datePickerId] ? datePickerReducer.datePickers[datePickerId].selectedDate : null;
+  },
 );
 
-export const getDisplayedDate = () => createSelector(
+export const getDisplayedDate = (datePickerId) => createSelector(
   datePickerReducer,
-  home => home.displayedDate,
+  datePickerReducer => datePickerReducer.datePickers[datePickerId] ?
+    datePickerReducer.datePickers[datePickerId].displayedDate :
+    null,
 );
 
-export const getIsVisibleCalendar = () => createSelector(
+export const getIsVisibleCalendar = (datePickerId) => createSelector(
   datePickerReducer,
-  home => home.isVisibleCalendar,
+  datePickerReducer => datePickerReducer.datePickers[datePickerId] ?
+    datePickerReducer.datePickers[datePickerId].isVisibleCalendar :
+    null,
 );

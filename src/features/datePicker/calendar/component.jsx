@@ -6,6 +6,11 @@ import { getArrayDaysInMonth } from '../../../utils/date';
 import './style.css';
 
 export class CalendarComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.chooseDate = ::this.chooseDate;
+  }
+
   componentDidMount() {
       document.addEventListener('click', this.hideCalendarIfBlur, false);
   }
@@ -21,7 +26,7 @@ export class CalendarComponent extends Component {
     }
   };
 
-  chooseDate = (e) => {
+  chooseDate(e){
     if(+e.currentTarget.firstElementChild.innerHTML >= 1 && +e.currentTarget.firstElementChild.innerHTML <= 31) {
       this.props.chooseDate(+e.currentTarget.firstElementChild.innerHTML);
       this.props.hideCalendar();

@@ -3,9 +3,14 @@ import { InputComponent } from './input/component';
 import { CalendarComponent } from './calendar/component';
 
 export class DatePickerComponent extends Component {
-  render() {
-    console.log(this.props)
+  componentDidMount() {
+    this.props.setDatePickerInitialState({
+      selectedDate: new Date(),
+    });
+  }
 
+  render() {
+    console.log(this.props.selectedDate);
     const calendar = (this.props.isVisibleCalendar) ?
       <CalendarComponent selectedDate={this.props.selectedDate}
                          displayedDate={this.props.displayedDate}
@@ -16,6 +21,7 @@ export class DatePickerComponent extends Component {
                          hideCalendar={this.props.hideCalendar}
       /> : null;
     return (
+      (this.props.selectedDate) ?
       <div style={{width: '80px', position: 'relative'}}>
         <InputComponent selectedDate={this.props.selectedDate}
                         showCalendar={this.props.showCalendar}
@@ -23,7 +29,8 @@ export class DatePickerComponent extends Component {
                         changeSelectedDate={this.props.changeSelectedDate}
         />
         {calendar}
-      </div>
+      </div> :
+        null
     );
   }
 }

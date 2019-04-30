@@ -5,75 +5,69 @@ export const datePickerActions = {
   CHANGE_MONTH: 'CHANGE_MONTH',
   CHANGE_YEAR: 'CHANGE_YEAR',
   CHOOSE_DATE: 'CHOOSE_DATE',
+  SET_DATE_PICKER_INITIAL_STATE: 'SET_DATE_PICKER_INITIAL_STATE',
 };
-const initialState = [{
-  selectedDate: new Date(),
-  displayedDate: new Date(),
-  isVisibleCalendar: false,
-  id: '0',
-}, {
-  selectedDate: new Date(),
-  displayedDate: new Date(),
-  isVisibleCalendar: false,
-  id: '1',
-}, {
-  selectedDate: new Date(),
-  displayedDate: new Date(),
-  isVisibleCalendar: false,
-  id: '2',
-}];
+const initialState = {
+  datePickers: []
+};
 
 export function datePickerReducer(state = initialState, action) {
-  const actionState = [
-    {
-      ...state[0],
-    },
-    {
-      ...state[1],
-    },
-    {
-      ...state[2],
-    },
-  ];
+  const datePickersState = {
+    datePickers: [
+      ...state.datePickers
+    ]
+  };
   switch(action.type) {
     case datePickerActions.SHOW_CALENDAR:
-      actionState[action.id] = {
-        ...state[action.id],
-        displayedDate: state[action.id].selectedDate,
+      datePickersState.datePickers[action.datePickerId] = {
+        ...state.datePickers[action.datePickerId],
         isVisibleCalendar: true,
+        displayedDate: state.datePickers[action.datePickerId].selectedDate
       };
-      return actionState;
+      return datePickersState;
     case datePickerActions.HIDE_CALENDAR:
-      actionState[action.id] = {
-        ...state[action.id],
+      datePickersState.datePickers[action.datePickerId] = {
+        ...state.datePickers[action.datePickerId],
         isVisibleCalendar: false,
       };
-      return actionState;
+      return datePickersState;
     case datePickerActions.CHANGE_SELECTED_DATE:
-      actionState[action.id] = {
-        ...state[action.id],
+      datePickersState.datePickers[action.datePickerId] = {
+        ...state.datePickers[action.datePickerId],
         selectedDate: action.payload,
       };
-      return actionState;
+      return datePickersState;
     case datePickerActions.CHANGE_MONTH:
-      actionState[action.id] = {
-        ...state[action.id],
-        displayedDate: new Date(state[action.id].displayedDate.getFullYear(), action.payload),
+      datePickersState.datePickers[action.datePickerId] = {
+        ...state.datePickers[action.datePickerId],
+        displayedDate: new Date(state.datePickers[action.datePickerId].displayedDate.getFullYear(), action.payload),
       };
-      return actionState;
+      return datePickersState;
     case datePickerActions.CHANGE_YEAR:
-      actionState[action.id] = {
-        ...state[action.id],
-        displayedDate: new Date(action.payload, state[action.id].displayedDate.getMonth()),
+      datePickersState.datePickers[action.datePickerId] = {
+        ...state.datePickers[action.datePickerId],
+        displayedDate: new Date(action.payload, state.datePickers[action.datePickerId].displayedDate.getMonth()),
       };
-      return actionState;
+      return datePickersState;
     case datePickerActions.CHOOSE_DATE:
-      actionState[action.id] = {
-        ...state[action.id],
-        selectedDate: new Date(state[action.id].displayedDate.getFullYear(), state[action.id].displayedDate.getMonth(), action.payload),
+      datePickersState.datePickers[action.datePickerId] = {
+        ...state.datePickers[action.datePickerId],
+        selectedDate: new Date(
+          state.datePickers[action.datePickerId].displayedDate.getFullYear(),
+          state.datePickers[action.datePickerId].displayedDate.getMonth(),
+          action.payload
+        ),
       };
-      return actionState;
+      return datePickersState;
+    case datePickerActions.SET_DATE_PICKER_INITIAL_STATE:
+      datePickersState.datePickers[action.datePickerId] = {
+        ...state.datePickers[action.datePickerId],
+        selectedDate: action.payload.selectedDate || new Date(),
+        displayedDate: action.payload.displayedDate || new Date(),
+        isVisibleCalendar: action.payload.isVisibleCalendar || false
+      };
+      return datePickersState;
     default:
-      return state;
+      return datePickersState;
   }
 }
