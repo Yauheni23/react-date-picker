@@ -11,12 +11,11 @@ export const mapStateToProps = (state, ownProps) => {
       selectedDate: getSelectedDate(ownProps['data-id']),
       displayedDate: getDisplayedDate(ownProps['data-id']),
       isVisibleCalendar: getIsVisibleCalendar(ownProps['data-id']),
-    },
-  );
+  });
 };
 
 export const mapDispatchToProps = (dispatch, ownProps) => {
-  return ({
+  return {
     showCalendar: () => dispatch(actions.showCalendar(ownProps['data-id'])),
     hideCalendar: () => dispatch(actions.hideCalendar(ownProps['data-id'])),
     changeSelectedDate: (date) => dispatch(actions.changeSelectedDate(ownProps['data-id'], date)),
@@ -24,7 +23,7 @@ export const mapDispatchToProps = (dispatch, ownProps) => {
     changeYear: (year) => dispatch(actions.changeYear(ownProps['data-id'], year)),
     chooseDate: (day) => dispatch(actions.chooseDate(ownProps['data-id'], day)),
     setDatePickerInitialState: (state) => dispatch(actions.setDatePickerInitialState(ownProps['data-id'], state)),
-  });
+  };
 };
 
 export default connect(
