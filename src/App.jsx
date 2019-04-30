@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Router from './router';
-import './App.css';
+import './App.less';
 
 const App = () => (
   <Provider store={store}>

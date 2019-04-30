@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { config } from '../../../config';
 import { getArrayDaysInMonth } from '../../../utils/date';
-import './style.css';
+import './style.less';
 
 export class CalendarComponent extends Component {
   constructor(props) {
