@@ -7,6 +7,7 @@ import { createStructuredSelector } from 'reselect';
 export { datePickerActions, datePickerReducer } from './reducer';
 
 export const mapStateToProps = (state, ownProps) => {
+  console.log(ownProps)
   return createStructuredSelector({
       selectedDate: getSelectedDate(ownProps['data-id']),
       displayedDate: getDisplayedDate(ownProps['data-id']),

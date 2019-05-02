@@ -6,7 +6,7 @@ import { ButtonComponent } from './input/button';
 import './style.less';
 
 export class DatePickerComponent extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.setDatePickerInitialState({});
   }
 
