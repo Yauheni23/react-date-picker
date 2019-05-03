@@ -1,41 +1,14 @@
 import React, { Component } from 'react';
-import * as ReactDOM from 'react-dom';
-import * as PropTypes from 'prop-types';
-import { constants } from '../../../constants';
-import { getArrayDaysInMonth } from '../../../utils/date';
+import { constants } from '../../constants';
+import { getArrayDaysInMonth } from '../../utils/date';
+import './style.css';
 
-export class CalendarDatePicker extends Component {
-  componentDidMount() {
-    document.addEventListener('click', this.hideCalendarIfBlur, false);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('click', this.hideCalendarIfBlur, false);
-  }
-
-  hideCalendarIfBlur = (e) => {
-    const domNode = ReactDOM.findDOMNode(this);
-    if(!domNode || !domNode.parentElement.contains(e.target)) {
-      this.hideCalendar();
-    }
-  };
-
-  chooseDate = (e) => {
-    if(+e.currentTarget.firstElementChild.innerHTML >= 1 && +e.currentTarget.firstElementChild.innerHTML <= 31) {
-      this.props.chooseDate(+e.currentTarget.firstElementChild.innerHTML);
-      this.hideCalendar();
-    }
-  };
-
-  changeMonth = (e) => {
+export class Calendar extends Component<any> {
+  changeMonth = (e: any) => {
     this.props.changeMonth(e.currentTarget.value);
   };
 
-  hideCalendar = () => {
-    this.props.hideCalendar();
-  };
-
-  changeYear = (e) => {
+  changeYear = (e: any) => {
     if(+e.currentTarget.value >= 1000 && +e.currentTarget.value <= 9999
       && (+e.currentTarget.value ^ 0) === +e.currentTarget.value) {
       this.props.changeYear(+e.currentTarget.value);
@@ -54,19 +27,18 @@ export class CalendarDatePicker extends Component {
     ));
   };
 
-  renderWeeksOfMonth(week) {
+  renderWeeksOfMonth(week: any) {
     const today = new Date();
-    const selectedDate = this.props.selectedDate;
-    const displayedDate = this.props.displayedDate;
+    const selectedDate = new Date();
+    const displayedDate = new Date();
 
-    return week.map((day, index) => {
+    return week.map((day: string, index: number) => {
       return (
         <div key={day + index}
              className={((day !== '') ? 'dayOfMonth enabled ' : 'dayOfMonth ')
              + ((displayedDate.getFullYear() === selectedDate.getFullYear()
                && displayedDate.getMonth() === selectedDate.getMonth()
                && +day === selectedDate.getDate()) ? 'selected ' : '')}
-             onClick={this.chooseDate}
         >
           <span className={((index === 0 || index === 6) ? 'weekend ' : '')
           + ((today.getFullYear() === displayedDate.getFullYear()
@@ -81,7 +53,7 @@ export class CalendarDatePicker extends Component {
   };
 
   renderDaysOfMonth() {
-    const dayOfMonth = getArrayDaysInMonth(this.props.displayedDate);
+    const dayOfMonth = getArrayDaysInMonth(new Date());
     return dayOfMonth.map((week, index) => {
       return (
         <div key={index} className="week">
@@ -92,17 +64,17 @@ export class CalendarDatePicker extends Component {
   }
 
   render() {
-    const displayedDate = this.props.displayedDate;
+    const displayedDate = new Date();
     return (
-      <div className={'calendar-date-picker ' + ((this.props.isVisibleCalendar) ? 'activeBlock' : '')}>
+      <div className={'calendar ' + ((this.props.isVisibleCalendar) ? 'activeBlock' : '')}>
         <section className="dateInputWrapper">
           <select id="month" value={displayedDate.getMonth()} onChange={this.changeMonth}>
-            {CalendarDatePicker.renderSelectMonth()}
+            {Calendar.renderSelectMonth()}
           </select>
           <input type="number" value={displayedDate.getFullYear()} id="year" onChange={this.changeYear}/>
         </section>
         <section className="daysOfWeek">
-          {CalendarDatePicker.renderDaysOfWeek()}
+          {Calendar.renderDaysOfWeek()}
         </section>
         <section className="daysOfMonth">
           {this.renderDaysOfMonth()}
@@ -112,12 +84,3 @@ export class CalendarDatePicker extends Component {
   }
 }
 
-CalendarDatePicker.propTypes = {
-  selectedDate: PropTypes.any.isRequired,
-  displayedDate: PropTypes.any.isRequired,
-  isVisibleCalendar: PropTypes.bool.isRequired,
-  chooseDate: PropTypes.func.isRequired,
-  hideCalendar: PropTypes.func.isRequired,
-  changeMonth: PropTypes.func.isRequired,
-  changeYear: PropTypes.func.isRequired,
-};

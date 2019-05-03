@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
 import { InputComponent } from './input/component';
-import { CalendarComponent } from './calendar/component';
+import { CalendarDatePicker } from './calendar/component';
 import { ButtonComponent } from './input/button';
-import './style.less';
+import './style.css';
 
 export class DatePickerComponent extends Component {
   componentWillMount() {
@@ -22,13 +22,13 @@ export class DatePickerComponent extends Component {
 
   getViewCalendar() {
     return (this.props.isVisibleCalendar) ?
-      <CalendarComponent selectedDate={this.props.selectedDate}
-                         displayedDate={this.props.displayedDate}
-                         isVisibleCalendar={this.props.isVisibleCalendar}
-                         changeMonth={this.props.changeMonth}
-                         changeYear={this.props.changeYear}
-                         chooseDate={this.props.chooseDate}
-                         hideCalendar={this.props.hideCalendar}
+      <CalendarDatePicker selectedDate={this.props.selectedDate}
+                          displayedDate={this.props.displayedDate}
+                          isVisibleCalendar={this.props.isVisibleCalendar}
+                          changeMonth={this.props.changeMonth}
+                          changeYear={this.props.changeYear}
+                          chooseDate={this.props.chooseDate}
+                          hideCalendar={this.props.hideCalendar}
       /> : null;
   }
 

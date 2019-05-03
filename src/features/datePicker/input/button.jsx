@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
 
 export class ButtonComponent extends Component {
-  toggleCalendar() {
+  toggleCalendar = () => {
     if(this.props.isVisibleCalendar) {
       this.props.hideCalendar();
     } else {
@@ -12,7 +12,7 @@ export class ButtonComponent extends Component {
 
   render() {
     return (
-      <div onClick={::this.toggleCalendar}
+      <div onClick={this.toggleCalendar}
            className={'button-show-calendar ' + (this.props.isVisibleCalendar ? ' openDatePicker ' : '')}
       >
         <i className="fas fa-caret-square-down"/>

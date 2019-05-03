@@ -12,7 +12,7 @@ export class InputComponent extends Component {
     this.input = createRef();
   }
 
-  changeSelectedDate(e) {
+  changeSelectedDate = (e) => {
     if(validateDateFromInput(e.currentTarget.value)) {
       this.props.changeSelectedDate(convertFromFormatInputInDate(e.currentTarget.value));
     }
@@ -23,7 +23,7 @@ export class InputComponent extends Component {
       <input type="date_picker"
              className="inputDatePicker"
              defaultValue={convertFromDateInFormatInput(this.props.selectedDate)}
-             onChange={::this.changeSelectedDate}
+             onChange={this.changeSelectedDate}
              ref={this.input}
              maxLength="10"
       />
