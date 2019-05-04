@@ -12,7 +12,9 @@ interface IProps {
   selectedDate: Date,
   changeYear: (year: number) => number,
   changeMonth: (month: number) => number,
+  openDialog: () => boolean
 }
+
 
 export class Calendar extends Component<IProps>{
   render(){
@@ -25,6 +27,7 @@ export class Calendar extends Component<IProps>{
         <Middle lol={constants.DAYS_OF_WEEK_FOR_MONTH}/>
         <Month displayedDate = {this.props.displayedDate}
                selectedDate = {this.props.selectedDate}
+               openDialog= {this.props.openDialog}
         />
       </div>
     )

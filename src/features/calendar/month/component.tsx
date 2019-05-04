@@ -4,9 +4,15 @@ import { getArrayDaysInMonth } from '../../../utils/date';
 interface IProps {
   displayedDate: Date,
   selectedDate: Date,
+  openDialog: () => boolean
 }
 
 export class Month extends Component<IProps> {
+  openDialog = () => {
+    this.props.openDialog();
+  };
+
+
   renderDay(day: string, index: number) {
     const selected = this.props.selectedDate.getFullYear() === this.props.displayedDate.getFullYear()
                   && this.props.selectedDate.getMonth() === this.props.displayedDate.getMonth()
@@ -18,6 +24,7 @@ export class Month extends Component<IProps> {
     return (
       <div key={day + index}
            className={'dayOfMonth ' + ((day !== '') ? ' enabled ' : '') + selected }
+           onClick={this.openDialog}
       >
           <span className={((index === 0 || index === 6) ? 'weekend ' : '') + today}>
             {day}
