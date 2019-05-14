@@ -10,6 +10,7 @@ import { Week } from './week/component';
 import { Middle } from './middleCalendar/component';
 import DialogForAddTask from './dialog/dialogForAddTask';
 import { constants } from '../../constants';
+import { Day } from './day/component';
 
 interface IProps {
   displayedDate: Date,
@@ -39,18 +40,21 @@ export class Calendar extends Component<IProps> {
                                     selectedDate={this.props.selectedDate}
                                     openDialog={this.props.openDialog}
                                     chooseDate={this.props.chooseDate}
-               />
-
-               }
+               />}
         />
         <Route path="/calendar/week"
                render={() => <Week displayedDate={this.props.displayedDate}
                                     selectedDate={this.props.selectedDate}
                                     openDialog={this.props.openDialog}
                                     chooseDate={this.props.chooseDate}
-               />
-
-               }
+               />}
+        />
+        <Route path="/calendar/day"
+               render={() => <Day displayedDate={this.props.displayedDate}
+                                    selectedDate={this.props.selectedDate}
+                                    openDialog={this.props.openDialog}
+                                    chooseDate={this.props.chooseDate}
+               />}
         />
 
         {this.props.isVisibleDialog

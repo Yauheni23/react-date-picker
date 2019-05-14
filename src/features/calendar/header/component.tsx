@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Component } from 'react';
 import { constants } from '../../../constants';
 import { Link } from 'react-router-dom';
-
+import { daysInMonth } from '../../../utils/date';
 
 interface IProps {
   displayedDate: Date,
@@ -13,7 +13,7 @@ interface IProps {
 
 export class HeaderCalendar extends Component<IProps> {
   showToday = () => {
-    this.props.showToday()
+    this.props.showToday();
   };
 
   changeMonth = ( event: ChangeEvent<HTMLSelectElement> ) => {
@@ -27,13 +27,21 @@ export class HeaderCalendar extends Component<IProps> {
     }
   };
 
-  showNextWeek = () => {
-    this.props.changeDisplayedDate(7 * 86400000)
-  }
-
-  showPrevWeek = () => {
-    this.props.changeDisplayedDate(- 7 * 86400000)
-  }
+  changeDisplayedDate = ( event: any ) => {
+    const result = window.location.href.match( /\/calendar\/([a-z]+)/i );
+    const string = result ? result[1] : null;
+    let countDay = 1;
+    switch ( string ) {
+      case 'month':
+        countDay = daysInMonth( this.props.displayedDate );
+        break;
+      case 'week':
+        countDay = 7;
+        break;
+    }
+    countDay *= event.currentTarget.dataset.change === 'left' ? -1 : 1;
+    this.props.changeDisplayedDate( countDay * 86400000 );
+  };
 
   static renderSelectMonth() {
     return constants.MONTH_FOR_CALENDAR.map( ( month, index ) => (
@@ -47,8 +55,10 @@ export class HeaderCalendar extends Component<IProps> {
       <section className="headerCalendar">
         <button className="btn btn-outline-primary" onClick={this.showToday}>Today</button>
         <div className="wrapperArrowsChangeDate">
-          <div onClick={this.showPrevWeek} className="arrowChangeDate"><i className="fas fa-chevron-left" /></div>
-          <div onClick={this.showNextWeek} className="arrowChangeDate"><i className="fas fa-chevron-right" /></div>
+          <div onClick={this.changeDisplayedDate} className="arrowChangeDate" data-change="left"><i
+            className="fas fa-chevron-left"/></div>
+          <div onClick={this.changeDisplayedDate} className="arrowChangeDate" data-change="right"><i
+            className="fas fa-chevron-right"/></div>
         </div>
         <select id="month" value={displayedDate.getMonth()} onChange={this.changeMonth}>
           {HeaderCalendar.renderSelectMonth()}

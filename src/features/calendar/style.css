@@ -78,6 +78,13 @@
 .weekForWeek {
   height: 100%;
 }
+.day {
+  width: 100%;
+  height: calc(100% - 98px);
+  text-align: left;
+  padding: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+}
 .dayOfMonth {
   width: calc(100% / 7);
   height: 100%;
