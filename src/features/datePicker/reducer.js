@@ -57,11 +57,11 @@ export function datePickerReducer(state = initialState, action) {
       };
       return { ...state, datePickers };
     case datePickerActions.SET_DATE_PICKER_INITIAL_STATE:
-      datePickers.push({
+      datePickers[action.datePickerId] = {
         selectedDate: action.payload.selectedDate || new Date(),
         displayedDate: action.payload.displayedDate || new Date(),
         isVisibleCalendar: action.payload.isVisibleCalendar || false,
-      });
+      };
       return { ...state, datePickers };
     default:
       return state;

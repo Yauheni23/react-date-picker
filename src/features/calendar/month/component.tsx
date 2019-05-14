@@ -5,10 +5,12 @@ interface IProps {
   displayedDate: Date,
   selectedDate: Date,
   openDialog: () => boolean
+  chooseDate: (day: number) => Date
 }
 
 export class Month extends Component<IProps> {
-  openDialog = () => {
+  openDialog = (event: any) => {
+    this.props.chooseDate(+event.currentTarget.dataset.day);
     this.props.openDialog();
   };
 
@@ -24,7 +26,8 @@ export class Month extends Component<IProps> {
     return (
       <div key={day + index}
            className={'dayOfMonth ' + ((day !== '') ? ' enabled ' : '') + selected }
-           onClick={this.openDialog}
+           onClick={(day !== '') ? this.openDialog : () => {}}
+           data-day={day}
       >
           <span className={((index === 0 || index === 6) ? 'weekend ' : '') + today}>
             {day}

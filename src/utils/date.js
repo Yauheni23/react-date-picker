@@ -43,3 +43,47 @@ export function getArrayDaysInMonth(date) {
   }
   return arrayDaysInMonth;
 }
+
+export function getFormatForInputTime(addHours = 0, addMinutes = 0) {
+  let hours = addHours;
+  let minutes = addMinutes;
+  if(minutes > 0 && minutes <= 30) {
+    minutes = 30;
+  } else if(minutes > 30 && minutes <= 60) {
+    minutes = 0;
+    hours++;
+  } else if (minutes > 60){
+    minutes = 30;
+    hours++;
+  }
+
+  if(hours >= 24) {
+    hours = hours % 24;
+  }
+  if(hours <= 9) {
+    hours = '0' + hours;
+  }
+  if(minutes <= 9) {
+    minutes = '0' + minutes;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
+export function validateFormatInputTime(time){
+  return time.search(/[0-2][0-9]:[0-5][0-9]/) !== -1
+}
+
+export function getTimeFromInputTimeFormat(time) {
+  const result = time.match(/([0-2][0-9]):([0-5][0-9])/);
+  return {
+    hours: result && +result[1],
+    minutes: result && +result[2]
+  };
+}
+
+export function equalDate(firstDate, secondDate) {
+  return firstDate.getFullYear() === secondDate.getFullYear()
+  && firstDate.getMonth() === secondDate.getMonth()
+  && firstDate.getDate() === secondDate.getDate()
+}

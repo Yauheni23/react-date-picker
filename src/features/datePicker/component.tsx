@@ -1,18 +1,34 @@
 import React, { Component } from 'react';
-import * as PropTypes from 'prop-types';
 import { InputComponent } from './input/component';
 import { CalendarDatePicker } from './calendar/component';
 import { ButtonComponent } from './input/button';
 import './style.css';
 
-export class DatePickerComponent extends Component {
+interface IProps {
+  setDatePickerInitialState: any,
+  selectedDate: Date,
+  defaultDate: Date,
+  displayedDate: Date,
+  isVisibleCalendar: boolean,
+  changeMonth: any,
+  changeYear: any,
+  showCalendar: any,
+  hideCalendar: any,
+  chooseDate: any,
+  changeSelectedDate: any,
+  onChange: any
+}
+
+export class DatePickerComponent extends Component<IProps> {
   componentWillMount() {
-    this.props.setDatePickerInitialState({});
+    this.props.setDatePickerInitialState({
+      selectedDate: this.props.defaultDate || new Date()
+    });
   }
 
   getViewInput() {
     return ((this.props.selectedDate) ?
-        <InputComponent selectedDate={this.props.selectedDate}
+        <InputComponent selectedDate={this.props.defaultDate || this.props.selectedDate}
                         showCalendar={this.props.showCalendar}
                         changeSelectedDate={this.props.changeSelectedDate}
         /> :
@@ -22,7 +38,7 @@ export class DatePickerComponent extends Component {
 
   getViewCalendar() {
     return (this.props.isVisibleCalendar) ?
-      <CalendarDatePicker selectedDate={this.props.selectedDate}
+      <CalendarDatePicker selectedDate={this.props.defaultDate || this.props.selectedDate}
                           displayedDate={this.props.displayedDate}
                           isVisibleCalendar={this.props.isVisibleCalendar}
                           changeMonth={this.props.changeMonth}
@@ -32,7 +48,18 @@ export class DatePickerComponent extends Component {
       /> : null;
   }
 
+  componentWillUpdate( nextProps: Readonly<IProps>, nextState: Readonly<{}>, nextContext: any ): void {
+    if( nextProps.selectedDate !== this.props.selectedDate) {
+      this.onChange()
+    }
+  }
+
+  onChange() {
+    if(this.props.onChange) { this.props.onChange()}
+  }
+
   render() {
+    console.log(this.props.selectedDate);
     return (
       <div className="datePicker">
         <ButtonComponent showCalendar={this.props.showCalendar}
@@ -46,15 +73,3 @@ export class DatePickerComponent extends Component {
   }
 }
 
-DatePickerComponent.propTypes = {
-  setDatePickerInitialState: PropTypes.func.isRequired,
-  selectedDate: PropTypes.object,
-  displayedDate: PropTypes.object,
-  isVisibleCalendar: PropTypes.bool,
-  changeMonth: PropTypes.func.isRequired,
-  changeYear: PropTypes.func.isRequired,
-  showCalendar: PropTypes.func.isRequired,
-  hideCalendar: PropTypes.func.isRequired,
-  chooseDate: PropTypes.func.isRequired,
-  changeSelectedDate: PropTypes.func.isRequired,
-};

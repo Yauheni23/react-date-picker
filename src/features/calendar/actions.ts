@@ -1,5 +1,5 @@
 import { calendarActions } from './reducer';
-import { defaultDialogActions } from './dialog/dialogForAddTask';
+import { dialogForAddTaskActions } from './dialog/dialogForAddTask';
 
 export function changeMonth( month: number ) {
   return {
@@ -24,13 +24,7 @@ export function chooseDate( day: number ) {
 
 export function openDialog() {
   return {
-    type: defaultDialogActions.OPEN_DIALOG,
-  };
-}
-
-export function closeDialog() {
-  return {
-    type: defaultDialogActions.CLOSE_DIALOG,
+    type: dialogForAddTaskActions.OPEN_DIALOG,
   };
 }
 

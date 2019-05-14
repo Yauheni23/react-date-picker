@@ -11,7 +11,7 @@ export const mapStateToProps = () => {
   return createStructuredSelector({
     selectedDate: getSelectedDate(),
     displayedDate: getDisplayedDate(),
-    isVisibleDialog: getIsVisibleDialog,
+    isVisibleDialog: getIsVisibleDialog(),
   });
 };
 
