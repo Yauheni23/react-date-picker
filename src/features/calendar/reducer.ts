@@ -6,6 +6,7 @@ export const calendarActions = {
   CHANGE_YEAR: 'CALENDAR_CHANGE_YEAR',
   CHOOSE_DATE: 'CALENDAR_CHOOSE_DATE',
 };
+
 const initialState = {
   selectedDate: new Date(),
   displayedDate: new Date(),

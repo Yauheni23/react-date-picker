@@ -10,17 +10,17 @@ export const dialogForAddTaskActions = {
 };
 
 const initialState = {
-  isVisibleDialog: false,
-  startDate: new Date(1000),
-  duration: 3600000,
-  endDate: new Date(1000),
+  isVisibleDialog: null,
+  startDate: null,
+  duration: null,
+  endDate: null
 };
 
 interface IState {
-  isVisibleDialog: boolean,
-  startDate: Date,
-  duration: number,
-  endDate: Date
+  isVisibleDialog: boolean | null,
+  startDate: Date | null,
+  duration: number | null,
+  endDate: Date | null
 }
 
 export function dialogForAddTaskReducer( state: IState = initialState, action: IAction<any> ) {
@@ -41,7 +41,6 @@ export function dialogForAddTaskReducer( state: IState = initialState, action: I
       return {
         ...state,
         isVisibleDialog: false,
-        startDate: new Date(1000)
       };
     case dialogForAddTaskActions.CHANGE_START_DATE:
       return {

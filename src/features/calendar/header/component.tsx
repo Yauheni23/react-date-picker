@@ -45,7 +45,7 @@ export class HeaderCalendar extends Component<IProps> {
           {HeaderCalendar.renderSelectMonth()}
         </select>
         <input type="number" value={displayedDate.getFullYear()} id="year" onChange={this.changeYear}/>
-        <select className="selectTypeView">
+        <select className="selectTypeView" defaultValue="month">
           <option value="day">Day</option>
           <option value="week">Week</option>
           <option value="month">Month</option>

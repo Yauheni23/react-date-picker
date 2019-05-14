@@ -28,7 +28,7 @@ export class DatePickerComponent extends Component<IProps> {
 
   getViewInput() {
     return ((this.props.selectedDate) ?
-        <InputComponent selectedDate={this.props.defaultDate || this.props.selectedDate}
+        <InputComponent selectedDate={this.props.selectedDate}
                         showCalendar={this.props.showCalendar}
                         changeSelectedDate={this.props.changeSelectedDate}
         /> :
@@ -38,7 +38,7 @@ export class DatePickerComponent extends Component<IProps> {
 
   getViewCalendar() {
     return (this.props.isVisibleCalendar) ?
-      <CalendarDatePicker selectedDate={this.props.defaultDate || this.props.selectedDate}
+      <CalendarDatePicker selectedDate={this.props.selectedDate}
                           displayedDate={this.props.displayedDate}
                           isVisibleCalendar={this.props.isVisibleCalendar}
                           changeMonth={this.props.changeMonth}
@@ -59,7 +59,6 @@ export class DatePickerComponent extends Component<IProps> {
   }
 
   render() {
-    console.log(this.props.selectedDate);
     return (
       <div className="datePicker">
         <ButtonComponent showCalendar={this.props.showCalendar}

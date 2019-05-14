@@ -83,7 +83,7 @@ export function getTimeFromInputTimeFormat(time) {
 }
 
 export function equalDate(firstDate, secondDate) {
-  return firstDate.getFullYear() === secondDate.getFullYear()
+  return firstDate && secondDate && firstDate.getFullYear() === secondDate.getFullYear()
   && firstDate.getMonth() === secondDate.getMonth()
   && firstDate.getDate() === secondDate.getDate()
 }

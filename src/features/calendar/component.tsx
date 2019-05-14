@@ -12,10 +12,10 @@ interface IProps {
   displayedDate: Date,
   selectedDate: Date,
   isVisibleDialog: boolean,
-  changeYear: ( year: number ) => number,
-  changeMonth: ( month: number ) => number,
-  openDialog: () => boolean
-  chooseDate: ( day: number ) => Date,
+  changeYear: ( year: number ) => any,
+  changeMonth: ( month: number ) => any,
+  openDialog: () => any
+  chooseDate: ( day: number ) => any,
 }
 
 export class Calendar extends Component<IProps> {
