@@ -15,6 +15,31 @@
     align-items: center;
 }
 
+.wrapperArrowsChangeDate {
+    display: flex;
+}
+
+.arrowChangeDate{
+    font-size: 1.2em;
+    text-align: center;
+    margin: 10px;
+    padding: 2px 0 0 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: 0.5s;
+}
+
+.arrowChangeDate:hover {
+    cursor: pointer;
+    background: #e5e5e5;
+}
+
+.arrowChangeDate:active {
+    background: #cbcbcb;
+}
+
 #month {
     margin-right: 10px;
     width: 100px;
@@ -63,6 +88,10 @@
     height: calc(100% / 5);
     justify-content: space-between;
     display: flex;
+}
+
+.weekForWeek {
+    height: 100%;
 }
 
 .dayOfMonth {
@@ -171,14 +200,13 @@
     padding: 4px;
 }
 
-.datePickerWrapper{
+.datePickerWrapper {
     position: relative;
 }
 
 .startTimeDatepicker, .endTimeDatepicker {
     width: 85px;
 }
-
 
 
 .buttonAddTime {

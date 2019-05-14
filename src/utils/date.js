@@ -44,6 +44,17 @@ export function getArrayDaysInMonth(date) {
   return arrayDaysInMonth;
 }
 
+export function getArrayDaysInWeek(date) {
+  const MILLISECONDS_IN_DAY = 86400000;
+  const arrayDaysInWeek = [];
+  const firstDayInWeek = new Date(date).setMilliseconds(-MILLISECONDS_IN_DAY * date.getDay());
+  for( let i = 0; i < 7; i++) {
+    arrayDaysInWeek[i] = new Date(firstDayInWeek + (i * MILLISECONDS_IN_DAY)).getDate()
+  }
+
+  return arrayDaysInWeek;
+}
+
 export function getFormatForInputTime(addHours = 0, addMinutes = 0) {
   let hours = addHours;
   let minutes = addMinutes;

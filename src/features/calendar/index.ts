@@ -19,8 +19,10 @@ export const mapDispatchToProps = (dispatch: any) => {
   return {
     changeMonth: (month: number) => dispatch(actions.changeMonth(month)),
     changeYear: (year: number) => dispatch(actions.changeYear(year)),
+    showToday: () => dispatch(actions.showToday()),
     chooseDate: (day: number) => dispatch(actions.chooseDate(day)),
     openDialog: () => dispatch(actions.openDialog()),
+    changeDisplayedDate: (milliseconds: number) => dispatch(actions.changeDisplayedDate(milliseconds)),
   };
 };
 

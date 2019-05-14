@@ -16,16 +16,13 @@ export class Month extends Component<IProps> {
 
 
   renderDay(day: string, index: number) {
-    const selected = this.props.selectedDate.getFullYear() === this.props.displayedDate.getFullYear()
-                  && this.props.selectedDate.getMonth() === this.props.displayedDate.getMonth()
-                  && this.props.selectedDate.getDate() === +day ? ' selected ' : '' ;
     const todayDate = new Date();
     const today = (todayDate.getFullYear() === this.props.displayedDate.getFullYear()
                   && todayDate.getMonth() === this.props.displayedDate.getMonth()
                   && todayDate.getDate() === +day) ? ' today ' : '';
     return (
       <div key={day + index}
-           className={'dayOfMonth ' + ((day !== '') ? ' enabled ' : '') + selected }
+           className={'dayOfMonth ' + ((day !== '') ? ' enabled ' : '') }
            onClick={(day !== '') ? this.openDialog : () => {}}
            data-day={day}
       >

@@ -1,30 +1,31 @@
 import { calendarActions } from './reducer';
 import { dialogForAddTaskActions } from './dialog/dialogForAddTask';
 
-export function changeMonth( month: number ) {
-  return {
-    type: calendarActions.CHANGE_MONTH,
-    payload: month,
-  };
-}
+export const changeMonth = ( month: number ) => ( {
+  type: calendarActions.CHANGE_MONTH,
+  payload: month,
+} );
 
-export function changeYear( year: number ) {
-  return {
-    type: calendarActions.CHANGE_YEAR,
-    payload: year,
-  };
-}
+export const changeYear = ( year: number ) => ( {
+  type: calendarActions.CHANGE_YEAR,
+  payload: year,
+} );
 
-export function chooseDate( day: number ) {
-  return {
-    type: calendarActions.CHOOSE_DATE,
-    payload: day,
-  };
-}
+export const showToday = () => ( {
+  type: calendarActions.SHOW_TODAY,
+} );
 
-export function openDialog() {
-  return {
-    type: dialogForAddTaskActions.OPEN_DIALOG,
-  };
-}
+export const changeDisplayedDate = (milliseconds: number) => ( {
+  type: calendarActions.CHANGE_DISPLAYED_DATE,
+  payload: milliseconds
+} );
+
+export const chooseDate = ( day: number ) => ( {
+  type: calendarActions.CHOOSE_DATE,
+  payload: day,
+} );
+
+export const openDialog = () => ( {
+  type: dialogForAddTaskActions.OPEN_DIALOG,
+} );
 

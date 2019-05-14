@@ -26,7 +26,7 @@ export class DatePickerComponent extends Component<IProps> {
     });
   }
 
-  getViewInput() {
+  getViewInput = () => {
     return ((this.props.selectedDate) ?
         <InputComponent selectedDate={this.props.selectedDate}
                         showCalendar={this.props.showCalendar}

@@ -5,6 +5,8 @@ export const calendarActions = {
   CHANGE_MONTH: 'CALENDAR_CHANGE_MONTH',
   CHANGE_YEAR: 'CALENDAR_CHANGE_YEAR',
   CHOOSE_DATE: 'CALENDAR_CHOOSE_DATE',
+  SHOW_TODAY: 'SHOW_TODAY',
+  CHANGE_DISPLAYED_DATE: 'CHANGE_DISPLAYED_DATE',
 };
 
 const initialState = {
@@ -24,11 +26,26 @@ export function calendarReducer( state: IState = initialState, action: IAction<a
         ...state,
         displayedDate: new Date( state.displayedDate.getFullYear(), action.payload ),
       };
+
     case calendarActions.CHANGE_YEAR:
       return {
         ...state,
         displayedDate: new Date( action.payload, state.displayedDate.getMonth() ),
       };
+
+    case calendarActions.SHOW_TODAY:
+      return {
+        ...state,
+        displayedDate: new Date(),
+        selectedDate: new Date(),
+      };
+
+    case calendarActions.CHANGE_DISPLAYED_DATE:
+      return {
+        ...state,
+        displayedDate: new Date(state.displayedDate.setMilliseconds(0) + action.payload ),
+      };
+
     case calendarActions.CHOOSE_DATE:
       return {
         ...state,
@@ -38,6 +55,7 @@ export function calendarReducer( state: IState = initialState, action: IAction<a
           action.payload,
         ),
       };
+
     default:
       return state;
   }

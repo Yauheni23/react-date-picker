@@ -32,10 +32,9 @@ export class dialogForAddTask extends React.Component<any> {
             <i className="fas fa-times"/>
           </div>
             <div className="timeTask">
-              <DatePickerComponent key="0" data-id="0" defaultDate={this.props.taskInfo.startDate}
-              />
+              <DatePickerComponent key="0" data-id="0" defaultDate={this.props.selectedDate}/>
               <SelectTime useDuration={useDuration}/>
-              <DatePickerComponent key="1" data-id="1" defaultDate={this.props.taskInfo.endDate}/>
+              <DatePickerComponent key="1" data-id="1" defaultDate={this.props.selectedDate}/>
             </div>
           <div className="wrapperSave">
             <button className="btn btn-success">Save</button>
