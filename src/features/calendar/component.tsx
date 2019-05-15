@@ -7,9 +7,9 @@ import { Route } from 'react-router-dom';
 import { HeaderCalendar } from './header/component';
 import { Month } from './month/component';
 import { Week } from './week/component';
-import { Middle } from './middleCalendar/component';
+// import { Middle } from './middleCalendar/component';
 import DialogForAddTask from './dialog/dialogForAddTask';
-import { constants } from '../../constants';
+// import { constants } from '../../constants';
 import { Day } from './day/component';
 
 interface IProps {
@@ -22,6 +22,7 @@ interface IProps {
   openDialog: () => any
   chooseDate: ( day: number ) => any,
   changeDisplayedDate: ( milliseconds: number ) => any,
+  showInputTime: any
 }
 
 export class Calendar extends Component<IProps> {
@@ -34,7 +35,7 @@ export class Calendar extends Component<IProps> {
                         displayedDate={this.props.displayedDate}
                         changeDisplayedDate={this.props.changeDisplayedDate}
         />
-        <Middle lol={constants.DAYS_OF_WEEK_FOR_MONTH}/>
+        {/*<Middle lol={constants.DAYS_OF_WEEK_FOR_MONTH}/>*/}
         <Route path="/calendar/month"
                render={() => <Month displayedDate={this.props.displayedDate}
                                     selectedDate={this.props.selectedDate}
@@ -44,22 +45,23 @@ export class Calendar extends Component<IProps> {
         />
         <Route path="/calendar/week"
                render={() => <Week displayedDate={this.props.displayedDate}
-                                    selectedDate={this.props.selectedDate}
-                                    openDialog={this.props.openDialog}
-                                    chooseDate={this.props.chooseDate}
+                                   selectedDate={this.props.selectedDate}
+                                   openDialog={this.props.openDialog}
+                                   chooseDate={this.props.chooseDate}
                />}
         />
         <Route path="/calendar/day"
                render={() => <Day displayedDate={this.props.displayedDate}
-                                    selectedDate={this.props.selectedDate}
-                                    openDialog={this.props.openDialog}
-                                    chooseDate={this.props.chooseDate}
+                                  selectedDate={this.props.selectedDate}
+                                  openDialog={this.props.openDialog}
+                                  chooseDate={this.props.chooseDate}
+                                  showInputTime={this.props.showInputTime}
                />}
         />
 
         {this.props.isVisibleDialog
-        ? <DialogForAddTask selectedDate={this.props.selectedDate}/>
-        : null}
+          ? <DialogForAddTask selectedDate={this.props.selectedDate}/>
+          : null}
       </div>
     );
   }

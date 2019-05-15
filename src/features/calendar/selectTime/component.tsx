@@ -18,7 +18,7 @@ export class SelectTime extends React.Component<any> {
   }
 
   showInputTime = () => {
-    this.props.showInputTime();
+    this.props.showInputTime({});
   };
 
   hideInputTime = () => {

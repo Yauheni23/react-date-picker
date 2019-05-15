@@ -1,5 +1,6 @@
 import { calendarActions } from './reducer';
 import { dialogForAddTaskActions } from './dialog/dialogForAddTask';
+import { selectTimeActions } from './selectTime';
 
 export const changeMonth = ( month: number ) => ( {
   type: calendarActions.CHANGE_MONTH,
@@ -27,5 +28,9 @@ export const chooseDate = ( day: number ) => ( {
 
 export const openDialog = () => ( {
   type: dialogForAddTaskActions.OPEN_DIALOG,
+} );
+
+export const showSelectTime = () => ( {
+  type: selectTimeActions.SHOW_SELECT_TIME,
 } );
 

@@ -8,15 +8,15 @@ export const selectTimeActions = {
 };
 
 const initialState = {
-  isVisibleInputTime: false,
-  startTime: new Date(),
-  endTime: new Date(new Date().setMilliseconds(3600000)),
+  isVisibleInputTime: null,
+  startTime: null,
+  endTime: null,
 };
 
-interface IState {
-  isVisibleInputTime: boolean,
-  startTime: Date,
-  endTime: Date
+export interface IState {
+  isVisibleInputTime: boolean | null,
+  startTime: Date | null,
+  endTime: Date | null
 }
 
 export function selectTimeReducer( state: IState = initialState, action: IAction<any> ) {
@@ -24,9 +24,9 @@ export function selectTimeReducer( state: IState = initialState, action: IAction
     case selectTimeActions.SHOW_SELECT_TIME:
       return {
         ...state,
-        isVisibleInputTime: true,
-        startTime: new Date(),
-        endTime: new Date(new Date().setMilliseconds(3600000)),
+        isVisibleInputTime: action.payload.isVisibleInputTime || true,
+        startTime: action.payload.startTime || new Date(),
+        endTime: action.payload.endTime || new Date(new Date().setMilliseconds(3600000)),
       };
     case selectTimeActions.HIDE_SELECT_TIME:
       return {
