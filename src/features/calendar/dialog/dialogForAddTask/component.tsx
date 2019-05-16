@@ -1,7 +1,6 @@
 import * as React from 'react';
-import DatePickerComponent from '../../../datePicker';
+import DatePickerComponent from '../../../datePicker/index.js';
 import SelectTime from '../../selectTime';
-import { equalDate } from '../../../../utils/date';
 
 
 export class dialogForAddTask extends React.Component<any> {
@@ -30,9 +29,7 @@ export class dialogForAddTask extends React.Component<any> {
   };
 
   render() {
-    const useDuration = this.props.taskInfo.startDate
-      ? equalDate( this.props.taskInfo.startDate, this.props.taskInfo.endDate )
-      : true;
+    const useDuration =  true;
     return (
       <div className="outsideDialog" onMouseDown={this.closeDialog}>
         <div className="dialog" onMouseDown={this.clickStop}>
@@ -43,9 +40,9 @@ export class dialogForAddTask extends React.Component<any> {
             <input className="nameTask" placeholder="Add name"/>
           </div>
           <div className="timeTask">
-            <DatePickerComponent key="0" data-id="0" defaultDate={this.props.selectedDate}/>
+            <DatePickerComponent selectedDate={this.props.startDate} id="start"/>
             <SelectTime useDuration={useDuration}/>
-            <DatePickerComponent key="1" data-id="1" defaultDate={this.props.selectedDate}/>
+            <DatePickerComponent selectedDate={this.props.endDate} id="end"/>
           </div>
           <div className="wrapperSave">
             <button className="btn btn-success">Save</button>

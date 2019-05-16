@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import * as actions from './actions';
 import { dialogForAddTask } from './component';
-import { getIsVisibleDialog, getNewTaskInfo, getTaskInfo } from './selector';
+import { getIsVisibleDialog, getStartDate, getEndDate } from './selector';
 import { createStructuredSelector } from 'reselect';
 
 export { dialogForAddTaskActions, dialogForAddTaskReducer } from './reducer';
@@ -9,8 +9,8 @@ export { dialogForAddTaskActions, dialogForAddTaskReducer } from './reducer';
 export const mapStateToProps = () => {
   return createStructuredSelector({
     isVisibleDialog: getIsVisibleDialog(),
-    newTaskInfo: getNewTaskInfo(),
-    taskInfo: getTaskInfo()
+    startDate: getStartDate(),
+    endDate: getEndDate()
   });
 };
 

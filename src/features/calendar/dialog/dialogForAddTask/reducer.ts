@@ -1,4 +1,5 @@
 import { IAction } from '../../../../store/interfaces';
+import { datePickerActions } from '../../../datePicker';
 
 export const dialogForAddTaskActions = {
   OPEN_DIALOG: 'OPEN_DIALOG_FOR_ADD_TASK',
@@ -12,25 +13,37 @@ export const dialogForAddTaskActions = {
 const initialState = {
   isVisibleDialog: null,
   startDate: null,
-  duration: null,
   endDate: null
 };
 
 interface IState {
   isVisibleDialog: boolean | null,
   startDate: Date | null,
-  duration: number | null,
   endDate: Date | null
 }
 
-export function dialogForAddTaskReducer( state: IState = initialState, action: IAction<any> ) {
+export function dialogForAddTaskReducer( state: IState = initialState, action: IAction<any> ): IState {
   switch ( action.type ) {
+    case datePickerActions.CHOOSE_DATE:
+      const changeDate = (action.id === 'start' ? 'startDate' : 'endDate');
+      return {
+        ...state,
+        [changeDate]: new Date(
+          action.payload.getFullYear(),
+          action.payload.getMonth(),
+          action.payload.getDate(),
+          // @ts-ignore
+          state[changeDate] ? state[changeDate].getHours() : 1,
+          // @ts-ignore
+          state[changeDate] ? state[changeDate].getMinutes() : 1,
+          )
+      }
+
     case dialogForAddTaskActions.SET_DIALOG_INITIAL_STATE:
       return {
         ...state,
         startDate: action.payload.startDate,
         endDate: action.payload.endDate,
-        duration: action.payload.duration
       };
     case dialogForAddTaskActions.OPEN_DIALOG:
       return {
@@ -51,11 +64,6 @@ export function dialogForAddTaskReducer( state: IState = initialState, action: I
       return {
         ...state,
         endDate: action.payload,
-      };
-    case dialogForAddTaskActions.CHANGE_DURATION:
-      return {
-        ...state,
-        duration: action.payload,
       };
 
     default:

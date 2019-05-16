@@ -14,7 +14,7 @@ export class InputComponent extends Component {
 
   changeSelectedDate = (e) => {
     if(validateDateFromInput(e.currentTarget.value)) {
-      this.props.changeSelectedDate(convertFromFormatInputInDate(e.currentTarget.value));
+      this.props.chooseDate(convertFromFormatInputInDate(e.currentTarget.value), this.props.id);
     }
   };
 
@@ -32,8 +32,8 @@ export class InputComponent extends Component {
 }
 
 InputComponent.propTypes = {
-  showCalendar: PropTypes.func.isRequired,
-  changeSelectedDate: PropTypes.func.isRequired,
+  chooseDate: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
   selectedDate: PropTypes.any.isRequired,
 };
 

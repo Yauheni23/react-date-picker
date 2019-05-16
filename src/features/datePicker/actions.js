@@ -1,55 +1,31 @@
-import { datePickerActions} from './reducer'
+import { datePickerActions } from './reducer';
 
-export function changeMonth(datePickerId, month) {
-  return {
-    type: datePickerActions.CHANGE_MONTH,
-    payload: month,
-    datePickerId
-  };
-}
+export const setDisplayedDate = (date) => ({
+  type: datePickerActions.SET_DISPLAYED_DATE,
+  payload: date,
+});
 
-export function changeYear(datePickerId, year) {
-  return {
-    type: datePickerActions.CHANGE_YEAR,
-    payload: year,
-    datePickerId
-  };
-}
+export const changeMonth = (month) => ({
+  type: datePickerActions.CHANGE_MONTH,
+  payload: month,
+});
 
-export function chooseDate(datePickerId, day) {
-  return {
-    type: datePickerActions.CHOOSE_DATE,
-    payload: day,
-    datePickerId
-  };
-}
+export const changeYear = (year) => ({
+  type: datePickerActions.CHANGE_YEAR,
+  payload: year,
+});
 
-export function showCalendar(datePickerId, ) {
-  return {
-    type: datePickerActions.SHOW_CALENDAR,
-    datePickerId
-  };
-}
+export const chooseDate = (date, id) => ({
+  type: datePickerActions.CHOOSE_DATE,
+  payload: date,
+  id: id
+});
 
-export function hideCalendar(datePickerId) {
-  return {
-    type: datePickerActions.HIDE_CALENDAR,
-    datePickerId
-  };
-}
+export const showCalendar = () => ({
+  type: datePickerActions.SHOW_CALENDAR,
+});
 
-export function changeSelectedDate(datePickerId, date) {
-  return {
-    type: datePickerActions.CHANGE_SELECTED_DATE,
-    payload: date,
-    datePickerId
-  };
-}
+export const hideCalendar = () => ({
+  type: datePickerActions.HIDE_CALENDAR,
+});
 
-export function setDatePickerInitialState(datePickerId, state) {
-  return {
-    type: datePickerActions.SET_DATE_PICKER_INITIAL_STATE,
-    payload: state,
-    datePickerId
-  };
-}
