@@ -32,11 +32,11 @@
 .calendar-date-picker {
   display: none;
   z-index: 1;
-  padding: 5px;
+  padding: 7px;
   margin-top: 5px;
   position: absolute;
   left: 0;
-  top: 20px;
+  top: 25px;
   width: 250px;
   background: #ffffff;
   border: 1px solid black;

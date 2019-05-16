@@ -11,10 +11,18 @@ export class dialogForAddTask extends React.Component<any> {
       endDate: new Date( new Date( this.props.selectedDate.setMilliseconds( 0 ) ).setMilliseconds( 3600000 ) ),
       duration: 3600000,
     } );
+    document.addEventListener( 'keyup', this.closeDialogWithHelpEscape );
   }
 
   closeDialog = () => {
     this.props.closeDialog();
+    document.removeEventListener( 'keyup', this.closeDialogWithHelpEscape );
+  };
+
+  closeDialogWithHelpEscape = ( event: any ) => {
+    if ( event.key === 'Escape' ) {
+      this.closeDialog();
+    }
   };
 
   clickStop = ( event: any ) => {
@@ -44,7 +52,6 @@ export class dialogForAddTask extends React.Component<any> {
           </div>
         </div>
       </div>
-
     );
   }
 }

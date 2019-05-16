@@ -29,9 +29,9 @@ export class HeaderCalendar extends Component<IProps> {
 
   changeDisplayedDate = ( event: any ) => {
     const result = window.location.href.match( /\/calendar\/([a-z]+)/i );
-    const string = result ? result[1] : null;
+    const currentMode = result ? result[ 1 ] : '';
     let countDay = 1;
-    switch ( string ) {
+    switch ( currentMode ) {
       case 'month':
         countDay = daysInMonth( this.props.displayedDate );
         break;
@@ -62,13 +62,18 @@ export class HeaderCalendar extends Component<IProps> {
           <div onClick={this.changeDisplayedDate} className="arrowChangeDate" data-change="right"><i
             className="fas fa-chevron-right"/></div>
         </div>
-        <select id="month" value={displayedDate.getMonth()} onChange={this.changeMonth}>
-          {HeaderCalendar.renderSelectMonth()}
-        </select>
-        <input type="number" value={displayedDate.getFullYear()} id="year" onChange={this.changeYear}/>
-        <Link to="/calendar/day"> Day </Link>
-        <Link to="/calendar/week"> Week </Link>
-        <Link to="/calendar/month"> Month </Link>
+        <div>
+          <select id="month" value={displayedDate.getMonth()} onChange={this.changeMonth}>
+            {HeaderCalendar.renderSelectMonth()}
+          </select>
+          <input type="number" value={displayedDate.getFullYear()} id="year" onChange={this.changeYear}/>
+        </div>
+        <div>
+          <Link to="/calendar/day" className="headerLink"> Day </Link>
+          <Link to="/calendar/week" className="headerLink"> Week </Link>
+          <Link to="/calendar/month" className="headerLink"> Month </Link>
+        </div>
+
       </section>
     );
   }
