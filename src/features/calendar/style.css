@@ -56,32 +56,70 @@
 .daysOfWeek {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 10px;
-  padding-top: 4px;
+  padding: 5px 0;
 }
 .dayOfWeek {
   width: calc(100% / 7);
   text-align: center;
+  font-size: 19.2px;
 }
 .daysOfMonth {
   width: 100%;
-  height: calc(100% - 98px);
+  height: calc(100% - 60px);
   display: flex;
   flex-direction: column;
 }
-.week {
+.dateOfWeekWrapper {
   width: 100%;
-  height: calc(100% / 5);
   justify-content: space-between;
   display: flex;
 }
-.weekForWeek {
+.dateOfWeek {
+  width: 100%;
   height: 100%;
+  text-align: center;
+  font-size: 1.4em;
+}
+.dateOfDay {
+  font-size: 1.4em;
+}
+.dayForWeekWrapper {
+  display: flex;
+  text-align: center;
+  width: 100%;
+}
+.dayForWeek {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+.dayForWeek + .dayForWeek::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 0;
+  height: calc(100% + 40px);
+  z-index: 3;
+  pointer-events: none;
+  border-left: 1px solid #dadce0;
+}
+.month {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+.weekOfMonth {
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  display: flex;
 }
 .dayOfMonth {
   width: calc(100% / 7);
   height: 100%;
-  font-size: 1.2em;
+  font-size: 1.4em;
   text-align: center;
 }
 .dayOfMonth.enabled {
@@ -159,12 +197,15 @@
   padding: 3px;
   transition: 0.5s;
 }
+.nameTask:focus {
+  border-color: blue;
+}
 .timeTask {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 48px;
-  padding: 4px;
+  height: 28px;
+  margin-bottom: 15px;
 }
 .datePickerWrapper {
   position: relative;
@@ -184,22 +225,28 @@
   cursor: pointer;
 }
 .inputTimeWrapper {
+  font-size: 0.9em;
+  margin-top: 10px;
   position: relative;
-  height: 20px;
+  height: 24px;
 }
 .inputTime {
-  padding-left: 3px;
-  margin: 0 3px;
+  padding-left: 5px;
+  margin: 0 4px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.48);
-  height: 20px;
+  height: 24px;
   width: 46px;
+  outline: none;
   transition: 0.7s;
+}
+.inputTime:focus {
+  border-color: blue;
 }
 .selectTime {
   position: absolute;
   z-index: 1;
-  top: 35px;
+  top: 30px;
   left: 0;
   height: 200px;
   width: 180px;
@@ -307,14 +354,15 @@
 }
 .day {
   width: 100%;
-  height: calc(100% - 98px);
+  height: calc(100% - 60px);
   position: relative;
   text-align: left;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 .headerDay {
-  font-size: 1.2em;
-  height: 65px;
+  height: 75px;
+  font-size: 19.2px;
   padding-left: 64px;
   display: flex;
   flex-direction: column;
@@ -331,6 +379,7 @@
 }
 .dayByHoursWrapper {
   display: flex;
+  min-width: 100%;
 }
 .hoursOfDay {
   height: 40px;
@@ -350,9 +399,6 @@
 }
 .errorInput {
   border-color: #c30000;
-}
-.enterInput {
-  border-color: blue;
 }
 .activeBlock {
   display: inline-block;

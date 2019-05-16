@@ -14,7 +14,11 @@ interface IProps {
 }
 
 export class Day extends Component<IProps> {
-  openDialog = ( event: any ) => {
+  openDialog = (event: any) => {
+    this.props.openDialog();
+  }
+
+  openDialogWithTime = ( event: any ) => {
     let startTime = event.nativeEvent.offsetY / 40 | 0;
     this.props.chooseDate( this.props.displayedDate.getDate() );
     this.props.openDialog();
@@ -42,13 +46,13 @@ export class Day extends Component<IProps> {
             {constants.DAYS_OF_WEEK_FOR_MONTH[ this.props.displayedDate.getDay() ]}
             </span>
           </div>
-          <div>
+          <div onClick={this.openDialog}>
             <span className="dateOfDay">
               {this.props.displayedDate.getDate()}
             </span>
           </div>
         </div>
-        <div className="dayByHoursWrapper" onClick={this.openDialog}>
+        <div className="dayByHoursWrapper" onClick={this.openDialogWithTime}>
           <TimeOfDay/>
           <DayByHours/>
         </div>

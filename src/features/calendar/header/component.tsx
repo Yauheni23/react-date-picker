@@ -38,6 +38,8 @@ export class HeaderCalendar extends Component<IProps> {
       case 'week':
         countDay = 7;
         break;
+      default:
+        countDay = 1;
     }
     countDay *= event.currentTarget.dataset.change === 'left' ? -1 : 1;
     this.props.changeDisplayedDate( countDay * 86400000 );

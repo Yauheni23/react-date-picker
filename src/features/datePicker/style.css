@@ -12,7 +12,7 @@
   padding: 0 5px;
 }
 .inputDatePicker:focus {
-  border-color: orangered;
+  border-color: blue;
 }
 .button-show-calendar {
   position: absolute;

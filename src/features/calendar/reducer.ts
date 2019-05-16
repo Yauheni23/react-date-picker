@@ -47,13 +47,19 @@ export function calendarReducer( state: IState = initialState, action: IAction<a
       };
 
     case calendarActions.CHOOSE_DATE:
+      const displayedDate = new Date(state.displayedDate);
       return {
         ...state,
         selectedDate: new Date(
-          state.displayedDate.getFullYear(),
-          state.displayedDate.getMonth(),
+          displayedDate.getFullYear(),
+          displayedDate.getMonth(),
           action.payload,
         ),
+        displayedDate: new Date(
+          displayedDate.getFullYear(),
+          displayedDate.getMonth(),
+          action.payload,
+        )
       };
 
     default:
