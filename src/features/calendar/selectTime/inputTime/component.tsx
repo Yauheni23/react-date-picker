@@ -29,15 +29,15 @@ export class InputTime extends React.Component<any> {
     const array = [];
     for ( let i = 0; i < 48; i++ ) {
       let time = getFormatForInputTime(
-        ( ( i / 2 ) + ( this.props.useDuration ? this.props.time.getHours() - 1 : 0 ) ) | 0,
-        ( i % 2 ) * 30 + ( this.props.useDuration ? this.props.time.getMinutes() : 0 ),
+        ( i / 2 ) | 0,
+        ( i % 2 ) * 30,
       );
       array.push(
         <div key={i}
              data-time={time}
              className="optionTime"
              onMouseDown={this.selectTime}>
-          {`${time}${( this.props.useDuration ) ? ' (' + i / 2 + 'ч.)' : ''}`}
+          {time}
         </div>,
       );
     }

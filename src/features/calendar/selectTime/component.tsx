@@ -9,32 +9,31 @@ export class SelectTime extends React.Component<any> {
       let state = dialogForAddTaskReducer( store.getState() );
       if ( state.isVisibleDialog === false ) {
         unsubscribe();
-        this.hideInputTime();
+        this.hideSelectTime();
       }
     } );
   }
-  state = {
-    endTime: this.props.startTime
-  }
 
-  showInputTime = () => {
-    this.props.showInputTime({});
+  showSelectTime = () => {
+    this.props.showSelectTime({
+      startTime: new Date(),
+      endTime: new Date(new Date().setMilliseconds(3600000))
+    });
   };
 
-  hideInputTime = () => {
-    this.props.hideInputTime();
+  hideSelectTime = () => {
+    this.props.hideSelectTime();
   };
 
   render() {
     return (
       ( !this.props.isVisibleInputTime
-          ? <button onClick={this.showInputTime} className="btn btn-success buttonAddTime">Click me</button>
+          ? <button onClick={this.showSelectTime} className="btn btn-success buttonAddTime">Click me</button>
           : <div className="timeTask">
             <InputTime chooseTime={this.props.chooseStartTime}
                        time={this.props.startTime}
             />
             <InputTime time={this.props.endTime}
-                       useDuration={this.props.useDuration}
                        chooseTime={this.props.chooseEndTime}
             />
           </div>

@@ -17,8 +17,8 @@ export const mapStateToProps = () => {
 
 export const mapDispatchToProps = (dispatch: any) => {
   return {
-    showInputTime: (data: IState) => dispatch(actions.showInputTime(data)),
-    hideInputTime: () => dispatch(actions.hideInputTime()),
+    showSelectTime: (data: IState) => dispatch(actions.showSelectTime(data)),
+    hideSelectTime: () => dispatch(actions.hideSelectTime()),
     chooseStartTime: (date: Date) => dispatch(actions.chooseStartTime(date)),
     chooseEndTime: (date: Date) => dispatch(actions.chooseEndTime(date)),
   };

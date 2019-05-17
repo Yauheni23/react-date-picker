@@ -20,7 +20,6 @@ export const mapDispatchToProps = (dispatch: any) => {
     setDialogInitialState: (data: any) => dispatch(actions.setDialogInitialState(data)),
     changeStartDate: (date: Date) => dispatch(actions.changeStartDate(date)),
     changeEndDate: (date: Date) => dispatch(actions.changeEndDate(date)),
-    changeDuration: (duration: number) => dispatch(actions.changeDuration(duration)),
   };
 };
 

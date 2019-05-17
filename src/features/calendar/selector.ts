@@ -9,9 +9,9 @@ export const getSelectedDate = () => createSelector(
   calendar => calendar.selectedDate
 );
 
-export const getDisplayedDate = () => createSelector(
+export const getModeCalendar = () => createSelector(
   CalendarReducer,
-  calendar => calendar.displayedDate
+  calendar => calendar.modeCalendar
 );
 
 

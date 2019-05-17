@@ -27,11 +27,4 @@ export function changeEndDate(date: Date) {
   };
 }
 
-export function changeDuration(duration: number) {
-  return {
-    type: dialogForAddTaskActions.CHANGE_DURATION,
-    payload: duration
-  };
-}
-
 

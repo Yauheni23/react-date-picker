@@ -7,31 +7,70 @@ import { DayByHours } from '../day/dayByHours/component';
 import { Link } from 'react-router-dom';
 
 interface IProps {
-  displayedDate: Date,
   selectedDate: Date,
   openDialog: () => boolean
-  chooseDate: ( day: number ) => Date,
-  showInputTime: any
+  chooseDate: ( date: Date ) => Date
+  showSelectTime: any,
+  changeModeCalendar: (mode: string) => any
 }
 
 export class Week extends Component<IProps> {
   openDialog = ( event: any ) => {
-    this.props.chooseDate( +event.currentTarget.dataset.day );
     this.props.openDialog();
+    if(this.props.selectedDate.getDate() - +event.currentTarget.dataset.day > 7) {
+      this.props.chooseDate( new Date(
+          this.props.selectedDate.getFullYear(),
+          this.props.selectedDate.getMonth() + 1,
+          +event.currentTarget.dataset.day
+      ) );
+    }
+    else if(this.props.selectedDate.getDate() - +event.currentTarget.dataset.day < -7) {
+      this.props.chooseDate( new Date(
+          this.props.selectedDate.getFullYear(),
+          this.props.selectedDate.getMonth() - 1,
+          +event.currentTarget.dataset.day
+      ) );
+    } else {
+      this.props.chooseDate( new Date(
+          this.props.selectedDate.getFullYear(),
+          this.props.selectedDate.getMonth(),
+          +event.currentTarget.dataset.day
+      ) );
+    }
   };
 
   chooseDay = ( event: any ) => {
-    this.props.chooseDate( +event.currentTarget.dataset.day );
+    this.props.changeModeCalendar('day')
+    if(this.props.selectedDate.getDate() - +event.currentTarget.dataset.day > 7) {
+      this.props.chooseDate( new Date(
+        this.props.selectedDate.getFullYear(),
+        this.props.selectedDate.getMonth() + 1,
+        +event.currentTarget.dataset.day
+      ) );
+    }
+    else if(this.props.selectedDate.getDate() - +event.currentTarget.dataset.day < -7) {
+      this.props.chooseDate( new Date(
+        this.props.selectedDate.getFullYear(),
+        this.props.selectedDate.getMonth() - 1,
+        +event.currentTarget.dataset.day
+      ) );
+    } else {
+      this.props.chooseDate( new Date(
+          this.props.selectedDate.getFullYear(),
+          this.props.selectedDate.getMonth(),
+          +event.currentTarget.dataset.day
+      ) );
+    }
     event.stopPropagation();
   };
 
   openDialogWithTime = ( event: any ) => {
-    this.openDialog(event);
     let startTime = event.nativeEvent.offsetY / 40 | 0;
-    this.props.showInputTime( {
+    this.openDialog(event);
+    this.props.showSelectTime( {
       isVisibleInputTime: true,
-      startTime: new Date( 2010, 0, 10, startTime ),
-      endTime: new Date( 2010, 0, 10, startTime + 1 ),
+      startTime: new Date( 2010, 0, 10, startTime, 0 ),
+      endTime: new Date( 2010, 0, 10, startTime + 1, 0 ),
     } );
   };
 
@@ -47,14 +86,14 @@ export class Week extends Component<IProps> {
   };
 
   renderWeeksOfMonth1() {
-    const daysOfMonth = getArrayDaysInWeek( this.props.displayedDate );
+    const daysOfMonth = getArrayDaysInWeek( this.props.selectedDate );
     return daysOfMonth.map( ( day: number ) => this.renderDay1( day ) );
   }
 
   renderDay( day: number, index: number ) {
     const todayDate = new Date();
-    const today = ( todayDate.getFullYear() === this.props.displayedDate.getFullYear()
-      && todayDate.getMonth() === this.props.displayedDate.getMonth()
+    const today = ( todayDate.getFullYear() === this.props.selectedDate.getFullYear()
+      && todayDate.getMonth() === this.props.selectedDate.getMonth()
       && todayDate.getDate() === +day ) ? ' today ' : '';
     return (
       <div key={day}
@@ -72,7 +111,7 @@ export class Week extends Component<IProps> {
   };
 
   renderWeeksOfMonth() {
-    const daysOfMonth = getArrayDaysInWeek( this.props.displayedDate );
+    const daysOfMonth = getArrayDaysInWeek( this.props.selectedDate );
     return daysOfMonth.map( ( day: number, index ) => this.renderDay( day, index ) );
   }
 

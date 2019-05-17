@@ -1,12 +1,13 @@
 import { selectTimeActions } from './reducer';
 import {IState} from './reducer'
+import { IAction } from '../../../store/interfaces';
 
-export const showInputTime = (data: IState) => ( {
+export const showSelectTime = (data: IState):IAction<any> => ( {
   type: selectTimeActions.SHOW_SELECT_TIME,
   payload: data
 } );
 
-export const hideInputTime = () => ( {
+export const hideSelectTime = () => ( {
   type: selectTimeActions.HIDE_SELECT_TIME,
 } );
 
