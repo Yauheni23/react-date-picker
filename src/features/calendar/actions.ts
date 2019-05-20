@@ -1,6 +1,5 @@
 import { calendarActions } from './reducer';
 import { dialogForAddTaskActions } from './dialog/dialogForAddTask';
-import { selectTimeActions } from './selectTime';
 import { IAction } from '../../store/interfaces';
 
 export const changeMonth = ( month: number ):IAction<number> => ( {
@@ -34,9 +33,5 @@ export const changeModeCalendar = ( mode: string ): IAction<string> => ( {
 
 export const openDialog = (): IAction<any>  => ( {
   type: dialogForAddTaskActions.OPEN_DIALOG,
-} );
-
-export const showSelectTime = (): IAction<any>  => ( {
-  type: selectTimeActions.SHOW_SELECT_TIME,
 } );
 

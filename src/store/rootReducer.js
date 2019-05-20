@@ -4,6 +4,7 @@ import { datePickerReducer } from '../features/datePicker';
 import { calendarReducer } from '../features/calendar';
 import { dialogForAddTaskReducer } from '../features/calendar/dialog/dialogForAddTask';
 import { selectTimeReducer} from '../features/calendar/selectTime';
+import { viewTaskReducer } from '../features/calendar/dialog/viewTask';
 
 export default function rootReducer(history) {
   return combineReducers({
@@ -11,6 +12,7 @@ export default function rootReducer(history) {
     datePickerReducer: datePickerReducer,
     calendarReducer: calendarReducer,
     dialogForAddTaskReducer: dialogForAddTaskReducer,
-    selectTimeReducer: selectTimeReducer
+    selectTimeReducer: selectTimeReducer,
+    viewTaskReducer: viewTaskReducer
   });
 }

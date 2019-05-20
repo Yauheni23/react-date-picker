@@ -2,6 +2,7 @@ import * as React from 'react';
 import DatePickerComponent from '../../../datePicker/index.js';
 import SelectTime from '../../selectTime';
 import { ChangeEvent } from 'react';
+import uuidv4 from 'uuid/v4'
 
 interface IProps {
     setDialogInitialState: any;
@@ -51,13 +52,14 @@ export class dialogForAddTask extends React.Component<IProps> {
     };
 
     saveTask = () => {
-        if ( this.state.nameTask ) {
+        if ( this.state.nameTask && this.state.nameTask.trim()) {
             this.createNewTask( {
                 startDate: this.props.startDate.toISOString(),
                 endDate: this.props.startDate > this.props.endDate
                     ? this.props.startDate.toISOString()
                     : this.props.endDate.toISOString(),
                 nameTask: this.state.nameTask,
+                id: uuidv4()
             } )  ? this.props.closeDialog() : console.log('Invalid Date!!!')
         } else {
             this.setState( {
@@ -70,10 +72,7 @@ export class dialogForAddTask extends React.Component<IProps> {
         const storage = localStorage.getItem( 'tasks' );
         const tasksFromStorage = storage ? JSON.parse( storage ) : null;
         if ( tasksFromStorage ) {
-
             const invalidDate = tasksFromStorage.some( ( el: any ) => {
-                console.log(el.startDate === task.startDate )
-                console.log(task.startDate === el.endDate )
                 return ( el.startDate >= task.startDate && task.startDate >= el.endDate )
                     || ( el.startDate >= task.endDate && task.endDate >= el.endDate )
                     || ( el.startDate === task.startDate && task.startDate === el.endDate )

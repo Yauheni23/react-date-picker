@@ -5,16 +5,52 @@ import { constants } from '../../../constants';
 import { TimeOfDay } from '../day/timeOfDay/component';
 import { DayByHours } from '../day/dayByHours/component';
 import { Link } from 'react-router-dom';
+import { ListOfTasksForDay } from '../day/listOfTasks/component';
+import { IDescriptionOfTask } from '../month/listOfTasks/component';
 
 interface IProps {
   selectedDate: Date,
   openDialog: () => boolean
   chooseDate: ( date: Date ) => Date
   showSelectTime: any,
-  changeModeCalendar: (mode: string) => any
+  changeModeCalendar: (mode: string) => any;
+  openViewTask: any;
 }
 
 export class Week extends Component<IProps> {
+  state = {
+    allTask: [],
+  };
+
+  componentDidMount(): void {
+    this.setState( {
+      allTask: this.getInfoByTasksOfMonth(),
+    } );
+  }
+
+  componentDidUpdate( nextProps: Readonly<IProps>, nextState: Readonly<{}>, nextContext: any ): void {
+    if ( nextProps.selectedDate.getFullYear() !== this.props.selectedDate.getFullYear()
+        || nextProps.selectedDate.getMonth() !== this.props.selectedDate.getMonth() ) {
+      this.setState( {
+        allTask: this.getInfoByTasksOfMonth(),
+      } );
+    }
+  }
+
+  getInfoByTasksOfMonth = () => {
+    const storageOfTasks = localStorage.getItem( 'tasks' );
+    const allTask = storageOfTasks ? JSON.parse( storageOfTasks ) : [];
+    return allTask.filter( ( task: IDescriptionOfTask ) => {
+      return new Date( task.startDate ).getMonth() === this.props.selectedDate.getMonth();
+    } );
+  };
+
+  getInfoByTasksOfDay = ( day: number ) => {
+    return this.state.allTask.filter( ( task: IDescriptionOfTask ) => {
+      return new Date( task.startDate ).getDate() === day;
+    } );
+  };
+
   openDialog = ( event: any ) => {
     this.props.openDialog();
     if(this.props.selectedDate.getDate() - +event.currentTarget.dataset.day > 7) {
@@ -80,7 +116,9 @@ export class Week extends Component<IProps> {
            className='dayForWeek'
            onClick={this.openDialogWithTime}
            data-day={day}
+           style={{padding: '0 4px'}}
       >
+        <ListOfTasksForDay openViewTask={this.props.openViewTask} listOfTask={this.getInfoByTasksOfDay(+day)}/>
       </div>
     );
   };

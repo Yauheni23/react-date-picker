@@ -7,64 +7,74 @@ import { HeaderCalendar } from './header/component';
 import { Month } from './month/component';
 import { Week } from './week/component';
 import DialogForAddTask from './dialog/dialogForAddTask';
+import ViewTask from './dialog/viewTask';
 import { Day } from './day/component';
 
 interface IProps {
-  displayedDate: Date;
-  selectedDate: Date;
-  isVisibleDialog: boolean;
-  changeYear: ( year: number ) => any;
-  changeMonth: ( month: number ) => any;
-  showToday: () => any;
-  openDialog: () => any;
-  chooseDate: ( date: Date ) => any;
-  changeDisplayedDate: ( milliseconds: number ) => any;
-  showSelectTime: (data: any) => any;
-  changeModeCalendar: (mode: string) => any;
-  modeCalendar: string;
+    displayedDate: Date;
+    selectedDate: Date;
+    isVisibleDialog: boolean;
+    isVisibleViewTask: boolean;
+    changeYear: ( year: number ) => any;
+    changeMonth: ( month: number ) => any;
+    showToday: () => any;
+    openDialog: () => any;
+    chooseDate: ( date: Date ) => any;
+    changeDisplayedDate: ( milliseconds: number ) => any;
+    showSelectTime: ( data: any ) => any;
+    changeModeCalendar: ( mode: string ) => any;
+    modeCalendar: string;
+    openViewTask: any
 }
 
 export class Calendar extends Component<IProps> {
-  render() {
-    return (
-      <div className="calendar">
-        <HeaderCalendar changeMonth={this.props.changeMonth}
-                        changeYear={this.props.changeYear}
-                        showToday={this.props.showToday}
-                        displayedDate={this.props.selectedDate}
-                        changeDisplayedDate={this.props.changeDisplayedDate}
-                        changeModeCalendar={this.props.changeModeCalendar}
-                        modeCalendar={this.props.modeCalendar}
-        />
-        <Route path="/calendar/month"
-               render={() => <Month selectedDate={this.props.selectedDate}
-                                    openDialog={this.props.openDialog}
-                                    chooseDate={this.props.chooseDate}
-                                    changeModeCalendar={this.props.changeModeCalendar}
-               />}
-        />
-        <Switch>
-          <Route path="/calendar/week"
-                 render={() => <Week selectedDate={this.props.selectedDate}
-                                     openDialog={this.props.openDialog}
-                                     chooseDate={this.props.chooseDate}
-                                     showSelectTime={this.props.showSelectTime}
-                                     changeModeCalendar={this.props.changeModeCalendar}
-                 />}
-          />
-          <Route path="/calendar/day"
-                 render={() => <Day selectedDate={this.props.selectedDate}
-                                    openDialog={this.props.openDialog}
-                                    chooseDate={this.props.chooseDate}
-                                    showSelectTime={this.props.showSelectTime}
-                 />}
-          />
-        </Switch>
+    render() {
+        return (
+            <div className="calendar">
+                <HeaderCalendar changeMonth={this.props.changeMonth}
+                                changeYear={this.props.changeYear}
+                                showToday={this.props.showToday}
+                                displayedDate={this.props.selectedDate}
+                                changeDisplayedDate={this.props.changeDisplayedDate}
+                                changeModeCalendar={this.props.changeModeCalendar}
+                                modeCalendar={this.props.modeCalendar}
+                />
+                <Route path="/calendar/month"
+                       render={() => <Month selectedDate={this.props.selectedDate}
+                                            openDialog={this.props.openDialog}
+                                            chooseDate={this.props.chooseDate}
+                                            changeModeCalendar={this.props.changeModeCalendar}
+                                            openViewTask={this.props.openViewTask}
+                       />}
+                />
+                <Switch>
+                    <Route path="/calendar/week"
+                           render={() => <Week selectedDate={this.props.selectedDate}
+                                               openDialog={this.props.openDialog}
+                                               chooseDate={this.props.chooseDate}
+                                               showSelectTime={this.props.showSelectTime}
+                                               changeModeCalendar={this.props.changeModeCalendar}
+                                               openViewTask={this.props.openViewTask}
+                           />}
+                    />
+                    <Route path="/calendar/day"
+                           render={() => <Day selectedDate={this.props.selectedDate}
+                                              openDialog={this.props.openDialog}
+                                              chooseDate={this.props.chooseDate}
+                                              showSelectTime={this.props.showSelectTime}
+                                              openViewTask={this.props.openViewTask}
 
-        {this.props.isVisibleDialog
-          ? <DialogForAddTask selectedDate={this.props.selectedDate}/>
-          : null}
-      </div>
-    );
-  }
+                           />}
+                    />
+                </Switch>
+
+                {this.props.isVisibleDialog
+                    ? <DialogForAddTask selectedDate={this.props.selectedDate}/>
+                    : null}
+                {this.props.isVisibleViewTask
+                    ? <ViewTask selectedDate={this.props.selectedDate}/>
+                    : null}
+            </div>
+        );
+    }
 }

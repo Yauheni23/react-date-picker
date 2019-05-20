@@ -98,3 +98,7 @@ export function equalDate(firstDate, secondDate) {
   && firstDate.getMonth() === secondDate.getMonth()
   && firstDate.getDate() === secondDate.getDate()
 }
+
+export function getTimeFromString(dateString) {
+  return getFormatForInputTime(new Date(dateString).getHours(), new Date(dateString).getMinutes())
+}
