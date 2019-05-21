@@ -10,7 +10,7 @@ export const mapStateToProps = () => {
   return createStructuredSelector({
     isVisibleDialog: getIsVisibleDialog(),
     startDate: getStartDate(),
-    endDate: getEndDate()
+    endDate: getEndDate(),
   });
 };
 
@@ -20,6 +20,7 @@ export const mapDispatchToProps = (dispatch: any) => {
     setDialogInitialState: (data: any) => dispatch(actions.setDialogInitialState(data)),
     changeStartDate: (date: Date) => dispatch(actions.changeStartDate(date)),
     changeEndDate: (date: Date) => dispatch(actions.changeEndDate(date)),
+    addTask: (data: any) => dispatch(actions.addTask(data)),
   };
 };
 

@@ -1,28 +1,25 @@
 import { connect } from 'react-redux';
 import * as actions from './actions';
 import { viewTask } from './component';
-import { getIsVisibleViewTask, getStartDate, getEndDate, getNameTask } from './selector';
+import { getId, getIsVisibleViewTask } from './selector';
 import { createStructuredSelector } from 'reselect';
 
 export { viewTaskActions, viewTaskReducer } from './reducer';
 
 export const mapStateToProps = () => {
-  return createStructuredSelector({
-    isVisibleDialog: getIsVisibleViewTask(),
-    startDate: getStartDate(),
-    endDate: getEndDate(),
-    nameTask: getNameTask()
-  });
+    return createStructuredSelector( {
+        isVisibleDialog: getIsVisibleViewTask(),
+        id: getId()
+    } );
 };
 
-export const mapDispatchToProps = (dispatch: any) => {
-  return {
-    closeDialog: () => dispatch(actions.closeDialog()),
-    setDialogInitialState: (data: any) => dispatch(actions.setDialogInitialState(data)),
-  };
+export const mapDispatchToProps = ( dispatch: any ) => {
+    return {
+        closeDialog: () => dispatch( actions.closeDialog() ),
+    };
 };
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(viewTask);
+    mapStateToProps,
+    mapDispatchToProps,
+)( viewTask );

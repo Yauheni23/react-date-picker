@@ -6,22 +6,12 @@ export const viewTaskReducer = ( state: any ) => {
 
 export const getIsVisibleViewTask = () => createSelector(
     viewTaskReducer,
-    dialog => dialog.isVisibleViewTask,
+    viewTask => viewTask.isVisibleViewTask,
 );
 
-export const getStartDate = () => createSelector(
+export const getId = () => createSelector(
     viewTaskReducer,
-    dialog => dialog.startDate,
-);
-
-export const getEndDate = () => createSelector(
-    viewTaskReducer,
-    dialog => dialog.endDate,
-);
-
-export const getNameTask = () => createSelector(
-    viewTaskReducer,
-    dialog => dialog.nameTask,
+    viewTask => viewTask.id,
 );
 
 

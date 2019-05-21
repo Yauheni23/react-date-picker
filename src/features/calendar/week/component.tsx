@@ -15,41 +15,15 @@ interface IProps {
   showSelectTime: any,
   changeModeCalendar: (mode: string) => any;
   openViewTask: any;
+  listOfTasks: IDescriptionOfTask[];
 }
 
 export class Week extends Component<IProps> {
-  state = {
-    allTask: [],
-  };
-
-  componentDidMount(): void {
-    this.setState( {
-      allTask: this.getInfoByTasksOfMonth(),
-    } );
+  getListOfTasksOnDay = (day: number) => {
+    return this.props.listOfTasks.filter((element:IDescriptionOfTask) => {
+      return new Date(element.startDate).getDate() === day
+    })
   }
-
-  componentDidUpdate( nextProps: Readonly<IProps>, nextState: Readonly<{}>, nextContext: any ): void {
-    if ( nextProps.selectedDate.getFullYear() !== this.props.selectedDate.getFullYear()
-        || nextProps.selectedDate.getMonth() !== this.props.selectedDate.getMonth() ) {
-      this.setState( {
-        allTask: this.getInfoByTasksOfMonth(),
-      } );
-    }
-  }
-
-  getInfoByTasksOfMonth = () => {
-    const storageOfTasks = localStorage.getItem( 'tasks' );
-    const allTask = storageOfTasks ? JSON.parse( storageOfTasks ) : [];
-    return allTask.filter( ( task: IDescriptionOfTask ) => {
-      return new Date( task.startDate ).getMonth() === this.props.selectedDate.getMonth();
-    } );
-  };
-
-  getInfoByTasksOfDay = ( day: number ) => {
-    return this.state.allTask.filter( ( task: IDescriptionOfTask ) => {
-      return new Date( task.startDate ).getDate() === day;
-    } );
-  };
 
   openDialog = ( event: any ) => {
     this.props.openDialog();
@@ -118,7 +92,7 @@ export class Week extends Component<IProps> {
            data-day={day}
            style={{padding: '0 4px'}}
       >
-        <ListOfTasksForDay openViewTask={this.props.openViewTask} listOfTask={this.getInfoByTasksOfDay(+day)}/>
+        <ListOfTasksForDay openViewTask={this.props.openViewTask} listOfTask={this.getListOfTasksOnDay(+day)}/>
       </div>
     );
   };

@@ -3,7 +3,7 @@ import { equalDate } from '../../../utils/date';
 import { DayByHours } from './dayByHours/component';
 import { TimeOfDay } from './timeOfDay/component';
 import { constants } from '../../../constants';
-import { IDescriptionOfTask } from '../month/listOfTasks/component';
+// import { IDescriptionOfTask } from '../month/listOfTasks/component';
 import { ListOfTasksForDay } from './listOfTasks/component';
 
 
@@ -13,41 +13,10 @@ interface IProps {
     chooseDate: ( date: Date ) => Date;
     showSelectTime: any;
     openViewTask: any;
+    listOfTasks: any
 }
 
 export class Day extends Component<IProps> {
-    state = {
-        allTask: [],
-    };
-
-    componentDidMount(): void {
-        this.setState( {
-            allTask: this.getInfoByTasksOfMonth(),
-        } );
-    }
-
-    componentDidUpdate( nextProps: Readonly<IProps>, nextState: Readonly<{}>, nextContext: any ): void {
-        if ( nextProps.selectedDate.getFullYear() !== this.props.selectedDate.getFullYear()
-            || nextProps.selectedDate.getMonth() !== this.props.selectedDate.getMonth() ) {
-            this.setState( {
-                allTask: this.getInfoByTasksOfMonth(),
-            } );
-        }
-    }
-
-    getInfoByTasksOfMonth = () => {
-        const storageOfTasks = localStorage.getItem( 'tasks' );
-        const allTask = storageOfTasks ? JSON.parse( storageOfTasks ) : [];
-        return allTask.filter( ( task: IDescriptionOfTask ) => {
-            return new Date( task.startDate ).getMonth() === this.props.selectedDate.getMonth();
-        } );
-    };
-
-    getInfoByTasksOfDay = ( day: number ) => {
-        return this.state.allTask.filter( ( task: IDescriptionOfTask ) => {
-            return new Date( task.startDate ).getDate() === day;
-        } );
-    };
     openDialog = ( event: any ) => {
         this.props.openDialog();
     };
@@ -93,7 +62,7 @@ export class Day extends Component<IProps> {
                 <div className="dayByHoursWrapper" onClick={this.openDialogWithTime}>
                     <TimeOfDay/>
                     <DayByHours/>
-                    <ListOfTasksForDay listOfTask={this.getInfoByTasksOfDay( this.props.selectedDate.getDate() )}
+                    <ListOfTasksForDay listOfTask={this.props.listOfTasks}
                                        openViewTask={this.props.openViewTask}/>
                 </div>
             </div>

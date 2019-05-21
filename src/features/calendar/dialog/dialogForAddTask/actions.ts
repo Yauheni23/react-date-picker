@@ -1,4 +1,12 @@
 import { dialogForAddTaskActions } from './reducer';
+import { calendarActions } from '../../reducer';
+
+export function addTask(data: any) {
+  return {
+    type: calendarActions.ADD_TASK,
+    payload: data
+  };
+}
 
 export function setDialogInitialState(data: any) {
   return {

@@ -2,7 +2,8 @@ import * as React from 'react';
 import DatePickerComponent from '../../../datePicker/index.js';
 import SelectTime from '../../selectTime';
 import { ChangeEvent } from 'react';
-import uuidv4 from 'uuid/v4'
+import uuidv4 from 'uuid/v4';
+import { saveTasksInLocalStorage } from '../../../../store/localStorage';
 
 interface IProps {
     setDialogInitialState: any;
@@ -10,12 +11,20 @@ interface IProps {
     startDate: Date;
     endDate: Date;
     closeDialog: any;
+    listOfTasks: any;
+    addTask: any;
 }
 
 export class dialogForAddTask extends React.Component<IProps> {
     state = {
         nameTask: '',
         inputError: false,
+    };
+
+    addTask = ( task: any ) => {
+        this.props.addTask( task );
+        console.log( task.startDate );
+        saveTasksInLocalStorage( this.props.listOfTasks.concat( task ) );
     };
 
     changeNameTask = ( event: ChangeEvent<HTMLInputElement> ) => {
@@ -31,8 +40,8 @@ export class dialogForAddTask extends React.Component<IProps> {
             endDate: this.props.selectedDate,
         } );
         document.addEventListener( 'keyup', this.closeDialogWithHelpEscape );
-        document.addEventListener( 'keyup', (event: KeyboardEvent) => {
-            event.stopPropagation()
+        document.addEventListener( 'keyup', ( event: KeyboardEvent ) => {
+            event.stopPropagation();
         } );
     }
 
@@ -52,15 +61,15 @@ export class dialogForAddTask extends React.Component<IProps> {
     };
 
     saveTask = () => {
-        if ( this.state.nameTask && this.state.nameTask.trim()) {
+        if ( this.state.nameTask && this.state.nameTask.trim() ) {
             this.createNewTask( {
-                startDate: this.props.startDate.toISOString(),
+                startDate: this.props.startDate,
                 endDate: this.props.startDate > this.props.endDate
-                    ? this.props.startDate.toISOString()
-                    : this.props.endDate.toISOString(),
+                    ? this.props.startDate
+                    : this.props.endDate,
                 nameTask: this.state.nameTask,
-                id: uuidv4()
-            } )  ? this.props.closeDialog() : console.log('Invalid Date!!!')
+                id: uuidv4(),
+            } ) ? this.closeDialog() : console.log( 'Invalid Date!!!' );
         } else {
             this.setState( {
                 inputError: true,
@@ -69,24 +78,19 @@ export class dialogForAddTask extends React.Component<IProps> {
     };
 
     createNewTask = ( task: any ) => {
-        const storage = localStorage.getItem( 'tasks' );
-        const tasksFromStorage = storage ? JSON.parse( storage ) : null;
-        if ( tasksFromStorage ) {
-            const invalidDate = tasksFromStorage.some( ( el: any ) => {
-                return ( el.startDate >= task.startDate && task.startDate >= el.endDate )
-                    || ( el.startDate >= task.endDate && task.endDate >= el.endDate )
-                    || ( el.startDate === task.startDate && task.startDate === el.endDate )
-                    || ( el.startDate === task.endDate && task.endDate === el.endDate );
-            } );
-            if ( !invalidDate ) {
-                tasksFromStorage.push(task);
-                localStorage.setItem( 'tasks', JSON.stringify( tasksFromStorage) );
-            } else {
-                console.log('Invalid date')
-                return false;
-            }
+        const invalidDate = this.props.listOfTasks.some( ( el: any ) => {
+            return ( el.startDate > task.startDate && task.startDate > el.endDate )
+                || ( el.startDate > task.endDate && task.endDate > el.endDate )
+                || ( el.startDate === task.startDate && task.startDate === el.endDate )
+                || ( el.startDate === task.endDate && task.endDate === el.endDate )
+                || ( task.startDate < el.startDate && el.endDate < task.endDate )
+                || ( el.startDate < task.startDate && task.endDate < el.endDate );
+        } );
+        if ( !invalidDate ) {
+            this.addTask( task );
         } else {
-            localStorage.setItem( 'tasks', JSON.stringify( [ task ] ) );
+            console.log( 'Invalid date' );
+            return false;
         }
         return true;
     };

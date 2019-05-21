@@ -16,23 +16,18 @@ interface IProps {
 export class ListOfTasksForMonth extends Component<IProps> {
     openViewTask = (event: any) => {
         event.stopPropagation();
-        const result = localStorage.getItem('tasks');
-        const allTasks = result ? JSON.parse(result) : [];
-        const currentTask = allTasks.find((el: any) => {
-            return el.id === event.currentTarget.dataset.id
-        })
-        this.props.openViewTask({
-            startDate: currentTask.startDate,
-            endDate: currentTask.endDate,
-            nameTask: currentTask.nameTask
-        })
+        this.props.openViewTask(event.currentTarget.dataset.id)
     }
 
     renderTask() {
+        this.props.listOfTask.sort((task1, task2) => {
+            return task1.startDate.setMilliseconds(0) - task2.startDate.setMilliseconds(0)
+        })
         return this.props.listOfTask.map( ( task ) => {
             return (
                 <div key={task.id}
-                     style={{ textAlign: 'left', padding: '5px', margin: '5px 0', fontSize: '14px', background: '#dddddd', borderRadius: '3px', overflow: 'hidden', width: '100%' }}
+                     style={{ textAlign: 'left', padding: '5px', margin: '5px 0', fontSize: '14px',
+                         background: '#dddddd', borderRadius: '3px', overflow: 'hidden', width: '100%' }}
                      onClick={this.openViewTask}
                      data-id={task.id}
                 >
@@ -49,7 +44,7 @@ export class ListOfTasksForMonth extends Component<IProps> {
     render() {
         return (
             <section className="listOfTasksFormMonth"
-                     style={{ height: 'calc(100% - 38px)', textAlign: 'left', padding: '5px', overflow: 'hidden', width: '100%' }}>
+                     style={{ height: 'calc(100% - 38px)', textAlign: 'left', padding: '0 5px', overflow: 'hidden', width: '100%' }}>
                 {this.renderTask()}
             </section>
         );

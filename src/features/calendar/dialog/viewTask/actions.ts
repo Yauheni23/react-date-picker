@@ -1,22 +1,18 @@
 import { viewTaskActions } from './reducer';
+import { calendarActions } from '../../reducer';
+import { IAction } from '../../../../store/interfaces';
 
-export function setDialogInitialState(data: any) {
-  return {
-    type: viewTaskActions.SET_VIEW_TASK_INITIAL_STATE,
-    payload: data
-  };
-}
-
-export function openDialog(data: any) {
-  return {
+export const openDialog = ( id: string ): IAction<string> => ( {
     type: viewTaskActions.OPEN_DIALOG,
-    payload: data
-  };
-}
+    payload: id,
+} );
 
-export function closeDialog() {
-  return {
+export const closeDialog = (): IAction<any> => ( {
     type: viewTaskActions.CLOSE_DIALOG,
-  };
-}
+} );
+
+export const removeTask = ( id: string ): IAction<string> => ( {
+    type: calendarActions.REMOVE_TASK,
+    payload: id,
+} );
 

@@ -9,6 +9,8 @@ import { Week } from './week/component';
 import DialogForAddTask from './dialog/dialogForAddTask';
 import ViewTask from './dialog/viewTask';
 import { Day } from './day/component';
+// import { IDescriptionOfTask } from './month/listOfTasks/component';
+import { loadTasksFromLocalStorage } from '../../store/localStorage';
 
 interface IProps {
     displayedDate: Date;
@@ -24,10 +26,35 @@ interface IProps {
     showSelectTime: ( data: any ) => any;
     changeModeCalendar: ( mode: string ) => any;
     modeCalendar: string;
-    openViewTask: any
+    openViewTask: any;
+    setListOfTasksFromStorage: any;
+    listOfTasks: any;
+    removeTask: any;
 }
 
 export class Calendar extends Component<IProps> {
+    componentWillMount(): void {
+        const tasks = loadTasksFromLocalStorage();
+        this.props.setListOfTasksFromStorage( tasks );
+    }
+
+    getTasksOfMonth = () => {
+        return this.props.listOfTasks.filter( ( element: any ) => {
+            const elementStartDate = new Date( element.startDate );
+            return this.props.selectedDate.getFullYear() === elementStartDate.getFullYear()
+                && this.props.selectedDate.getMonth() === elementStartDate.getMonth();
+        } );
+    };
+
+    getTasksOfDay = () => {
+        return this.props.listOfTasks.filter( ( element: any ) => {
+            const elementStartDate = new Date( element.startDate );
+            return this.props.selectedDate.getFullYear() === elementStartDate.getFullYear()
+                && this.props.selectedDate.getMonth() === elementStartDate.getMonth()
+                && this.props.selectedDate.getDay() === elementStartDate.getDay();
+        } );
+    };
+
     render() {
         return (
             <div className="calendar">
@@ -45,6 +72,7 @@ export class Calendar extends Component<IProps> {
                                             chooseDate={this.props.chooseDate}
                                             changeModeCalendar={this.props.changeModeCalendar}
                                             openViewTask={this.props.openViewTask}
+                                            listOfTasks={this.getTasksOfMonth()}
                        />}
                 />
                 <Switch>
@@ -55,6 +83,7 @@ export class Calendar extends Component<IProps> {
                                                showSelectTime={this.props.showSelectTime}
                                                changeModeCalendar={this.props.changeModeCalendar}
                                                openViewTask={this.props.openViewTask}
+                                               listOfTasks={this.getTasksOfMonth()}
                            />}
                     />
                     <Route path="/calendar/day"
@@ -63,16 +92,21 @@ export class Calendar extends Component<IProps> {
                                               chooseDate={this.props.chooseDate}
                                               showSelectTime={this.props.showSelectTime}
                                               openViewTask={this.props.openViewTask}
+                                              listOfTasks={this.getTasksOfDay()}
 
                            />}
                     />
                 </Switch>
 
                 {this.props.isVisibleDialog
-                    ? <DialogForAddTask selectedDate={this.props.selectedDate}/>
+                    ? <DialogForAddTask selectedDate={this.props.selectedDate}
+                                        listOfTasks={this.props.listOfTasks}
+                    />
                     : null}
                 {this.props.isVisibleViewTask
-                    ? <ViewTask selectedDate={this.props.selectedDate}/>
+                    ? <ViewTask listOfTasks={this.props.listOfTasks}
+                                removeTask={this.props.removeTask}
+                    />
                     : null}
             </div>
         );
