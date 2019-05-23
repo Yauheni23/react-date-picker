@@ -27,13 +27,13 @@ export class ListOfTasksForMonth extends Component<IProps> {
             return (
                 <div key={task.id}
                      style={{ textAlign: 'left', padding: '5px', margin: '5px 0', fontSize: '14px',
-                         background: '#dddddd', borderRadius: '3px', overflow: 'hidden', width: '100%' }}
+                         background: 'rgb(3, 155, 229)', borderRadius: '3px', overflow: 'hidden', width: '100%' }}
                      onClick={this.openViewTask}
                      data-id={task.id}
                 >
                     <i className="fas fa-circle" style={{ color: 'green', fontSize: '12px' }}/>
-                    <span style={{ margin: '4px' }}>
-                        {`${getTimeFromString( task.startDate )}-${getTimeFromString( task.endDate )} ${task.nameTask}`}
+                    <span style={{ color: '#ffffff' }}>
+                        {` ${getTimeFromString(task.startDate )} ${task.nameTask}`}
                     </span>
                 </div>
 

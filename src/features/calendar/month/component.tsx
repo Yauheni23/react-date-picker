@@ -15,17 +15,20 @@ interface IProps {
 }
 
 export class Month extends Component<IProps> {
-    getListOfTasksOnDay = (day: number) => {
-        return this.props.listOfTasks.filter((element:IDescriptionOfTask) => {
-            return new Date(element.startDate).getDate() === day
-        })
-    }
+    getListOfTasksOnDay = ( day: number ) => {
+        return this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
+            return new Date( element.startDate ).getDate() === day;
+        } );
+    };
 
     openDialog = ( event: any ) => {
+        const minutes = ( Date.now() / 1800000 % 48 % 2 | 0 ) === 0 ? 30 : 0;
         this.props.chooseDate( new Date(
             this.props.selectedDate.getFullYear(),
             this.props.selectedDate.getMonth(),
             +event.currentTarget.dataset.day,
+            new Date().getHours(),
+            minutes,
         ) );
         this.props.openDialog();
     };
@@ -58,7 +61,8 @@ export class Month extends Component<IProps> {
             {day}
           </span>
                 </Link>
-                <ListOfTasksForMonth listOfTask={this.getListOfTasksOnDay( +day )} openViewTask={this.props.openViewTask}/>
+                <ListOfTasksForMonth listOfTask={this.getListOfTasksOnDay( +day )}
+                                     openViewTask={this.props.openViewTask}/>
             </div>
         );
     }

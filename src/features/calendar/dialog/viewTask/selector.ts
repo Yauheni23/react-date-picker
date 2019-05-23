@@ -1,13 +1,9 @@
 import { createSelector } from 'reselect';
+import { ISelectors } from './types';
 
-export const viewTaskReducer = ( state: any ) => {
+export const viewTaskReducer = ( state: any ): ISelectors => {
     return state.viewTaskReducer;
 };
-
-export const getIsVisibleViewTask = () => createSelector(
-    viewTaskReducer,
-    viewTask => viewTask.isVisibleViewTask,
-);
 
 export const getId = () => createSelector(
     viewTaskReducer,

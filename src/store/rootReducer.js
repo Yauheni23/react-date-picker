@@ -2,8 +2,7 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import { datePickerReducer } from '../features/datePicker';
 import { calendarReducer } from '../features/calendar';
-import { dialogForAddTaskReducer } from '../features/calendar/dialog/dialogForAddTask';
-import { selectTimeReducer} from '../features/calendar/selectTime';
+import { editorTaskReducer } from '../features/calendar/dialog/editorTask';
 import { viewTaskReducer } from '../features/calendar/dialog/viewTask';
 
 export default function rootReducer(history) {
@@ -11,8 +10,7 @@ export default function rootReducer(history) {
     router: connectRouter(history),
     datePickerReducer: datePickerReducer,
     calendarReducer: calendarReducer,
-    dialogForAddTaskReducer: dialogForAddTaskReducer,
-    selectTimeReducer: selectTimeReducer,
+    editorTaskReducer: editorTaskReducer,
     viewTaskReducer: viewTaskReducer
   });
 }

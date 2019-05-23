@@ -3,7 +3,6 @@ import { equalDate } from '../../../utils/date';
 import { DayByHours } from './dayByHours/component';
 import { TimeOfDay } from './timeOfDay/component';
 import { constants } from '../../../constants';
-// import { IDescriptionOfTask } from '../month/listOfTasks/component';
 import { ListOfTasksForDay } from './listOfTasks/component';
 
 
@@ -11,7 +10,6 @@ interface IProps {
     selectedDate: Date;
     openDialog: () => boolean;
     chooseDate: ( date: Date ) => Date;
-    showSelectTime: any;
     openViewTask: any;
     listOfTasks: any
 }
@@ -27,12 +25,8 @@ export class Day extends Component<IProps> {
             this.props.selectedDate.getFullYear(),
             this.props.selectedDate.getMonth(),
             this.props.selectedDate.getDate(),
+            startTime
         ) );
-        this.props.showSelectTime( {
-            isVisibleInputTime: true,
-            startTime: new Date( 2010, 0, 10, startTime, 0 ),
-            endTime: new Date( 2010, 0, 10, startTime + 1, 0 ),
-        } );
         this.props.openDialog();
     };
 
@@ -63,7 +57,9 @@ export class Day extends Component<IProps> {
                     <TimeOfDay/>
                     <DayByHours/>
                     <ListOfTasksForDay listOfTask={this.props.listOfTasks}
-                                       openViewTask={this.props.openViewTask}/>
+                                       openViewTask={this.props.openViewTask}
+                                       currentDay={this.props.selectedDate.getDate()}
+                    />
                 </div>
             </div>
         );

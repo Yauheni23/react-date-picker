@@ -1,7 +1,8 @@
 import { calendarActions } from './reducer';
-import { dialogForAddTaskActions } from './dialog/dialogForAddTask';
+import { editorTaskActions } from './dialog/editorTask';
 import { IAction } from '../../store/interfaces';
 import { IDescriptionOfTask } from './day/listOfTasks/component';
+import { viewTaskActions } from './dialog/viewTask';
 
 export const setListOfTasksFromStorage = ( tasks: any[] ): IAction<IDescriptionOfTask[]> => ( {
     type: calendarActions.GET_LIST_OF_TASKS_FROM_STORAGE,
@@ -44,6 +45,11 @@ export const changeModeCalendar = ( mode: string ): IAction<string> => ( {
 } );
 
 export const openDialog = (): IAction<any> => ( {
-    type: dialogForAddTaskActions.OPEN_DIALOG,
+    type: editorTaskActions.OPEN_DIALOG,
+} );
+
+export const openViewTask = ( id: string ): IAction<string> => ( {
+    type: viewTaskActions.OPEN_DIALOG,
+    payload: id,
 } );
 

@@ -1,21 +1,24 @@
 import { connect } from 'react-redux';
 import * as actions from './actions';
 import { viewTask } from './component';
-import { getId, getIsVisibleViewTask } from './selector';
+import { getId } from './selector';
 import { createStructuredSelector } from 'reselect';
+import { IDispatch } from '../../../../store/interfaces';
+import { IActions } from './types';
 
-export { viewTaskActions, viewTaskReducer } from './reducer';
+export { viewTaskActions } from './constants'
+export { viewTaskReducer } from './reducer';
 
 export const mapStateToProps = () => {
     return createStructuredSelector( {
-        isVisibleDialog: getIsVisibleViewTask(),
-        id: getId()
+        id: getId(),
     } );
 };
 
-export const mapDispatchToProps = ( dispatch: any ) => {
+export const mapDispatchToProps = ( dispatch: IDispatch<any>): IActions => {
     return {
         closeDialog: () => dispatch( actions.closeDialog() ),
+        removeTask: ( id: string ) => dispatch( actions.removeTask( id ) ),
     };
 };
 

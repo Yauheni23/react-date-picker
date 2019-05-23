@@ -1,21 +1,8 @@
-import { IAction } from '../../../../store/interfaces';
+import { IAction } from 'store/interfaces';
+import { IState } from './types';
+import { viewTaskActions } from './constants';
 
-export const viewTaskActions = {
-    OPEN_DIALOG: 'OPEN_VIEW_TASK',
-    CLOSE_DIALOG: 'CLOSE_VIEW_TASK',
-};
-
-const initialState = {
-    isVisibleViewTask: null,
-    id: null,
-};
-
-interface IState {
-    isVisibleViewTask: boolean | null;
-    id: string | null;
-}
-
-export function viewTaskReducer( state: IState = initialState, action: IAction<any> ): IState {
+export function viewTaskReducer( state: IState = {}, action: IAction<string> ): IState {
     switch ( action.type ) {
         case viewTaskActions.OPEN_DIALOG:
             return {

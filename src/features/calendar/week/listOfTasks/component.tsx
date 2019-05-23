@@ -14,7 +14,7 @@ interface IProps {
     currentDay?: number;
 }
 
-export class ListOfTasksForDay extends Component<IProps> {
+export class ListOfTasksForDaysOfWeek extends Component<IProps> {
     openViewTask = ( event: React.MouseEvent<HTMLDivElement> ) => {
         event.stopPropagation();
         this.props.openViewTask( event.currentTarget.dataset.id ? event.currentTarget.dataset.id : '' );
@@ -30,7 +30,7 @@ export class ListOfTasksForDay extends Component<IProps> {
                     task.endDate.getHours() * 48 + ( task.endDate.getMinutes() === 30 ? 24 : 0 ) - topPosition - 8
                     : 1152 - topPosition;
             } else if ( task.endDate.getDate() === this.props.currentDay ) {
-                heightBlock = task.endDate.getHours() * 48 + ( task.endDate.getMinutes() === 30 ? 24 : 0 ) - 8;
+                heightBlock = task.endDate.getHours() * 48 + ( task.endDate.getMinutes() === 30 ? 24 : 0 ) - topPosition - 8;
                 topPosition = 0;
             } else {
                 heightBlock = 1152;
@@ -38,19 +38,9 @@ export class ListOfTasksForDay extends Component<IProps> {
             return (
                 <div key={task.id}
                      style={{
-                         textAlign: 'left',
-                         padding: '0 5px',
-                         margin: '0 50px 4px 10px',
-                         fontSize: '14px',
-                         background: 'rgb(3, 155, 229)',
-                         borderRadius: '3px',
-                         overflow: 'hidden',
-                         width: 'calc(100% - 50px)',
-                         height: `${heightBlock}px`,
-                         position: 'absolute',
-                         top: `${topPosition}px`,
-                         left: '0px',
-                         zIndex: 3,
+                         textAlign: 'left', padding: '0 5px', margin: '0 10px 5px 0', fontSize: '14px', background: 'rgb(3, 155, 229)',
+                         borderRadius: '3px', overflow: 'hidden', width: 'calc(100% - 10px)', height: `${heightBlock}px`,
+                         position: 'absolute', top: `${topPosition}px`, left: '0px', zIndex: 3,
                      }}
                      onClick={this.openViewTask}
                      data-id={task.id}
@@ -81,7 +71,6 @@ export class ListOfTasksForDay extends Component<IProps> {
                      style={{
                          height: '1152px',
                          textAlign: 'left',
-                         padding: '5px ',
                          overflow: 'hidden',
                          width: '100%',
                          position: 'relative',

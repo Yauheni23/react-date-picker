@@ -1,13 +1,9 @@
 import { connect } from 'react-redux';
 import * as actions from './actions';
-import * as actionsSelectTime from './selectTime/actions';
-import * as actionsViewTask from './dialog/viewTask/actions';
 import { Calendar } from './component';
-import { getListOfTasks, getModeCalendar, getSelectedDate } from './selector';
-import { getIsVisibleDialog } from './dialog/dialogForAddTask/selector';
-import { getIsVisibleViewTask } from './dialog/viewTask/selector';
+import { getListOfTasks, getModeCalendar, getSelectedDate, getIsVisibleViewTask } from './selector';
+import { getIsVisibleDialog } from './dialog/editorTask/selector';
 import { createStructuredSelector } from 'reselect';
-import { IState as SelectTime } from './selectTime/reducer';
 
 export { calendarActions, calendarReducer } from './reducer';
 
@@ -30,8 +26,7 @@ export const mapDispatchToProps = ( dispatch: any ) => {
         openDialog: () => dispatch( actions.openDialog() ),
         changeDisplayedDate: ( milliseconds: number ) => dispatch( actions.changeDisplayedDate( milliseconds ) ),
         changeModeCalendar: ( mode: string ) => dispatch( actions.changeModeCalendar( mode ) ),
-        showSelectTime: ( data: SelectTime ) => dispatch( actionsSelectTime.showSelectTime( data ) ),
-        openViewTask: ( data: any ) => dispatch( actionsViewTask.openDialog( data ) ),
+        openViewTask: ( data: any ) => dispatch( actions.openViewTask( data ) ),
         setListOfTasksFromStorage: ( tasks: any[] ) => dispatch( actions.setListOfTasksFromStorage( tasks ) ),
         removeTask: ( id: string ) => dispatch( actions.removeTask( id ) ),
     };

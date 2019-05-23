@@ -1,52 +1,42 @@
 import * as React from 'react';
 import { IDescriptionOfTask } from '../../day/listOfTasks/component';
-import { saveTasksInLocalStorage } from '../../../../store/localStorage';
-
-interface IProps {
-    closeDialog: any;
-    listOfTasks: IDescriptionOfTask[];
-    removeTask: any;
-    id: string;
-}
+import { saveTasks } from '../../../../services/services';
+import { eventListener, key } from './constants';
+import { IProps } from './types';
 
 export class viewTask extends React.Component<IProps> {
-    currentTask: IDescriptionOfTask | undefined;
+    currentTask?: IDescriptionOfTask;
 
-    componentWillMount() {
+    componentWillMount(): void {
         this.currentTask = this.props.listOfTasks.find( ( element: IDescriptionOfTask ) => {
             return element.id === this.props.id;
         } );
-        document.addEventListener( 'keyup', this.closeDialogWithHelpEscape );
-        document.addEventListener( 'keyup', this.removeTaskWithDeleteKey );
+        document.addEventListener( eventListener.KEY_UP, this.addKeyListeners );
     }
 
-    closeDialog = () => {
+    closeDialog = (): void => {
         this.props.closeDialog();
-        document.removeEventListener( 'keyup', this.closeDialogWithHelpEscape );
-        document.removeEventListener( 'keyup', this.removeTaskWithDeleteKey );
+        document.removeEventListener( eventListener.KEY_UP, this.addKeyListeners );
     };
 
-    removeTask = () => {
+    removeTask = (): void => {
         this.props.removeTask( this.props.id );
-        saveTasksInLocalStorage( this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
+        saveTasks( this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
             return element.id !== this.props.id;
         } ) );
         this.closeDialog();
     };
 
-    closeDialogWithHelpEscape = ( event: KeyboardEvent ) => {
-        if ( event.key === 'Escape' ) {
+    addKeyListeners = ( event: KeyboardEvent ): void => {
+        if ( event.key === key.ESCAPE ) {
             this.closeDialog();
         }
-    };
-
-    removeTaskWithDeleteKey = ( event: KeyboardEvent ) => {
-        if ( event.key === 'Delete' ) {
+        if ( event.key === key.DELETE ) {
             this.removeTask();
         }
     };
 
-    clickStop = ( event: any ) => {
+    clickStop = ( event: any ): void => {
         event.stopPropagation();
     };
 

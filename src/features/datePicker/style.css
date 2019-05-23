@@ -120,3 +120,6 @@
 .disabled {
   background: rgba(128, 91, 58, 0.18);
 }
+.errorInput {
+  border-color: #c30000;
+}

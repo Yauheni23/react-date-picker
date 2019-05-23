@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-interface IProps {
-}
-
-export class DayByHours extends Component<IProps> {
-  renderHoursOfDay() {
+export class DayByHours extends React.Component {
+  static renderHoursOfDay() {
     const array = [];
     for ( let i = 0; i < 24; i++ ) {
       array.push(
@@ -19,7 +16,7 @@ export class DayByHours extends Component<IProps> {
   render() {
     return (
       <div>
-        {this.renderHoursOfDay()}
+        {DayByHours.renderHoursOfDay()}
       </div>
     );
   }

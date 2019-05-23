@@ -55,9 +55,7 @@ export function getArrayDaysInWeek(date) {
   return arrayDaysInWeek;
 }
 
-export function getFormatForInputTime(addHours = 0, addMinutes = 0) {
-  let hours = addHours;
-  let minutes = addMinutes;
+export function getFormatForInputTime(hours = 0, minutes = 0) {
   if(minutes > 0 && minutes <= 30) {
     minutes = 30;
   } else if(minutes > 30 && minutes <= 60) {
@@ -101,4 +99,12 @@ export function equalDate(firstDate, secondDate) {
 
 export function getTimeFromString(dateString) {
   return getFormatForInputTime(new Date(dateString).getHours(), new Date(dateString).getMinutes())
+}
+
+export function isDateBusy(arrayDateTask, task) {
+  return arrayDateTask.some( ( el ) => {
+    return ( el.startDate < task.startDate && task.startDate  < el.endDate )
+        || ( el.startDate < task.endDate && task.endDate < el.endDate )
+        || ( +el.startDate === +task.startDate && +task.endDate === +el.endDate )
+  } )
 }
