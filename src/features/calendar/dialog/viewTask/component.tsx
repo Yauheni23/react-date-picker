@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { IDescriptionOfTask } from '../../day/listOfTasks/component';
 import { saveTasks } from '../../../../services/services';
 import { eventListener, key } from './constants';
 import { IProps } from './types';
+import { IDescriptionOfTask } from '../../types';
 
 export class viewTask extends React.Component<IProps> {
     currentTask?: IDescriptionOfTask;
@@ -40,7 +40,7 @@ export class viewTask extends React.Component<IProps> {
         event.stopPropagation();
     };
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div className="outsideDialog" onMouseDown={this.closeDialog}>
                 <div className="dialog" onMouseDown={this.clickStop}>

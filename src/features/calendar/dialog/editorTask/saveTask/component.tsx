@@ -1,7 +1,7 @@
 import React from 'react';
 import { saveTasks } from '../../../../../services/services';
-import { IDescriptionOfTask } from '../../../day/listOfTasks/component';
 import { isDateBusy } from '../../../../../utils/date';
+import { IDescriptionOfTask } from '../../../types';
 
 interface IProps {
     taskInfo: IDescriptionOfTask,
@@ -32,7 +32,7 @@ export class SaveTask extends React.Component<IProps> {
         this.props.addTask( task );
     };
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div className="wrapperSave">
                 <button className="btn btn-success" onClick={this.saveTask}>

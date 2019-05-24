@@ -1,12 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getTimeFromString } from '../../../../utils/date';
-
-export interface IDescriptionOfTask {
-    startDate: Date;
-    endDate: Date;
-    nameTask: string;
-    id: string;
-}
+import { IDescriptionOfTask } from '../../types';
 
 interface IProps {
     listOfTask: IDescriptionOfTask[];
@@ -14,13 +8,13 @@ interface IProps {
     currentDay?: number;
 }
 
-export class ListOfTasksForDaysOfWeek extends Component<IProps> {
-    openViewTask = ( event: React.MouseEvent<HTMLDivElement> ) => {
+export class ListOfTasksForDaysOfWeek extends React.Component<IProps> {
+    openViewTask = ( event: React.MouseEvent<HTMLDivElement> ): void => {
         event.stopPropagation();
         this.props.openViewTask( event.currentTarget.dataset.id ? event.currentTarget.dataset.id : '' );
     };
 
-    renderTask() {
+    renderTasks(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         return this.props.listOfTask.map( ( task ) => {
             let topPosition = task.startDate.getDate() === this.props.currentDay ?
                 task.startDate.getHours() * 48 + ( task.startDate.getMinutes() === 30 ? 24 : 0 ) : 0;
@@ -65,7 +59,7 @@ export class ListOfTasksForDaysOfWeek extends Component<IProps> {
         } );
     }
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <section className="listOfTasksFormMonth"
                      style={{
@@ -75,7 +69,7 @@ export class ListOfTasksForDaysOfWeek extends Component<IProps> {
                          width: '100%',
                          position: 'relative',
                      }}>
-                {this.renderTask()}
+                {this.renderTasks()}
             </section>
         );
     }

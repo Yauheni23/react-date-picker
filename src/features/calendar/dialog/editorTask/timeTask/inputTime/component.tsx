@@ -16,19 +16,19 @@ export class InputTime extends React.Component<IProps, IState> {
         isVisibleSelectTime: false,
     };
 
-    showSelectTime = () => {
+    showSelectTime = (): void => {
         this.setState( {
             isVisibleSelectTime: true,
         } );
     };
 
-    hideSelectTime = () => {
+    hideSelectTime = (): void => {
         this.setState( {
             isVisibleSelectTime: false,
         } );
     };
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         const time = getFormatForInputTime(
             this.props.time ? this.props.time.getHours() : new Date().getHours(),
             this.props.time ? this.props.time.getMinutes() : new Date().getMinutes(),

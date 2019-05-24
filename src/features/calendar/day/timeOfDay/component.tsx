@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-
 export class TimeOfDay extends Component<any> {
-  renderTimeBlock() {
+  renderTimeBlock(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
     const array = [];
     for ( let i = 0; i < 24; i++ ) {
       array.push(
@@ -16,7 +15,7 @@ export class TimeOfDay extends Component<any> {
     return array;
   }
 
-  render() {
+  render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
     return (
       <div className="timeOfDay">
         {this.renderTimeBlock()}

@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import { getTimeFromString } from '../../../../utils/date';
-
-export interface IDescriptionOfTask {
-    startDate: Date;
-    endDate: Date;
-    nameTask: string;
-    id: string;
-}
+import { IDescriptionOfTask } from '../../types';
 
 interface IProps {
-    listOfTask: IDescriptionOfTask[],
+    listOfTasks: IDescriptionOfTask[],
     openViewTask: any
 }
 
@@ -19,11 +13,11 @@ export class ListOfTasksForMonth extends Component<IProps> {
         this.props.openViewTask(event.currentTarget.dataset.id)
     }
 
-    renderTask() {
-        this.props.listOfTask.sort((task1, task2) => {
+    renderTask(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
+        this.props.listOfTasks.sort((task1, task2) => {
             return task1.startDate.setMilliseconds(0) - task2.startDate.setMilliseconds(0)
         })
-        return this.props.listOfTask.map( ( task ) => {
+        return this.props.listOfTasks.map( ( task ) => {
             return (
                 <div key={task.id}
                      style={{ textAlign: 'left', padding: '5px', margin: '5px 0', fontSize: '14px',

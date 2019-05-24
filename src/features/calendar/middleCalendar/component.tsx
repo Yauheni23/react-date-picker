@@ -1,22 +1,21 @@
 import * as React from 'react';
 
 interface IProps {
-  lol:string[]
+    lol: string[]
 }
 
-export class Middle extends React.Component<IProps>{
-  renderDaysOfWeek() {
-    return this.props.lol.map((dayOfWeek, index) => (
-      <div key={index} className="dayOfWeek">{dayOfWeek}</div>
-    ));
-  };
+export class Middle extends React.Component<IProps> {
+    renderDaysOfWeek(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
+        return this.props.lol.map( ( dayOfWeek, index ) => (
+            <div key={index} className="dayOfWeek">{dayOfWeek}</div>
+        ) );
+    };
 
-  render(){
-    return (
-      <section className="daysOfWeek">
-        {this.renderDaysOfWeek()}
-      </section>
-    )
-  }
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
+        return (
+            <section className="daysOfWeek">
+                {this.renderDaysOfWeek()}
+            </section>
+        );
+    }
 }
-//: React.ReactElement<React.JSXElementConstructor<HTMLElement>>

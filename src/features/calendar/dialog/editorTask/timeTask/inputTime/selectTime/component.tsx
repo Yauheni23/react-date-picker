@@ -8,11 +8,11 @@ interface IProps {
 }
 
 export class SelectTime extends React.Component<IProps> {
-    hideSelectTime = () => {
+    hideSelectTime = ():void => {
         this.props.hideSelectTime();
     };
 
-    selectTime = ( event: any ) => {
+    selectTime = ( event: React.MouseEvent<HTMLDivElement> ):void => {
         event.stopPropagation();
         const time = getTimeFromInputTimeFormat( event.currentTarget.dataset.time );
         this.props.chooseTime( new Date(
@@ -25,7 +25,7 @@ export class SelectTime extends React.Component<IProps> {
         this.hideSelectTime();
     };
 
-    renderSelectTime() {
+    renderSelectTime(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         const array = [];
         for ( let i = 0; i < 48; i++ ) {
             let time = getFormatForInputTime( ( i / 2 ) | 0, ( i % 2 ) * 30 );
@@ -41,7 +41,7 @@ export class SelectTime extends React.Component<IProps> {
         return array;
     }
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div className="selectTime">
                 {this.renderSelectTime()}

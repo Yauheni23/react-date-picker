@@ -1,33 +1,15 @@
 import { IAction } from '../../store/interfaces';
 import { datePickerActions } from '../datePicker';
-import { IDescriptionOfTask } from './day/listOfTasks/component';
+import { IDescriptionOfTask, IState } from './types';
+import { calendarActions } from './constants';
 
-export const calendarActions = {
-    CHANGE_SELECTED_DATE: 'CALENDAR_CHANGE_SELECTED_DATE',
-    CHANGE_MONTH: 'CALENDAR_CHANGE_MONTH',
-    CHANGE_YEAR: 'CALENDAR_CHANGE_YEAR',
-    CHOOSE_DATE: 'CALENDAR_CHOOSE_DATE',
-    SHOW_TODAY: 'SHOW_TODAY',
-    CHANGE_DISPLAYED_DATE: 'CHANGE_DISPLAYED_DATE',
-    CHANGE_MODE_CALENDAR: 'CHANGE_MODE_CALENDAR',
-    GET_LIST_OF_TASKS_FROM_STORAGE: 'GET_LIST_OF_TASKS_FROM_STORAGE',
-    ADD_TASK: 'ADD_TASK',
-    REMOVE_TASK: 'REMOVE_TASK',
-};
-
-const initialState = {
+const initialState: IState = {
     selectedDate: new Date(),
     modeCalendar: 'month',
     listOfTasks: [],
 };
 
-interface IState {
-    selectedDate: Date;
-    modeCalendar: string;
-    listOfTasks: any;
-}
-
-export function calendarReducer( state: IState = initialState, action: IAction<any> ) {
+export function calendarReducer( state: IState = initialState, action: IAction<any> ): IState {
     switch ( action.type ) {
         case datePickerActions.CHOOSE_DATE:
             if ( action.id === 'start' ) {

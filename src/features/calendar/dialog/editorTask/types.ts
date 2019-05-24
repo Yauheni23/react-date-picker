@@ -1,4 +1,4 @@
-import { IDescriptionOfTask } from '../../day/listOfTasks/component';
+import { IDescriptionOfTask } from '../../types';
 
 export interface IStateEntry {
     nameTask: string;

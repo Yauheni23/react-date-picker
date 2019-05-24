@@ -8,10 +8,8 @@ export enum editorTaskActions  {
 
 export enum key {
     ESCAPE = 'Escape',
-    ENTER = 'Enter'
 }
 
 export enum eventListener {
     KEY_UP = 'keyup',
-    ENTER = 'Enter'
 }

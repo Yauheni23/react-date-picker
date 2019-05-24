@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getArrayDaysInWeek } from '../../../utils/date';
 import { Middle } from '../middleCalendar/component';
 import { constants } from '../../../constants';
@@ -6,7 +6,7 @@ import { TimeOfDay } from '../day/timeOfDay/component';
 import { DayByHours } from '../day/dayByHours/component';
 import { Link } from 'react-router-dom';
 import { ListOfTasksForDaysOfWeek } from './listOfTasks/component';
-import { IDescriptionOfTask } from '../month/listOfTasks/component';
+import { IDescriptionOfTask } from '../types';
 
 interface IProps {
     selectedDate: Date,
@@ -17,15 +17,15 @@ interface IProps {
     listOfTasks: IDescriptionOfTask[];
 }
 
-export class Week extends Component<IProps> {
-    getListOfTasksOnDay = ( day: number ) => {
+export class Week extends React.Component<IProps> {
+    getListOfTasksOnDay = ( day: number ): IDescriptionOfTask[] => {
         return this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
             return new Date( element.startDate ).getDate() === day
                 || ( element.startDate.getDate() <= day && day <= element.endDate.getDate());
         } );
     };
 
-    openDialog = ( event: any ) => {
+    openDialog = ( event: any ): void => {
         let startTime = event.nativeEvent.offsetY / 48 | 0;
         this.props.openDialog();
         if ( this.props.selectedDate.getDate() - +event.currentTarget.dataset.day > 7 ) {
@@ -52,7 +52,7 @@ export class Week extends Component<IProps> {
         }
     };
 
-    chooseDay = ( event: any ) => {
+    chooseDay = ( event: any ): void => {
         this.props.changeModeCalendar( 'day' );
         if ( this.props.selectedDate.getDate() - +event.currentTarget.dataset.day > 7 ) {
             this.props.chooseDate( new Date(
@@ -76,7 +76,7 @@ export class Week extends Component<IProps> {
         event.stopPropagation();
     };
 
-    renderDay1( day: number ) {
+    renderDay1( day: number ): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div key={day}
                  className='dayForWeek'
@@ -91,12 +91,12 @@ export class Week extends Component<IProps> {
         );
     };
 
-    renderWeeksOfMonth1() {
+    renderWeeksOfMonth1(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         const daysOfMonth = getArrayDaysInWeek( this.props.selectedDate );
         return daysOfMonth.map( ( day: number ) => this.renderDay1( day ) );
     }
 
-    renderDay( day: number, index: number ) {
+    renderDay( day: number, index: number ): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         const todayDate = new Date();
         const today = ( todayDate.getFullYear() === this.props.selectedDate.getFullYear()
             && todayDate.getMonth() === this.props.selectedDate.getMonth()
@@ -116,12 +116,12 @@ export class Week extends Component<IProps> {
         );
     };
 
-    renderWeeksOfMonth() {
+    renderWeeksOfMonth(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         const daysOfMonth = getArrayDaysInWeek( this.props.selectedDate );
         return daysOfMonth.map( ( day: number, index ) => this.renderDay( day, index ) );
     }
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <section className="day">
                 <div className="headerDay">

@@ -3,7 +3,8 @@ import { getArrayDaysInMonth } from '../../../utils/date';
 import { Middle } from '../middleCalendar/component';
 import { constants } from '../../../constants';
 import { Link } from 'react-router-dom';
-import { ListOfTasksForMonth, IDescriptionOfTask } from './listOfTasks/component';
+import { ListOfTasksForMonth } from './listOfTasks/component';
+import { IDescriptionOfTask } from '../types';
 
 interface IProps {
     selectedDate: Date,
@@ -15,13 +16,13 @@ interface IProps {
 }
 
 export class Month extends Component<IProps> {
-    getListOfTasksOnDay = ( day: number ) => {
+    getListOfTasksOnDay = ( day: number ): IDescriptionOfTask[] => {
         return this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
             return new Date( element.startDate ).getDate() === day;
         } );
     };
 
-    openDialog = ( event: any ) => {
+    openDialog = ( event: any ): void => {
         const minutes = ( Date.now() / 1800000 % 48 % 2 | 0 ) === 0 ? 30 : 0;
         this.props.chooseDate( new Date(
             this.props.selectedDate.getFullYear(),
@@ -33,7 +34,7 @@ export class Month extends Component<IProps> {
         this.props.openDialog();
     };
 
-    chooseDay = ( event: any ) => {
+    chooseDay = ( event: any ): void => {
         this.props.changeModeCalendar( 'day' );
         this.props.chooseDate( new Date(
             this.props.selectedDate.getFullYear(),
@@ -43,7 +44,7 @@ export class Month extends Component<IProps> {
         event.stopPropagation();
     };
 
-    renderDay( day: string, index: number ) {
+    renderDay( day: string, index: number ): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         const todayDate = new Date();
         const today = ( todayDate.getFullYear() === this.props.selectedDate.getFullYear()
             && todayDate.getMonth() === this.props.selectedDate.getMonth()
@@ -61,19 +62,19 @@ export class Month extends Component<IProps> {
             {day}
           </span>
                 </Link>
-                <ListOfTasksForMonth listOfTask={this.getListOfTasksOnDay( +day )}
+                <ListOfTasksForMonth listOfTasks={this.getListOfTasksOnDay( +day )}
                                      openViewTask={this.props.openViewTask}/>
             </div>
         );
     }
 
-    renderDaysOfMonth( week: string[] ) {
+    renderDaysOfMonth( week: string[] ): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         return week.map( ( day, index ) => {
             return this.renderDay( day, index );
         } );
     };
 
-    renderWeeksOfMonth() {
+    renderWeeksOfMonth(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         const daysOfMonth = getArrayDaysInMonth( this.props.selectedDate );
         return daysOfMonth.map( ( week, index ) => {
             return (
@@ -84,7 +85,7 @@ export class Month extends Component<IProps> {
         } );
     }
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <section className="daysOfMonth">
                 <Middle lol={constants.DAYS_OF_WEEK_FOR_MONTH}/>

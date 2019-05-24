@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { getTimeFromString } from '../../../../utils/date';
-
-export interface IDescriptionOfTask {
-    startDate: Date;
-    endDate: Date;
-    nameTask: string;
-    id: string;
-}
+import { IDescriptionOfTask } from '../../types';
 
 interface IProps {
     listOfTask: IDescriptionOfTask[];
@@ -15,12 +9,12 @@ interface IProps {
 }
 
 export class ListOfTasksForDay extends Component<IProps> {
-    openViewTask = ( event: React.MouseEvent<HTMLDivElement> ) => {
+    openViewTask = ( event: React.MouseEvent<HTMLDivElement> ): void => {
         event.stopPropagation();
         this.props.openViewTask( event.currentTarget.dataset.id ? event.currentTarget.dataset.id : '' );
     };
 
-    renderTask() {
+    renderTask(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         return this.props.listOfTask.map( ( task ) => {
             let topPosition = task.startDate.getDate() === this.props.currentDay ?
                 task.startDate.getHours() * 48 + ( task.startDate.getMinutes() === 30 ? 24 : 0 ) : 0;
@@ -70,12 +64,11 @@ export class ListOfTasksForDay extends Component<IProps> {
                         </div>
                     }
                 </div>
-
             );
         } );
     }
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <section className="listOfTasksFormMonth"
                      style={{

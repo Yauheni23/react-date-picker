@@ -1,8 +1,8 @@
-import { calendarActions } from './reducer';
+import { calendarActions } from './';
 import { editorTaskActions } from './dialog/editorTask';
 import { IAction } from '../../store/interfaces';
-import { IDescriptionOfTask } from './day/listOfTasks/component';
 import { viewTaskActions } from './dialog/viewTask';
+import { IDescriptionOfTask } from './types';
 
 export const setListOfTasksFromStorage = ( tasks: any[] ): IAction<IDescriptionOfTask[]> => ( {
     type: calendarActions.GET_LIST_OF_TASKS_FROM_STORAGE,

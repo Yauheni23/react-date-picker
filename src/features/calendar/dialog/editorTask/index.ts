@@ -2,15 +2,15 @@ import { connect } from 'react-redux';
 import * as actions from './actions';
 import { EditorTask } from './component';
 import { getStartDate, getEndDate, getIsVisibleDialog } from './selector';
-import { createStructuredSelector } from 'reselect';
-import { IDescriptionOfTask } from '../../day/listOfTasks/component';
+import { createStructuredSelector, Selector } from 'reselect';
 import { IDispatch } from '../../../../store/interfaces';
-import { IActions, IDialogDefault } from './types';
+import { IActions, IDialogDefault, ISelectors } from './types';
+import { IDescriptionOfTask } from '../../types';
 
 export { editorTaskReducer } from './reducer';
 export { editorTaskActions } from './constants';
 
-export const mapStateToProps = () => {
+export const mapStateToProps = (): Selector<any, ISelectors> => {
     return createStructuredSelector( {
         startDate: getStartDate(),
         endDate: getEndDate(),

@@ -1,8 +1,8 @@
 import { editorTaskActions } from './constants';
-import { calendarActions } from '../../reducer';
-import { IDescriptionOfTask } from '../../day/listOfTasks/component';
+import { calendarActions } from '../../';
 import { IAction } from '../../../../store/interfaces';
 import { IDialogDefault } from './types';
+import { IDescriptionOfTask } from '../../types';
 
 export const addTask = ( data: IDescriptionOfTask ): IAction<IDescriptionOfTask> => ( {
     type: calendarActions.ADD_TASK,
@@ -14,7 +14,7 @@ export const setDialogInitialState = ( data: IDialogDefault ): IAction<IDialogDe
     payload: data,
 } );
 
-export const closeDialog = (): IAction<void> => ( {
+export const closeDialog = (): IAction<any> => ( {
     type: editorTaskActions.CLOSE_DIALOG,
 } );
 

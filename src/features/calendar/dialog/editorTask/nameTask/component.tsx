@@ -6,11 +6,11 @@ interface IProps {
 }
 
 export class NameTask extends React.Component<IProps> {
-    changeNameTask = (event: React.ChangeEvent<HTMLInputElement> ) => {
+    changeNameTask = (event: React.ChangeEvent<HTMLInputElement> ): void => {
         this.props.changeNameTask(event.currentTarget.value);
     };
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div>
                 <input className={'nameTask' + ( this.props.error ? ' errorInput' : '' )}

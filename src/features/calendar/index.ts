@@ -3,11 +3,14 @@ import * as actions from './actions';
 import { Calendar } from './component';
 import { getListOfTasks, getModeCalendar, getSelectedDate, getIsVisibleViewTask } from './selector';
 import { getIsVisibleDialog } from './dialog/editorTask/selector';
-import { createStructuredSelector } from 'reselect';
+import { createStructuredSelector, Selector } from 'reselect';
+import { IActions, ISelectors } from './types';
+import { IDispatch } from '../../store/interfaces';
 
-export { calendarActions, calendarReducer } from './reducer';
+export { calendarActions } from './constants';
+export { calendarReducer } from './reducer';
 
-export const mapStateToProps = () => {
+export const mapStateToProps = (): Selector<any, ISelectors> => {
     return createStructuredSelector( {
         selectedDate: getSelectedDate(),
         isVisibleDialog: getIsVisibleDialog(),
@@ -17,7 +20,7 @@ export const mapStateToProps = () => {
     } );
 };
 
-export const mapDispatchToProps = ( dispatch: any ) => {
+export const mapDispatchToProps = ( dispatch: IDispatch<any> ): IActions => {
     return {
         changeMonth: ( month: number ) => dispatch( actions.changeMonth( month ) ),
         changeYear: ( year: number ) => dispatch( actions.changeYear( year ) ),

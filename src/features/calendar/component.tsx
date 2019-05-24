@@ -10,26 +10,8 @@ import { Day } from './day/component';
 
 import DialogForAddTask from './dialog/editorTask';
 import ViewTask from './dialog/viewTask';
-import { IDescriptionOfTask } from './month/listOfTasks/component';
 import { loadTasks } from '../../services/services';
-
-interface IProps {
-    selectedDate: Date;
-    isVisibleDialog: boolean;
-    isVisibleViewTask: boolean;
-    changeYear: ( year: number ) => any;
-    changeMonth: ( month: number ) => any;
-    showToday: () => any;
-    openDialog: () => any;
-    chooseDate: ( date: Date ) => any;
-    changeDisplayedDate: ( milliseconds: number ) => any;
-    changeModeCalendar: ( mode: string ) => any;
-    modeCalendar: string;
-    openViewTask: any;
-    setListOfTasksFromStorage: any;
-    listOfTasks: IDescriptionOfTask[];
-    removeTask: any;
-}
+import { IDescriptionOfTask, IProps } from './types';
 
 export class Calendar extends Component<IProps> {
     componentWillMount(): void {
@@ -37,7 +19,7 @@ export class Calendar extends Component<IProps> {
         this.props.setListOfTasksFromStorage( tasks );
     }
 
-    getTasksOfMonth = () => {
+    getTasksOfMonth = (): IDescriptionOfTask[] => {
         return this.props.listOfTasks.filter( ( element: any ) => {
             const elementStartDate = new Date( element.startDate );
             return this.props.selectedDate.getFullYear() === elementStartDate.getFullYear()
@@ -45,7 +27,7 @@ export class Calendar extends Component<IProps> {
         } );
     };
 
-    getTasksOfDay = () => {
+    getTasksOfDay = (): IDescriptionOfTask[] => {
         return this.props.listOfTasks.filter( ( element: any ) => {
             return ( this.props.selectedDate.getFullYear() === element.startDate.getFullYear()
                 && this.props.selectedDate.getMonth() === element.startDate.getMonth()
@@ -56,7 +38,7 @@ export class Calendar extends Component<IProps> {
         } );
     };
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div className="calendar">
                 <HeaderCalendar changeMonth={this.props.changeMonth}

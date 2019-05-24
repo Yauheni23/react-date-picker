@@ -1,5 +1,5 @@
-import { IDescriptionOfTask } from '../features/calendar/day/listOfTasks/component';
 import { Request } from './request';
+import { IDescriptionOfTask } from '../features/calendar/types';
 
 export const loadTasks = () => {
     const tasksLocalStorage = new Request( 'tasks' ).getAll();

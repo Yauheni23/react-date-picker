@@ -1,6 +1,6 @@
 import { viewTaskActions } from './constants';
 import { IAction } from '../../../../store/interfaces';
-import { calendarActions } from '../../reducer';
+import { calendarActions } from '../../';
 
 export const removeTask = ( id: string ): IAction<string> => ( {
     type: calendarActions.REMOVE_TASK,

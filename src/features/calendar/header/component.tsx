@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component } from 'react';
+import React from 'react';
 import { constants } from '../../../constants';
 import { Link } from 'react-router-dom';
 import { daysInMonth } from '../../../utils/date';
@@ -13,7 +13,7 @@ interface IProps {
     modeCalendar: string
 }
 
-export class HeaderCalendar extends Component<IProps> {
+export class HeaderCalendar extends React.Component<IProps> {
     countDay: number;
 
     constructor( props: IProps ) {
@@ -33,7 +33,7 @@ export class HeaderCalendar extends Component<IProps> {
         } );
     }
 
-    changeCountDay = () => {
+    changeCountDay = (): void => {
         switch ( this.props.modeCalendar ) {
             case 'month':
                 this.countDay = daysInMonth( this.props.displayedDate );
@@ -46,39 +46,39 @@ export class HeaderCalendar extends Component<IProps> {
         }
     };
 
-    showToday = () => {
+    showToday = (): void => {
         this.props.showToday();
     };
 
-    changeModeCalendar = ( event: any ) => {
+    changeModeCalendar = ( event: any ): void => {
         this.props.changeModeCalendar( event.currentTarget.dataset.mode );
     };
 
-    changeMonth = ( event: ChangeEvent<HTMLSelectElement> ) => {
+    changeMonth = ( event: React.ChangeEvent<HTMLSelectElement> ): void => {
         this.props.changeMonth( +event.currentTarget.value );
     };
 
-    changeYear = ( event: ChangeEvent<HTMLInputElement> ) => {
+    changeYear = ( event: React.ChangeEvent<HTMLInputElement> ): void => {
         if ( +event.currentTarget.value >= 1000 && +event.currentTarget.value <= 9999
             && ( +event.currentTarget.value ^ 0 ) === +event.currentTarget.value ) {
             this.props.changeYear( +event.currentTarget.value );
         }
     };
 
-    changeDisplayedDate = ( event: any ) => {
+    changeDisplayedDate = ( event: React.MouseEvent<HTMLDivElement>): void => {
         this.changeCountDay();
         this.props.changeDisplayedDate(
             this.countDay * 86400000 * ( event.currentTarget.dataset.change === 'left' ? -1 : 1 ),
         );
     };
 
-    static renderSelectMonth() {
+    static renderSelectMonth(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         return constants.MONTH_FOR_CALENDAR.map( ( month, index ) => (
             <option value={index} key={index}>{month}</option>
         ) );
     };
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         const displayedDate = this.props.displayedDate;
         return (
             <section className="headerCalendar">

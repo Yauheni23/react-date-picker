@@ -5,12 +5,12 @@ import { InputTime } from './inputTime/component';
 interface IProps {
     startDate: Date;
     endDate: Date;
-    changeStartDate: any;
-    changeEndDate: any;
+    changeStartDate: (date: Date) => any;
+    changeEndDate: (date: Date) => any;
 }
 
 export class TimeTask extends React.Component<IProps> {
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div className="timeTask">
                 <DatePickerComponent selectedDate={this.props.startDate} id="start"/>

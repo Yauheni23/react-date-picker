@@ -55,7 +55,7 @@ export class EditorTask extends React.Component<IProps, IState> {
         event.stopPropagation();
     };
 
-    render() {
+    render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         const task = {
             nameTask: this.state.nameTask,
             startDate: this.props.startDate,
