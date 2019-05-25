@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { equalDate } from '../../../utils/date';
+import { equalDate } from '../../../../utils/date';
 import { DayByHours } from './dayByHours/component';
 import { TimeOfDay } from './timeOfDay/component';
-import { constants } from '../../../constants';
+import { constants } from '../../../../constants';
 import { ListOfTasksForDay } from './listOfTasks/component';
-import { IDescriptionOfTask } from '../types';
+import { IDescriptionOfTask } from '../../types';
 
 
 interface IProps {
@@ -34,7 +34,7 @@ export class Day extends Component<IProps> {
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         const today = equalDate( new Date(), this.props.selectedDate ) ? ' today ' : '';
         return (
-            <div className="day"
+            <section className="mainCalendar"
                  data-day={this.props.selectedDate.getDate()}
             >
                 <div className="headerDay">
@@ -60,7 +60,7 @@ export class Day extends Component<IProps> {
                                        currentDay={this.props.selectedDate.getDate()}
                     />
                 </div>
-            </div>
+            </section>
         );
     }
 }

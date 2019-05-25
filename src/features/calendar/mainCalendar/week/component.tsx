@@ -1,12 +1,12 @@
 import React from 'react';
-import { getArrayDaysInWeek } from '../../../utils/date';
-import { Middle } from '../middleCalendar/component';
-import { constants } from '../../../constants';
+import { getArrayDaysInWeek } from '../../../../utils/date';
+import { Middle } from '../../middleCalendar/component';
+import { constants } from '../../../../constants';
 import { TimeOfDay } from '../day/timeOfDay/component';
 import { DayByHours } from '../day/dayByHours/component';
 import { Link } from 'react-router-dom';
 import { ListOfTasksForDaysOfWeek } from './listOfTasks/component';
-import { IDescriptionOfTask } from '../types';
+import { IDescriptionOfTask } from '../../types';
 
 interface IProps {
     selectedDate: Date,
@@ -123,7 +123,7 @@ export class Week extends React.Component<IProps> {
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
-            <section className="day">
+            <section className="mainCalendar">
                 <div className="headerDay">
                     <Middle lol={constants.DAYS_OF_WEEK_FOR_MONTH}/>
                     <div className="dateOfWeekWrapper">

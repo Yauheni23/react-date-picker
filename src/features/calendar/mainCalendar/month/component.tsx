@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { getArrayDaysInMonth } from '../../../utils/date';
-import { Middle } from '../middleCalendar/component';
-import { constants } from '../../../constants';
+import { getArrayDaysInMonth } from '../../../../utils/date';
+import { Middle } from '../../middleCalendar/component';
+import { constants } from '../../../../constants';
 import { Link } from 'react-router-dom';
 import { ListOfTasksForMonth } from './listOfTasks/component';
-import { IDescriptionOfTask } from '../types';
+import { IDescriptionOfTask } from '../../types';
 
 interface IProps {
     selectedDate: Date,

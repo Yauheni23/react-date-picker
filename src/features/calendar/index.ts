@@ -6,6 +6,7 @@ import { getIsVisibleDialog } from './dialog/editorTask/selector';
 import { createStructuredSelector, Selector } from 'reselect';
 import { IActions, ISelectors } from './types';
 import { IDispatch } from '../../store/interfaces';
+import './style.css';
 
 export { calendarActions } from './constants';
 export { calendarReducer } from './reducer';

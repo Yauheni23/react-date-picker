@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { getTimeFromString } from '../../../../utils/date';
-import { IDescriptionOfTask } from '../../types';
+import { getTimeFromString } from '../../../../../utils/date';
+import { IDescriptionOfTask } from '../../../types';
 
 interface IProps {
     listOfTask: IDescriptionOfTask[];
@@ -31,34 +31,20 @@ export class ListOfTasksForDay extends Component<IProps> {
             }
             return (
                 <div key={task.id}
-                     style={{
-                         textAlign: 'left',
-                         padding: '0 5px',
-                         margin: '0 50px 4px 10px',
-                         fontSize: '14px',
-                         background: 'rgb(3, 155, 229)',
-                         borderRadius: '3px',
-                         overflow: 'hidden',
-                         width: 'calc(100% - 50px)',
-                         height: `${heightBlock}px`,
-                         position: 'absolute',
-                         top: `${topPosition}px`,
-                         left: '0px',
-                         zIndex: 3,
-                     }}
+                     style={{height: `${heightBlock}px`, top: `${topPosition}px`}}
+                     className="taskForDay"
                      onClick={this.openViewTask}
                      data-id={task.id}
                 >
-                    {heightBlock <= 24 ?
-                        <p style={{ margin: '0', color: '#ffffff', lineHeight: '1.3em' }}>
+                    {heightBlock <= 24
+                        ?<p className="taskText">
                             {`${task.nameTask}, ${getTimeFromString( task.startDate )}`}
                         </p>
-                        :
-                        <div>
-                            <p style={{ margin: '0', color: '#ffffff', lineHeight: '1.3em' }}>
+                        :<div>
+                            <p className="taskText">
                                 {`${task.nameTask}`}
                             </p>
-                            <p style={{ margin: '0', color: '#ffffff', lineHeight: '1.3em' }}>
+                            <p className="taskText">
                                 {`${getTimeFromString( task.startDate )}-${getTimeFromString( task.endDate )}`}
                             </p>
                         </div>
@@ -70,15 +56,7 @@ export class ListOfTasksForDay extends Component<IProps> {
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
-            <section className="listOfTasksFormMonth"
-                     style={{
-                         height: '1152px',
-                         textAlign: 'left',
-                         padding: '5px ',
-                         overflow: 'hidden',
-                         width: '100%',
-                         position: 'relative',
-                     }}>
+            <section className="tasksForDayWrapper">
                 {this.renderTask()}
             </section>
         );
