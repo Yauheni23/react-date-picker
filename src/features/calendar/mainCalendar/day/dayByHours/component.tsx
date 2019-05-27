@@ -15,7 +15,7 @@ export class DayByHours extends React.Component {
 
   render(): React.ReactElement<React.JSXElementConstructor<HTMLDivElement>> {
     return (
-      <div>
+      <div className="dayByHoursLine">
         {DayByHours.renderHoursOfDay()}
       </div>
     );

@@ -16,11 +16,11 @@ interface IProps {
 }
 
 export class Day extends Component<IProps> {
-    openDialog = ():void => {
+    openDialog = (): void => {
         this.props.openDialog();
     };
 
-    openDialogWithTime = ( event: React.MouseEvent<HTMLDivElement> ):void => {
+    openDialogWithTime = ( event: React.MouseEvent<HTMLDivElement> ): void => {
         let startTime = event.nativeEvent.offsetY / 48 | 0;
         this.props.chooseDate( new Date(
             this.props.selectedDate.getFullYear(),
@@ -35,7 +35,7 @@ export class Day extends Component<IProps> {
         const today = equalDate( new Date(), this.props.selectedDate ) ? ' today ' : '';
         return (
             <section className="mainCalendar"
-                 data-day={this.props.selectedDate.getDate()}
+                     data-day={this.props.selectedDate.getDate()}
             >
                 <div className="headerDay">
                     <div>
@@ -59,6 +59,7 @@ export class Day extends Component<IProps> {
                                        openViewTask={this.props.openViewTask}
                                        currentDay={this.props.selectedDate.getDate()}
                     />
+
                 </div>
             </section>
         );
