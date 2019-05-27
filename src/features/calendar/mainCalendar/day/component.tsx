@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { equalDate } from '../../../../utils/date';
 import { DayByHours } from './dayByHours/component';
 import { TimeOfDay } from './timeOfDay/component';
-import { constants } from '../../../../constants';
+import { calendar, className } from '../../../constants';
 import { ListOfTasksForDay } from './listOfTasks/component';
 import { IDescriptionOfTask } from '../../types';
 
@@ -22,37 +22,39 @@ export class Day extends Component<IProps> {
 
     openDialogWithTime = ( event: React.MouseEvent<HTMLDivElement> ): void => {
         let startTime = event.nativeEvent.offsetY / 48 | 0;
+        let minutes = (event.nativeEvent.offsetY / 24 % 2 | 0) ===  1 ? 30 : 0;
         this.props.chooseDate( new Date(
             this.props.selectedDate.getFullYear(),
             this.props.selectedDate.getMonth(),
             this.props.selectedDate.getDate(),
             startTime,
+            minutes,
         ) );
         this.props.openDialog();
     };
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
-        const today = equalDate( new Date(), this.props.selectedDate ) ? ' today ' : '';
+        const today = equalDate( new Date(), this.props.selectedDate ) ? className.TODAY : '';
         return (
-            <section className="mainCalendar"
+            <section className={className.MAIN_CALENDAR}
                      data-day={this.props.selectedDate.getDate()}
             >
-                <div className="headerDay">
+                <div className={className.HEADER_DAY}>
                     <div>
                         <span className={( (
                             this.props.selectedDate.getDay() === 0 || this.props.selectedDate.getDay() === 6 )
-                            ? 'weekend ' : '' ) + today}
+                            ? className.WEEKEND : '' ) + today}
                         >
-                        {constants.DAYS_OF_WEEK_FOR_MONTH[ this.props.selectedDate.getDay() ]}
+                        {calendar.DAYS_OF_WEEK[ this.props.selectedDate.getDay() ]}
                         </span>
                     </div>
                     <div onClick={this.openDialog}>
-                        <span className="dateOfDay">
+                        <span className={className.DATE_OF_DAY}>
                           {this.props.selectedDate.getDate()}
                         </span>
                     </div>
                 </div>
-                <div className="dayByHoursWrapper" onClick={this.openDialogWithTime}>
+                <div className={className.DAY_BY_HOURS_WRAPPER} onClick={this.openDialogWithTime}>
                     <TimeOfDay/>
                     <DayByHours/>
                     <ListOfTasksForDay listOfTask={this.props.listOfTasks}

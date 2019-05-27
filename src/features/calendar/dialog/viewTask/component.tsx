@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { saveTasks } from '../../../../services/services';
-import { eventListener, key } from './constants';
 import { IProps } from './types';
 import { IDescriptionOfTask } from '../../types';
+import { className, eventListener, key } from '../../../constants';
 
 export class viewTask extends React.Component<IProps> {
     currentTask?: IDescriptionOfTask;
@@ -42,19 +42,19 @@ export class viewTask extends React.Component<IProps> {
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
-            <div className="outsideDialog" onMouseDown={this.closeDialog}>
-                <div className="dialog" onMouseDown={this.clickStop}>
-                    <div className="close" onClick={this.closeDialog}>
-                        <i className="fas fa-times"/>
+            <div className={className.OUTSIDE_DIALOG} onMouseDown={this.closeDialog}>
+                <div className={className.DIALOG} onMouseDown={this.clickStop}>
+                    <div className={className.CLOSE} onClick={this.closeDialog}>
+                        <i className={className.BUTTON_CLOSE}/>
                     </div>
-                    <div className="deleteTask" onClick={this.removeTask}>
-                        <i className="fas fa-trash-alt"/>
+                    <div className={className.DELETE_TASK} onClick={this.removeTask}>
+                        <i className={className.BUTTON_DELETE}/>
                     </div>
-                    <div>
+                    <div style={{ overflow: 'hidden' }}>
                         <span>{this.currentTask ? this.currentTask.nameTask : null}</span>
                     </div>
                     <div>
-                        <span>Start:{this.currentTask ? this.currentTask.startDate.toString() : null}</span>
+                        <span>Start: {this.currentTask ? this.currentTask.startDate.toString() : null}</span>
                     </div>
                     <div>
                         <span>End: {this.currentTask ? this.currentTask.endDate.toString() : null}</span>

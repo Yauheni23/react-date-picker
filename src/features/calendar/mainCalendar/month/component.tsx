@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getArrayDaysInMonth } from '../../../../utils/date';
 import { Middle } from '../../middleCalendar/component';
-import { constants } from '../../../../constants';
+import { calendar, className, modeCalendar } from '../../../constants';
 import { Link } from 'react-router-dom';
 import { ListOfTasksForMonth } from './listOfTasks/component';
 import { IDescriptionOfTask } from '../../types';
@@ -35,7 +35,7 @@ export class Month extends Component<IProps> {
     };
 
     chooseDay = ( event: any ): void => {
-        this.props.changeModeCalendar( 'day' );
+        this.props.changeModeCalendar( modeCalendar.DAY );
         this.props.chooseDate( new Date(
             this.props.selectedDate.getFullYear(),
             this.props.selectedDate.getMonth(),
@@ -48,17 +48,17 @@ export class Month extends Component<IProps> {
         const todayDate = new Date();
         const today = ( todayDate.getFullYear() === this.props.selectedDate.getFullYear()
             && todayDate.getMonth() === this.props.selectedDate.getMonth()
-            && todayDate.getDate() === +day ) ? ' today ' : '';
+            && todayDate.getDate() === +day ) ? className.TODAY : '';
         return (
             <div key={day + index}
-                 className={'dayOfMonth ' + ( ( day !== '' ) ? ' enabled ' : '' )}
+                 className={`${className.DAY_OF_MONTH} ${(day !== '') ?  className.ENABLED : '' }`}
                  onClick={( day !== '' ) ? this.openDialog : () => {
                  }}
                  data-day={day}
             >
-                <Link to="/calendar/day" onClick={this.chooseDay} data-day={day} style={{ color: 'black' }}>
+                <Link to={modeCalendar.DAY} onClick={this.chooseDay} data-day={day} style={{ color: 'black' }}>
           <span
-              className={( ( index === 0 || index === 6 ) ? 'weekend ' : '' ) + today}>
+              className={( ( index === 0 || index === 6 ) ? className.WEEKEND : '' ) + today}>
             {day}
           </span>
                 </Link>
@@ -78,7 +78,7 @@ export class Month extends Component<IProps> {
         const daysOfMonth = getArrayDaysInMonth( this.props.selectedDate );
         return daysOfMonth.map( ( week, index ) => {
             return (
-                <div key={index} className="weekOfMonth">
+                <div key={index} className={className.WEEK_OF_MONTH}>
                     {this.renderDaysOfMonth( week )}
                 </div>
             );
@@ -87,9 +87,9 @@ export class Month extends Component<IProps> {
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
-            <section className="daysOfMonth">
-                <Middle lol={constants.DAYS_OF_WEEK_FOR_MONTH}/>
-                <div className="month">
+            <section className={className.DAYS_OF_MONTH}>
+                <Middle data={calendar.DAYS_OF_WEEK}/>
+                <div className={className.MONTH}>
                     {this.renderWeeksOfMonth()}
                 </div>
             </section>

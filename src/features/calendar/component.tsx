@@ -8,6 +8,7 @@ import ViewTask from './dialog/viewTask';
 import { loadTasks } from '../../services/services';
 import { IProps } from './types';
 import { MainCalendar } from './mainCalendar/component';
+import { className } from '../constants';
 
 export class Calendar extends Component<IProps> {
     componentWillMount(): void {
@@ -16,9 +17,8 @@ export class Calendar extends Component<IProps> {
     }
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
-
         return (
-            <div className="calendar">
+            <div className={className.CALENDAR}>
                 <HeaderCalendar changeMonth={this.props.changeMonth}
                                 changeYear={this.props.changeYear}
                                 showToday={this.props.showToday}

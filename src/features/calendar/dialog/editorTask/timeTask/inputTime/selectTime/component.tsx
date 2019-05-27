@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { getFormatForInputTime, getTimeFromInputTimeFormat } from '../../../../../../../utils/date';
+import { className } from '../../../../../../constants';
 
 interface IProps {
     hideSelectTime: () => any;
@@ -32,7 +33,7 @@ export class SelectTime extends React.Component<IProps> {
             array.push(
                 <div key={i}
                      data-time={time}
-                     className="optionTime"
+                     className={className.OPTION_TIME}
                      onMouseDown={this.selectTime}>
                     {time}
                 </div>,
@@ -43,7 +44,7 @@ export class SelectTime extends React.Component<IProps> {
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
-            <div className="selectTime">
+            <div className={className.SELECT_TIME}>
                 {this.renderSelectTime()}
             </div>
         );

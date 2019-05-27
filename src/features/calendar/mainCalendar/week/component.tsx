@@ -1,12 +1,11 @@
 import React from 'react';
 import { getArrayDaysInWeek } from '../../../../utils/date';
-import { Middle } from '../../middleCalendar/component';
-import { constants } from '../../../../constants';
 import { TimeOfDay } from '../day/timeOfDay/component';
 import { DayByHours } from '../day/dayByHours/component';
-import { Link } from 'react-router-dom';
 import { ListOfTasksForDaysOfWeek } from './listOfTasks/component';
 import { IDescriptionOfTask } from '../../types';
+import { TopWeek } from './topWeek/component';
+import { className, modeCalendar } from '../../../constants';
 
 interface IProps {
     selectedDate: Date,
@@ -21,65 +20,46 @@ export class Week extends React.Component<IProps> {
     getListOfTasksOnDay = ( day: number ): IDescriptionOfTask[] => {
         return this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
             return new Date( element.startDate ).getDate() === day
-                || ( element.startDate.getDate() <= day && day <= element.endDate.getDate());
+                || ( element.startDate.getDate() <= day && day <= element.endDate.getDate() );
         } );
     };
 
     openDialog = ( event: any ): void => {
-        let startTime = event.nativeEvent.offsetY / 48 | 0;
+        let month = this.props.selectedDate.getMonth();
+        let hours = event.nativeEvent.offsetY / 48 | 0;
+        let minutes = ( event.nativeEvent.offsetY / 24 % 2 | 0 ) === 1 ? 30 : 0;
         this.props.openDialog();
         if ( this.props.selectedDate.getDate() - +event.currentTarget.dataset.day > 7 ) {
-            this.props.chooseDate( new Date(
-                this.props.selectedDate.getFullYear(),
-                this.props.selectedDate.getMonth() + 1,
-                +event.currentTarget.dataset.day,
-                startTime,
-            ) );
+            month = this.props.selectedDate.getMonth() + 1;
         } else if ( this.props.selectedDate.getDate() - +event.currentTarget.dataset.day < -7 ) {
-            this.props.chooseDate( new Date(
-                this.props.selectedDate.getFullYear(),
-                this.props.selectedDate.getMonth() - 1,
-                +event.currentTarget.dataset.day,
-                startTime,
-            ) );
-        } else {
-            this.props.chooseDate( new Date(
-                this.props.selectedDate.getFullYear(),
-                this.props.selectedDate.getMonth(),
-                +event.currentTarget.dataset.day,
-                startTime,
-            ) );
+            month = this.props.selectedDate.getMonth() - 1;
         }
+        this.props.chooseDate( new Date( this.props.selectedDate.getFullYear(),
+            month, +event.currentTarget.dataset.day,
+            hours, minutes,
+        ) );
     };
 
     chooseDay = ( event: any ): void => {
-        this.props.changeModeCalendar( 'day' );
+        this.props.changeModeCalendar( modeCalendar.DAY );
+        let month = this.props.selectedDate.getMonth();
         if ( this.props.selectedDate.getDate() - +event.currentTarget.dataset.day > 7 ) {
-            this.props.chooseDate( new Date(
-                this.props.selectedDate.getFullYear(),
-                this.props.selectedDate.getMonth() + 1,
-                +event.currentTarget.dataset.day,
-            ) );
+            month = this.props.selectedDate.getMonth() + 1;
         } else if ( this.props.selectedDate.getDate() - +event.currentTarget.dataset.day < -7 ) {
-            this.props.chooseDate( new Date(
-                this.props.selectedDate.getFullYear(),
-                this.props.selectedDate.getMonth() - 1,
-                +event.currentTarget.dataset.day,
-            ) );
-        } else {
-            this.props.chooseDate( new Date(
-                this.props.selectedDate.getFullYear(),
-                this.props.selectedDate.getMonth(),
-                +event.currentTarget.dataset.day,
-            ) );
+            month = this.props.selectedDate.getMonth() - 1;
         }
+        this.props.chooseDate( new Date(
+            this.props.selectedDate.getFullYear(),
+            month,
+            +event.currentTarget.dataset.day,
+        ) );
         event.stopPropagation();
     };
 
-    renderDay1( day: number ): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
+    renderDay( day: number ): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div key={day}
-                 className='dayForWeek'
+                 className={className.DAY_FOR_WEEK}
                  onClick={this.openDialog}
                  data-day={day}
                  style={{ padding: '0 4px' }}
@@ -91,50 +71,24 @@ export class Week extends React.Component<IProps> {
         );
     };
 
-    renderWeeksOfMonth1(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
-        const daysOfMonth = getArrayDaysInWeek( this.props.selectedDate );
-        return daysOfMonth.map( ( day: number ) => this.renderDay1( day ) );
-    }
-
-    renderDay( day: number, index: number ): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
-        const todayDate = new Date();
-        const today = ( todayDate.getFullYear() === this.props.selectedDate.getFullYear()
-            && todayDate.getMonth() === this.props.selectedDate.getMonth()
-            && todayDate.getDate() === +day ) ? ' today ' : '';
-        return (
-            <div key={day}
-                 className='dateOfWeek'
-                 onClick={this.openDialog}
-                 data-day={day}
-            >
-                <Link to="/calendar/day" onClick={this.chooseDay} data-day={day} style={{ color: 'black' }}>
-          <span className={( ( index === 0 || index === 6 ) ? 'weekend ' : '' ) + today}>
-            {day}
-          </span>
-                </Link>
-            </div>
-        );
-    };
-
     renderWeeksOfMonth(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         const daysOfMonth = getArrayDaysInWeek( this.props.selectedDate );
-        return daysOfMonth.map( ( day: number, index ) => this.renderDay( day, index ) );
+        return daysOfMonth.map( ( day: number ) => this.renderDay( day ) );
     }
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
-            <section className="mainCalendar">
-                <div className="headerDay">
-                    <Middle lol={constants.DAYS_OF_WEEK_FOR_MONTH}/>
-                    <div className="dateOfWeekWrapper">
-                        {this.renderWeeksOfMonth()}
-                    </div>
-                </div>
-                <div className="dayByHoursWrapper">
+            <section className={className.MAIN_CALENDAR}>
+                <TopWeek selectedDate={this.props.selectedDate}
+                         openDialog={this.openDialog}
+                         chooseDay={this.chooseDay}
+                         changeModeCalendar={this.props.changeModeCalendar}
+                />
+                <div className={className.DAY_BY_HOURS_WRAPPER}>
                     <TimeOfDay/>
                     <DayByHours/>
-                    <div className="dayForWeekWrapper">
-                        {this.renderWeeksOfMonth1()}
+                    <div className={className.DAY_FOR_WEEK_WRAPPER}>
+                        {this.renderWeeksOfMonth()}
                     </div>
                 </div>
             </section>

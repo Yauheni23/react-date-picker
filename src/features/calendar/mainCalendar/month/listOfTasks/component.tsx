@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getTimeFromString } from '../../../../../utils/date';
 import { IDescriptionOfTask } from '../../../types';
+import { className } from '../../../../constants';
 
 interface IProps {
     listOfTasks: IDescriptionOfTask[],
@@ -20,12 +21,12 @@ export class ListOfTasksForMonth extends Component<IProps> {
         return this.props.listOfTasks.map( ( task ) => {
             return (
                 <div key={task.id}
-                     className="taskForMonth"
+                     className={className.TASK_FOR_MONTH}
                      onClick={this.openViewTask}
                      data-id={task.id}
                 >
-                    <i className="fas fa-circle"/>
-                    <span className="taskText">
+                    <i className={className.MARKER_TASK}/>
+                    <span className={className.TASK_TEXT}>
                         {` ${getTimeFromString( task.startDate )} ${task.nameTask}`}
                     </span>
                 </div>
@@ -36,8 +37,7 @@ export class ListOfTasksForMonth extends Component<IProps> {
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
-            <section className="tasksForMonthWrapper"
-                     style={{}}>
+            <section className={className.TASK_FOR_MONTH_WRAPPER}>
                 {this.renderTask()}
             </section>
         );

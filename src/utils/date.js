@@ -105,6 +105,8 @@ export function isDateBusy(arrayDateTask, task) {
     return arrayDateTask.some((el) => {
         return (el.startDate < task.startDate && task.startDate < el.endDate)
             || (el.startDate < task.endDate && task.endDate < el.endDate)
+            || (task.startDate < el.startDate && el.startDate < task.endDate)
+            || (task.startDate < el.endDate && el.endDate < task.endDate)
             || (+el.startDate === +task.startDate && +task.endDate === +el.endDate);
     });
 }

@@ -5,6 +5,7 @@ import { Week } from './week/component';
 import { Day } from './day/component';
 import { IDescriptionOfTask } from '../types';
 import { isTaskForDay } from '../../../utils/date';
+import { route } from '../../constants';
 
 export class MainCalendar extends React.Component<any> {
     getTasksOfMonth = (): IDescriptionOfTask[] => {
@@ -23,7 +24,7 @@ export class MainCalendar extends React.Component<any> {
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <React.Fragment>
-                <Route path="/calendar/month"
+                <Route path={route.CALENDAR_MONTH}
                        render={() => <Month selectedDate={this.props.selectedDate}
                                             openDialog={this.props.openDialog}
                                             chooseDate={this.props.chooseDate}
@@ -32,7 +33,7 @@ export class MainCalendar extends React.Component<any> {
                                             listOfTasks={this.getTasksOfMonth()}
                        />}
                 />
-                <Route path="/calendar/week"
+                <Route path={route.CALENDAR_WEEK}
                        render={() => <Week selectedDate={this.props.selectedDate}
                                            openDialog={this.props.openDialog}
                                            chooseDate={this.props.chooseDate}
@@ -41,7 +42,7 @@ export class MainCalendar extends React.Component<any> {
                                            listOfTasks={this.getTasksOfMonth()}
                        />}
                 />
-                <Route path="/calendar/day"
+                <Route path={route.CALENDAR_DAY}
                        render={() => <Day selectedDate={this.props.selectedDate}
                                           openDialog={this.props.openDialog}
                                           chooseDate={this.props.chooseDate}

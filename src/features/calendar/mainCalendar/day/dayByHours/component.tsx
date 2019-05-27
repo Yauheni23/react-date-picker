@@ -1,4 +1,5 @@
 import React from 'react';
+import { className } from '../../../../constants';
 
 export class DayByHours extends React.Component {
   static renderHoursOfDay(): React.ReactElement<React.JSXElementConstructor<HTMLDivElement>>[] {
@@ -6,7 +7,7 @@ export class DayByHours extends React.Component {
     for ( let i = 0; i < 24; i++ ) {
       array.push(
         <div key={i}
-             className="hoursOfDay"
+             className={className.HOURS_OF_DAY}
         />,
       );
     }
@@ -15,7 +16,7 @@ export class DayByHours extends React.Component {
 
   render(): React.ReactElement<React.JSXElementConstructor<HTMLDivElement>> {
     return (
-      <div className="dayByHoursLine">
+      <div className={className.DAY_BY_HOURS_LINE}>
         {DayByHours.renderHoursOfDay()}
       </div>
     );

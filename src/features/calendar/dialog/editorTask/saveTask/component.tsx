@@ -2,6 +2,7 @@ import React from 'react';
 import { saveTasks } from '../../../../../services/services';
 import { isDateBusy } from '../../../../../utils/date';
 import { IDescriptionOfTask } from '../../../types';
+import { className, text } from '../../../../constants';
 
 interface IProps {
     taskInfo: IDescriptionOfTask,
@@ -9,12 +10,15 @@ interface IProps {
     listOfTasks: IDescriptionOfTask[];
     addTask: ( task: IDescriptionOfTask ) => any;
     validateNameTask: any;
+    changeDateError: ( error: string ) => any;
 }
 
 export class SaveTask extends React.Component<IProps> {
     saveTask = (): void => {
         if ( this.props.validateNameTask() ) {
-            this.createNewTask( this.props.taskInfo ) ? this.props.closeDialog() : console.log( 'Invalid Date!!!' );
+            this.createNewTask( this.props.taskInfo )
+                ? this.props.closeDialog()
+                : this.props.changeDateError( text.DATE_ERROR_MESSAGE );
         }
     };
 
@@ -28,15 +32,20 @@ export class SaveTask extends React.Component<IProps> {
     };
 
     addTask = ( task: IDescriptionOfTask ): void => {
-        saveTasks( this.props.listOfTasks.concat( task ) );
-        this.props.addTask( task );
+        const validateTask = {
+            ...task,
+            endDate: ( task.endDate < task.startDate ) ? task.startDate : task.endDate,
+        };
+        saveTasks( this.props.listOfTasks.concat(validateTask) );
+        this.props.addTask(validateTask)
+        ;
     };
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
-            <div className="wrapperSave">
-                <button className="btn btn-success" onClick={this.saveTask}>
-                    <span>Save</span>
+            <div className={className.WRAPPER_SAVE}>
+                <button className={className.BUTTON_SAVE} onClick={this.saveTask}>
+                    <span>{text.BUTTON_SAVE}</span>
                 </button>
             </div>
         );

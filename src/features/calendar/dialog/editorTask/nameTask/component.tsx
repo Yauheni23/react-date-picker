@@ -1,4 +1,5 @@
 import React from 'react';
+import { className, text } from '../../../../constants';
 
 interface IProps {
     error: boolean;
@@ -13,8 +14,8 @@ export class NameTask extends React.Component<IProps> {
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div>
-                <input className={'nameTask' + ( this.props.error ? ' errorInput' : '' )}
-                       placeholder="Add name"
+                <input className={className.NAME_TASK + ( this.props.error ? className.ERROR_INPUT : '' )}
+                       placeholder={text.NAME_TASK_PLACEHOLDER}
                        onChange={this.changeNameTask}
                        maxLength={100}
                        autoFocus

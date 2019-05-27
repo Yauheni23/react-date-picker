@@ -4,12 +4,4 @@ export enum editorTaskActions  {
     CHANGE_START_DATE = 'CHANGE_START_DATE',
     CHANGE_END_DATE = 'CHANGE_END_DATE',
     SET_DIALOG_INITIAL_STATE = 'SET_DIALOG_INITIAL_STATE',
-};
-
-export enum key {
-    ESCAPE = 'Escape',
-}
-
-export enum eventListener {
-    KEY_UP = 'keyup',
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { getTimeFromString } from '../../../../../utils/date';
 import { IDescriptionOfTask } from '../../../types';
+import { getSizeTaskBlock } from '../../../../../utils/size';
+import { className } from '../../../../constants';
 
 interface IProps {
     listOfTask: IDescriptionOfTask[];
@@ -16,36 +18,23 @@ export class ListOfTasksForDaysOfWeek extends React.Component<IProps> {
 
     renderTasks(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         return this.props.listOfTask.map( ( task ) => {
-            let topPosition = task.startDate.getDate() === this.props.currentDay ?
-                task.startDate.getHours() * 48 + ( task.startDate.getMinutes() === 30 ? 24 : 0 ) : 0;
-            let heightBlock = 0;
-            if ( task.startDate.getDate() === this.props.currentDay ) {
-                heightBlock = task.startDate.getDate() === task.endDate.getDate() ?
-                    task.endDate.getHours() * 48 + ( task.endDate.getMinutes() === 30 ? 24 : 0 ) - topPosition - 8
-                    : 1152 - topPosition;
-            } else if ( task.endDate.getDate() === this.props.currentDay ) {
-                heightBlock = task.endDate.getHours() * 48 + ( task.endDate.getMinutes() === 30 ? 24 : 0 ) - topPosition - 8;
-                topPosition = 0;
-            } else {
-                heightBlock = 1152;
-            }
+            let { heightBlock, topPosition } = { ...getSizeTaskBlock( task, this.props.currentDay || 0 ) };
             return (
                 <div key={task.id}
                      style={{ height: `${heightBlock}px`, top: `${topPosition}px` }}
-                     className="taskForWeek"
+                     className={className.TASK_FOR_WEEK}
                      onClick={this.openViewTask}
                      data-id={task.id}
                 >
                     {heightBlock <= 24 ?
-                        <p className="taskText">
+                        <p className={className.TASK_TEXT}>
                             {`${task.nameTask}, ${getTimeFromString( task.startDate )}`}
-                        </p>
-                        :
+                        </p> :
                         <div>
-                            <p className="taskText">
+                            <p className={className.TASK_TEXT}>
                                 {`${task.nameTask}`}
                             </p>
-                            <p className="taskText">
+                            <p className={className.TASK_TEXT}>
                                 {`${getTimeFromString( task.startDate )}-${getTimeFromString( task.endDate )}`}
                             </p>
                         </div>

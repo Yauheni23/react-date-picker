@@ -62,7 +62,7 @@
     height: 38px;
 }
 
-.daysOfWeek {
+.dayOfWeekWrapper {
     display: flex;
     justify-content: space-between;
     padding: 5px 0;
@@ -108,7 +108,7 @@
     position: relative;
     text-align: center;
     width: 100%;
-    height: 100%;
+    height: 1152px;
 }
 
 .dayForWeek + .dayForWeek::after {
@@ -236,7 +236,7 @@
 }
 
 .nameTask {
-    margin: 0 5px 15px;
+    margin: 5px 5px 15px;
     width: 100%;
     border: none;
     outline: none;
@@ -255,7 +255,8 @@
     justify-content: space-around;
     align-items: center;
     height: 28px;
-    margin-bottom: 15px;
+    margin-top: 5px;
+    margin-bottom: 25px;
 }
 
 .datePickerWrapper {
@@ -493,7 +494,7 @@
     pointer-events: none;
 }
 
-.tasksForDayWrapper {
+.taskForDayWrapper {
     height: 1152px;
     text-align: left;
     padding: 5px;
@@ -522,7 +523,7 @@
     line-height: 1.3em;
 }
 
-.tasksForMonthWrapper {
+.taskForMonthWrapper {
     height: calc(100% - 38px);
     text-align: left;
     padding: 0 5px;
@@ -571,7 +572,6 @@
 
 .error {
     color: red;
-    display: none;
 }
 
 .errorInput {

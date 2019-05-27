@@ -38,6 +38,7 @@
   left: 0;
   top: 25px;
   width: 250px;
+  height: 250px;
   background: #ffffff;
   border: 1px solid black;
   border-radius: 3px;
@@ -51,23 +52,21 @@
   justify-content: center;
   align-items: center;
 }
-#month {
+#month-date-picker {
   margin-right: 10px;
   border-radius: 5px;
   height: 25px;
   background: #ffffff;
 }
-#year {
+#year-date-picker {
   border-radius: 5px;
   padding: 2px 4px;
   width: 70px;
   height: 25px;
 }
-.daysOfWeek {
+.daysOfWeek-date-picker {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 10px;
-  padding-top: 4px;
 }
 .dayOfWeek {
   width: calc(100% / 7);
@@ -85,19 +84,19 @@
   justify-content: space-between;
   display: flex;
 }
-.dayOfMonth {
+.dayOfMonth-datePicker {
   width: calc(100% / 7);
   height: 100%;
   font-size: 1.2em;
   text-align: center;
 }
-.dayOfMonth.enabled {
+.dayOfMonth-datePicker.enabled {
   border: 1px solid rgba(0, 0, 0, 0.18);
 }
-.dayOfMonth.enabled:hover {
+.dayOfMonth-datePicker.enabled:hover {
   cursor: pointer;
 }
-.daysOfMonth .week .dayOfMonth.enabled:hover {
+.daysOfMonth .week .dayOfMonth-datePicker.enabled:hover {
   background: rgba(0, 0, 255, 0.27);
 }
 .today {

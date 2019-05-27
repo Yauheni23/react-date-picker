@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as ReactDOM from 'react-dom';
 import * as PropTypes from 'prop-types';
-import { constants } from '../../../constants';
+import { calendar } from '../../constants';
 import { getArrayDaysInMonth } from '../../../utils/date';
 
 export class CalendarDatePicker extends Component {
@@ -46,13 +46,13 @@ export class CalendarDatePicker extends Component {
     };
 
     static renderSelectMonth() {
-        return constants.MONTH.map((month, index) => (
+        return calendar.MONTH_SHORT.map((month, index) => (
             <option value={index} key={index}>{month}</option>
         ));
     };
 
     static renderDaysOfWeek() {
-        return constants.DAYS_OF_WEEK.map((dayOfWeek, index) => (
+        return calendar.DAYS_OF_WEEK_SHORT.map((dayOfWeek, index) => (
             <div key={index} className="dayOfWeek">{dayOfWeek}</div>
         ));
     };
@@ -64,7 +64,7 @@ export class CalendarDatePicker extends Component {
         return week.map((day, index) => {
             return (
                 <div key={day + index}
-                     className={((day !== '') ? 'dayOfMonth enabled ' : 'dayOfMonth ')}
+                     className={((day !== '') ? 'dayOfMonth-datePicker enabled ' : 'dayOfMonth-datePicker ')}
                      onClick={this.chooseDate}
                      data-day={day}
                 >
@@ -96,12 +96,12 @@ export class CalendarDatePicker extends Component {
         return (
             <div className={'calendar-date-picker ' + ((this.props.isVisibleCalendar) ? 'activeBlock' : '')}>
                 <section className="dateInputWrapper">
-                    <select id="month" value={displayedDate.getMonth()} onChange={this.changeMonth}>
+                    <select id="month-date-picker" value={displayedDate.getMonth()} onChange={this.changeMonth}>
                         {CalendarDatePicker.renderSelectMonth()}
                     </select>
-                    <input type="number" value={displayedDate.getFullYear()} id="year" onChange={this.changeYear}/>
+                    <input type="number" value={displayedDate.getFullYear()} id="year-date-picker" onChange={this.changeYear}/>
                 </section>
-                <section className="daysOfWeek">
+                <section className="daysOfWeek-date-picker">
                     {CalendarDatePicker.renderDaysOfWeek()}
                 </section>
                 <section className="daysOfMonth">

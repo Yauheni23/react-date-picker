@@ -2,6 +2,7 @@ import { IAction } from '../../store/interfaces';
 import { datePickerActions } from '../datePicker';
 import { IDescriptionOfTask, IState } from './types';
 import { calendarActions } from './constants';
+import { checkRoute } from '../../utils/checkRoute';
 
 const initialState: IState = {
     selectedDate: new Date(),
@@ -71,6 +72,12 @@ export function calendarReducer( state: IState = initialState, action: IAction<a
             return {
                 ...state,
                 modeCalendar: action.payload,
+            };
+
+        case calendarActions.LOCATION_CHANGE:
+            return {
+                ...state,
+                modeCalendar: checkRoute(action.payload.location.pathname)
             };
 
         default:

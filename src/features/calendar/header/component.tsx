@@ -1,5 +1,5 @@
 import React from 'react';
-import { constants } from '../../../constants';
+import { calendar, className, eventListener, id, key, modeCalendar, route, text } from '../../constants';
 import { Link } from 'react-router-dom';
 import { daysInMonth } from '../../../utils/date';
 
@@ -22,12 +22,12 @@ export class HeaderCalendar extends React.Component<IProps> {
     }
 
     componentDidMount(): void {
-        document.addEventListener( 'keyup', ( event: KeyboardEvent ) => {
+        document.addEventListener( eventListener.KEY_UP, ( event: KeyboardEvent ) => {
             this.changeCountDay();
-            if ( event.key === 'ArrowLeft' ) {
+            if ( event.key === key.ARROW_LEFT ) {
                 this.props.changeDisplayedDate( -this.countDay * 86400000 );
             }
-            if ( event.key === 'ArrowRight' ) {
+            if ( event.key === key.ARROW_RIGHT ) {
                 this.props.changeDisplayedDate( this.countDay * 86400000 );
             }
         } );
@@ -35,10 +35,10 @@ export class HeaderCalendar extends React.Component<IProps> {
 
     changeCountDay = (): void => {
         switch ( this.props.modeCalendar ) {
-            case 'month':
+            case modeCalendar.MONTH:
                 this.countDay = daysInMonth( this.props.displayedDate );
                 break;
-            case 'week':
+            case modeCalendar.WEEK:
                 this.countDay = 7;
                 break;
             default:
@@ -68,12 +68,12 @@ export class HeaderCalendar extends React.Component<IProps> {
     changeDisplayedDate = ( event: React.MouseEvent<HTMLDivElement>): void => {
         this.changeCountDay();
         this.props.changeDisplayedDate(
-            this.countDay * 86400000 * ( event.currentTarget.dataset.change === 'left' ? -1 : 1 ),
+            this.countDay * 86400000 * ( event.currentTarget.dataset.change === key.ARROW_LEFT ? -1 : 1 ),
         );
     };
 
     static renderSelectMonth(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
-        return constants.MONTH_FOR_CALENDAR.map( ( month, index ) => (
+        return calendar.MONTH.map( ( month, index ) => (
             <option value={index} key={index}>{month}</option>
         ) );
     };
@@ -81,26 +81,28 @@ export class HeaderCalendar extends React.Component<IProps> {
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         const displayedDate = this.props.displayedDate;
         return (
-            <section className="headerCalendar">
-                <button className="btn btn-outline-primary" onClick={this.showToday}>Today</button>
-                <div className="wrapperArrowsChangeDate">
-                    <div onClick={this.changeDisplayedDate} className="arrowChangeDate" data-change="left"><i
-                        className="fas fa-chevron-left"/></div>
-                    <div onClick={this.changeDisplayedDate} className="arrowChangeDate" data-change="right"><i
-                        className="fas fa-chevron-right"/></div>
+            <section className={className.HEADER_CALENDAR}>
+                <button className={className.BUTTON_TODAY} onClick={this.showToday}>{text.BUTTON_TODAY}</button>
+                <div className={className.WRAPPER_ARROWS_CHANGE_DATE}>
+                    <div onClick={this.changeDisplayedDate} className={className.ARROW_CHANGE_DATE}
+                         data-change={key.ARROW_LEFT}>
+                        <i className={className.ARROW_LEFT_CHANGE_DATE}/></div>
+                    <div onClick={this.changeDisplayedDate} className={className.ARROW_CHANGE_DATE}
+                         data-change={key.ARROW_RIGHT}>
+                        <i className={className.ARROW_RIGHT_CHANGE_DATE}/></div>
                 </div>
                 <div>
-                    <select id="month" value={displayedDate.getMonth()} onChange={this.changeMonth}>
+                    <select id={id.MONTH} value={displayedDate.getMonth()} onChange={this.changeMonth}>
                         {HeaderCalendar.renderSelectMonth()}
                     </select>
-                    <input type="number" value={displayedDate.getFullYear()} id="year" onChange={this.changeYear}/>
+                    <input type="number" value={displayedDate.getFullYear()} id={id.YEAR} onChange={this.changeYear}/>
                 </div>
                 <div>
-                    <Link to="/calendar/day" className="headerLink" onClick={this.changeModeCalendar}
+                    <Link to={route.CALENDAR_DAY} className={className.HEADER_LINK} onClick={this.changeModeCalendar}
                           data-mode="day"> Day </Link>
-                    <Link to="/calendar/week" className="headerLink" onClick={this.changeModeCalendar}
+                    <Link to={route.CALENDAR_WEEK} className={className.HEADER_LINK} onClick={this.changeModeCalendar}
                           data-mode="week"> Week </Link>
-                    <Link to="/calendar/month" className="headerLink" onClick={this.changeModeCalendar}
+                    <Link to={route.CALENDAR_MONTH} className={className.HEADER_LINK} onClick={this.changeModeCalendar}
                           data-mode="month"> Month </Link>
                 </div>
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import DatePickerComponent from '../../../../datePicker/index.js';
 import { InputTime } from './inputTime/component';
+import { className } from '../../../../constants';
 
 interface IProps {
     startDate: Date;
@@ -12,9 +13,9 @@ interface IProps {
 export class TimeTask extends React.Component<IProps> {
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
-            <div className="timeTask">
+            <div className={className.TIME_TASK}>
                 <DatePickerComponent selectedDate={this.props.startDate} id="start"/>
-                <div className="timeTask">
+                <div className={className.TIME_TASK}>
                     <InputTime chooseTime={this.props.changeStartDate}
                                time={this.props.startDate}
                     />

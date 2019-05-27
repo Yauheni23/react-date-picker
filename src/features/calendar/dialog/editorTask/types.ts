@@ -3,6 +3,7 @@ import { IDescriptionOfTask } from '../../types';
 export interface IStateEntry {
     nameTask: string;
     inputError: boolean;
+    dateError: string;
 }
 
 export interface IActions {

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { getFormatForInputTime } from '../../../../../../utils/date';
 import { SelectTime } from './selectTime/component';
+import { className } from '../../../../../constants';
 
 interface IProps {
     time: Date;
@@ -40,9 +41,9 @@ export class InputTime extends React.Component<IProps, IState> {
             />
             : null;
         return (
-            <div className="inputTimeWrapper">
+            <div className={className.INPUT_TIME_WRAPPER}>
                 <input type="text"
-                       className="inputTime"
+                       className={className.INPUT_TIME}
                        onClick={this.showSelectTime}
                        onBlur={this.hideSelectTime}
                        value={time}
