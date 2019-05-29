@@ -63,15 +63,14 @@ export const className = {
 export const id = {
     MONTH: 'month',
     YEAR: 'year',
-}
+};
 
 export const text = {
     BUTTON_TODAY: 'Today',
     BUTTON_SAVE: 'Save',
     NAME_TASK_PLACEHOLDER: 'Add name',
-    DATE_ERROR_MESSAGE: 'Invalid Date!',
-
-}
+    DATE_ERROR_MESSAGE: 'Date is busy!',
+};
 
 export const route = {
     CALENDAR_MONTH: '/calendar/month',
@@ -83,12 +82,12 @@ export const modeCalendar = {
     MONTH: 'month',
     WEEK: 'week',
     DAY: 'day',
-}
+};
 
 export const time = {
     HOUR_IN_MILLISECONDS: 3600000,
     DAY_IN_MILLISECONDS: 24 * 3600000,
-}
+};
 
 export enum key {
     ESCAPE = 'Escape',

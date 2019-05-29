@@ -19,7 +19,7 @@ export interface IActions {
     showToday: () => any;
     openDialog: () => any;
     chooseDate: ( date: Date ) => any;
-    changeDisplayedDate: ( milliseconds: number ) => any;
+    changeDisplayedDate: ( date: Date ) => any;
     changeModeCalendar: ( mode: string ) => any;
     openViewTask: any;
     setListOfTasksFromStorage: any;

@@ -61,7 +61,7 @@ export function calendarReducer( state: IState = initialState, action: IAction<a
         case calendarActions.CHANGE_DISPLAYED_DATE:
             return {
                 ...state,
-                selectedDate: new Date( state.selectedDate.setMilliseconds( 0 ) + action.payload ),
+                selectedDate: action.payload,
             };
         case calendarActions.CHOOSE_DATE:
             return {

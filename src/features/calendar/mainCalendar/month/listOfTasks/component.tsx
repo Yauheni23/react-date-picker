@@ -4,19 +4,19 @@ import { IDescriptionOfTask } from '../../../types';
 import { className } from '../../../../constants';
 
 interface IProps {
-    listOfTasks: IDescriptionOfTask[],
-    openViewTask: any
+    listOfTasks: IDescriptionOfTask[];
+    openViewTask: (id: string) => any;
 }
 
 export class ListOfTasksForMonth extends Component<IProps> {
-    openViewTask = ( event: any ): void => {
+    openViewTask = ( event: React.MouseEvent<HTMLElement> ): void => {
         event.stopPropagation();
-        this.props.openViewTask( event.currentTarget.dataset.id );
+        this.props.openViewTask( event.currentTarget.dataset.id ? event.currentTarget.dataset.id : '' );
     };
 
     renderTask(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         this.props.listOfTasks.sort( ( task1, task2 ) => {
-            return task1.startDate.setMilliseconds( 0 ) - task2.startDate.setMilliseconds( 0 );
+            return task1.startDate.getTime() - task2.startDate.getTime();
         } );
         return this.props.listOfTasks.map( ( task ) => {
             return (

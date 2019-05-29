@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { equalDate } from '../../../../utils/date';
 import { DayByHours } from './dayByHours/component';
 import { TimeOfDay } from './timeOfDay/component';
-import { calendar, className } from '../../../constants';
+import { className } from '../../../constants';
 import { ListOfTasksForDay } from './listOfTasks/component';
 import { IDescriptionOfTask } from '../../types';
+import { HeaderDay } from './headerDay/component';
 
 
 interface IProps {
@@ -16,10 +16,6 @@ interface IProps {
 }
 
 export class Day extends Component<IProps> {
-    openDialog = (): void => {
-        this.props.openDialog();
-    };
-
     openDialogWithTime = ( event: React.MouseEvent<HTMLDivElement> ): void => {
         let startTime = event.nativeEvent.offsetY / 48 | 0;
         let minutes = (event.nativeEvent.offsetY / 24 % 2 | 0) ===  1 ? 30 : 0;
@@ -34,26 +30,13 @@ export class Day extends Component<IProps> {
     };
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
-        const today = equalDate( new Date(), this.props.selectedDate ) ? className.TODAY : '';
         return (
             <section className={className.MAIN_CALENDAR}
                      data-day={this.props.selectedDate.getDate()}
             >
-                <div className={className.HEADER_DAY}>
-                    <div>
-                        <span className={( (
-                            this.props.selectedDate.getDay() === 0 || this.props.selectedDate.getDay() === 6 )
-                            ? className.WEEKEND : '' ) + today}
-                        >
-                        {calendar.DAYS_OF_WEEK[ this.props.selectedDate.getDay() ]}
-                        </span>
-                    </div>
-                    <div onClick={this.openDialog}>
-                        <span className={className.DATE_OF_DAY}>
-                          {this.props.selectedDate.getDate()}
-                        </span>
-                    </div>
-                </div>
+                <HeaderDay selectedDate={this.props.selectedDate}
+                           openDialog={this.props.openDialog}
+                />
                 <div className={className.DAY_BY_HOURS_WRAPPER} onClick={this.openDialogWithTime}>
                     <TimeOfDay/>
                     <DayByHours/>
@@ -61,7 +44,6 @@ export class Day extends Component<IProps> {
                                        openViewTask={this.props.openViewTask}
                                        currentDay={this.props.selectedDate.getDate()}
                     />
-
                 </div>
             </section>
         );

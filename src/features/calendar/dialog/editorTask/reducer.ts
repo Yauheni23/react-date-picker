@@ -16,9 +16,9 @@ export function editorTaskReducer( state: IState = initialState, action: IAction
                     action.payload.getMonth(),
                     action.payload.getDate(),
                     // @ts-ignore
-                    state[ changeDate ] ? state[ changeDate ].getHours() : 1,
+                    state[ changeDate ] ? state[ changeDate ].getHours() : 0,
                     // @ts-ignore
-                    state[ changeDate ] ? state[ changeDate ].getMinutes() : 1,
+                    state[ changeDate ] ? state[ changeDate ].getMinutes() : 0,
                 ),
             };
         case editorTaskActions.SET_DIALOG_INITIAL_STATE:

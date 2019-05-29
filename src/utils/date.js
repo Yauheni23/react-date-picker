@@ -24,32 +24,48 @@ export function convertFromDateInFormatInput(date) {
     return `${date.getFullYear()}-${month}-${day}`;
 }
 
-export function daysInMonth(date) {
+export function getCountDaysInMonth(date) {
     return 33 - new Date(date.getFullYear(), date.getMonth(), 33).getDate();
 }
 
 export function getArrayDaysInMonth(date) {
     const arrayDaysInMonth = [];
     const dayOfWeek = new Date(date.getFullYear(), date.getMonth()).getDay();
-    const countWeeksInMonth = (daysInMonth(date) - 7 + dayOfWeek - 0.0001) / 7 | 0;
+    const countWeeksInMonth = (getCountDaysInMonth(date) - 7 + dayOfWeek - 0.0001) / 7 | 0;
 
     for(let i = 0; i <= countWeeksInMonth + 1; i++) {
         arrayDaysInMonth[i] = [];
         for(let j = 0; j < 7; j++) {
             const currentDayOfMonth = (7 * i) + j + 1 - dayOfWeek;
-            arrayDaysInMonth[i][j] = (currentDayOfMonth > 0 && currentDayOfMonth <= daysInMonth(date)) ?
+            arrayDaysInMonth[i][j] = (currentDayOfMonth > 0 && currentDayOfMonth <= getCountDaysInMonth(date)) ?
                 currentDayOfMonth + '' : '';
         }
     }
     return arrayDaysInMonth;
 }
 
+export function getDaysInMonth(date) {
+    const arrayDaysInMonth = [];
+    const dayOfWeek = new Date(date.getFullYear(), date.getMonth()).getDay();
+    const countWeeksInMonth = (getCountDaysInMonth(date) - 7 + dayOfWeek - 0.0001) / 7 | 0;
+
+    for(let i = 0; i <= countWeeksInMonth + 1; i++) {
+        arrayDaysInMonth[i] = [];
+        for(let j = 0; j < 7; j++) {
+            arrayDaysInMonth[i][j] = (7 * i) + j + 1 - dayOfWeek;
+        }
+    }
+    return arrayDaysInMonth;
+}
+
 export function getArrayDaysInWeek(date) {
-    const MILLISECONDS_IN_DAY = 86400000;
     const arrayDaysInWeek = [];
-    const firstDayInWeek = new Date(date).setMilliseconds(-MILLISECONDS_IN_DAY * date.getDay());
-    for(let i = 0; i < 7; i++) {
-        arrayDaysInWeek[i] = new Date(firstDayInWeek + (i * MILLISECONDS_IN_DAY)).getDate();
+    const selectedDay = new Date(date);
+    for(let i = selectedDay.getDay(); i >= 0; i--) {
+        arrayDaysInWeek.push(selectedDay.getDate() - i);
+    }
+    for(let i = 1; i < 7 - selectedDay.getDay(); i++) {
+        arrayDaysInWeek.push(selectedDay.getDate() + i);
     }
 
     return arrayDaysInWeek;
@@ -102,12 +118,14 @@ export function getTimeFromString(dateString) {
 }
 
 export function isDateBusy(arrayDateTask, task) {
-    return arrayDateTask.some((el) => {
+    return arrayDateTask.find((el) => {
         return (el.startDate < task.startDate && task.startDate < el.endDate)
             || (el.startDate < task.endDate && task.endDate < el.endDate)
             || (task.startDate < el.startDate && el.startDate < task.endDate)
             || (task.startDate < el.endDate && el.endDate < task.endDate)
-            || (+el.startDate === +task.startDate && +task.endDate === +el.endDate);
+            || (+el.startDate === +task.startDate && +task.endDate === +el.endDate)
+            || (+el.startDate === +task.startDate && +task.endDate === +el.startDate)
+            || (+el.endDate === +task.startDate && +task.endDate === +el.endDate);
     });
 }
 

@@ -29,9 +29,9 @@ export const showToday = (): IAction<any> => ( {
     type: calendarActions.SHOW_TODAY,
 } );
 
-export const changeDisplayedDate = ( milliseconds: number ): IAction<number> => ( {
+export const changeDisplayedDate = ( date: Date ): IAction<Date> => ( {
     type: calendarActions.CHANGE_DISPLAYED_DATE,
-    payload: milliseconds,
+    payload: date,
 } );
 
 export const chooseDate = ( date: Date ): IAction<Date> => ( {

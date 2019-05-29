@@ -16,19 +16,22 @@ export class ChangerMode extends React.Component<IProps> {
         return (
             <div>
                 <Link to={route.CALENDAR_DAY}
-                      className={className.HEADER_LINK + (this.props.modeCalendar === modeCalendar.DAY ? ' currentMode' : '')}
+                      className={className.HEADER_LINK
+                      + (this.props.modeCalendar === modeCalendar.DAY ? ' currentMode' : '')}
                       onClick={this.changeModeCalendar}
                       data-mode="day">
                     Day
                 </Link>
                 <Link to={route.CALENDAR_WEEK}
-                      className={className.HEADER_LINK  + (this.props.modeCalendar === modeCalendar.WEEK ? ' currentMode' : '')}
+                      className={className.HEADER_LINK
+                      + (this.props.modeCalendar === modeCalendar.WEEK ? ' currentMode' : '')}
                       onClick={this.changeModeCalendar}
                       data-mode="week">
                     Week
                 </Link>
                 <Link to={route.CALENDAR_MONTH}
-                      className={className.HEADER_LINK  + (this.props.modeCalendar === modeCalendar.MONTH ? ' currentMode' : '')}
+                      className={className.HEADER_LINK
+                      + (this.props.modeCalendar === modeCalendar.MONTH ? ' currentMode' : '')}
                       onClick={this.changeModeCalendar}
                       data-mode="month">
                     Month

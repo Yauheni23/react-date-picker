@@ -28,7 +28,7 @@ export const mapDispatchToProps = ( dispatch: IDispatch<any> ): IActions => {
         showToday: () => dispatch( actions.showToday() ),
         chooseDate: ( date: Date ) => dispatch( actions.chooseDate( date ) ),
         openDialog: () => dispatch( actions.openDialog() ),
-        changeDisplayedDate: ( milliseconds: number ) => dispatch( actions.changeDisplayedDate( milliseconds ) ),
+        changeDisplayedDate: ( date: Date ) => dispatch( actions.changeDisplayedDate( date ) ),
         changeModeCalendar: ( mode: string ) => dispatch( actions.changeModeCalendar( mode ) ),
         openViewTask: ( data: any ) => dispatch( actions.openViewTask( data ) ),
         setListOfTasksFromStorage: ( tasks: any[] ) => dispatch( actions.setListOfTasksFromStorage( tasks ) ),

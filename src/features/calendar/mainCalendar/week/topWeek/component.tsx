@@ -11,12 +11,13 @@ interface IProps {
     changeModeCalendar: ( mode: string ) => any;
 }
 
-export class TopWeek extends React.Component<IProps> {
+export class DateWeek extends React.Component<IProps> {
     renderDay( day: number, index: number ): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         const todayDate = new Date();
         const today = ( todayDate.getFullYear() === this.props.selectedDate.getFullYear()
             && todayDate.getMonth() === this.props.selectedDate.getMonth()
             && todayDate.getDate() === +day ) ? className.TODAY : '';
+        const currentDate = new Date(this.props.selectedDate.getFullYear(), this.props.selectedDate.getMonth(), day)
         return (
             <div key={day}
                  className={className.DATE_OF_WEEK}
@@ -25,7 +26,7 @@ export class TopWeek extends React.Component<IProps> {
             >
                 <Link to={route.CALENDAR_DAY} onClick={this.props.chooseDay} data-day={day} style={{ color: 'black' }}>
           <span className={( ( index === 0 || index === 6 ) ? className.WEEKEND : '' ) + today}>
-            {day}
+            {currentDate.getDate() + ' ' + (currentDate.getDate() === 1 ? calendar.MONTH_SHORT[currentDate.getMonth()] : '')}
           </span>
                 </Link>
             </div>

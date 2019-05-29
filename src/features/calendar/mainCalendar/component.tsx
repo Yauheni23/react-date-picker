@@ -5,13 +5,34 @@ import { Week } from './week/component';
 import { Day } from './day/component';
 import { IDescriptionOfTask } from '../types';
 import { isTaskForDay } from '../../../utils/date';
-import { route } from '../../constants';
+import { route, time } from '../../constants';
 
-export class MainCalendar extends React.Component<any> {
+interface IProps {
+    selectedDate: Date;
+    openDialog: () => any
+    chooseDate: ( date: Date ) => any;
+    changeModeCalendar: ( mode: string ) => any;
+    openViewTask: any;
+    listOfTasks: IDescriptionOfTask[];
+}
+
+export class MainCalendar extends React.Component<IProps> {
     getTasksOfMonth = (): IDescriptionOfTask[] => {
+        const NUMBER_MIDDLE_MONTH = 15;
+        const NUMBER_FOR_VIEW_MONTH = 23;
         return this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
-            return this.props.selectedDate.getFullYear() === element.startDate.getFullYear()
-                && this.props.selectedDate.getMonth() === element.startDate.getMonth();
+            return Math.abs(
+                this.props.selectedDate.getTime() - element.startDate.getTime()
+                + (NUMBER_MIDDLE_MONTH - this.props.selectedDate.getDate()) * time.DAY_IN_MILLISECONDS )
+                < NUMBER_FOR_VIEW_MONTH * time.DAY_IN_MILLISECONDS
+        } );
+    };
+
+    getTasksOfWeek = (): IDescriptionOfTask[] => {
+        return this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
+            return ( Math.abs( this.props.selectedDate.getTime() - element.startDate.getTime() ) < time.DAY_IN_MILLISECONDS * 7 )
+                || ( element.startDate.getTime() < this.props.selectedDate.getTime()
+                    && this.props.selectedDate.getTime() < element.endDate.getTime() );
         } );
     };
 
@@ -39,7 +60,7 @@ export class MainCalendar extends React.Component<any> {
                                            chooseDate={this.props.chooseDate}
                                            changeModeCalendar={this.props.changeModeCalendar}
                                            openViewTask={this.props.openViewTask}
-                                           listOfTasks={this.getTasksOfMonth()}
+                                           listOfTasks={this.getTasksOfWeek()}
                        />}
                 />
                 <Route path={route.CALENDAR_DAY}

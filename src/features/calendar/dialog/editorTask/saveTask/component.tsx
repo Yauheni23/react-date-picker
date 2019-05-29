@@ -23,8 +23,12 @@ export class SaveTask extends React.Component<IProps> {
     };
 
     createNewTask = ( task: IDescriptionOfTask ): boolean => {
-        if ( !isDateBusy( this.props.listOfTasks, task ) ) {
-            this.addTask( task );
+        const validateTask = {
+            ...task,
+            endDate: ( task.endDate < task.startDate ) ? task.startDate : task.endDate,
+        };
+        if ( !isDateBusy( this.props.listOfTasks, validateTask ) ) {
+            this.addTask( validateTask );
         } else {
             return false;
         }
@@ -32,12 +36,8 @@ export class SaveTask extends React.Component<IProps> {
     };
 
     addTask = ( task: IDescriptionOfTask ): void => {
-        const validateTask = {
-            ...task,
-            endDate: ( task.endDate < task.startDate ) ? task.startDate : task.endDate,
-        };
-        saveTasks( this.props.listOfTasks.concat(validateTask) );
-        this.props.addTask(validateTask)
+        saveTasks( this.props.listOfTasks.concat(task) );
+        this.props.addTask(task)
         ;
     };
 

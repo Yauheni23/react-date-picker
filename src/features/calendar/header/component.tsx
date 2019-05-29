@@ -8,7 +8,7 @@ interface IProps {
     changeYear: ( year: number ) => number,
     changeMonth: ( month: number ) => number,
     showToday: () => any,
-    changeDisplayedDate: ( milliseconds: number ) => any,
+    changeDisplayedDate: ( date: Date ) => any,
     changeModeCalendar: ( mode: string ) => any,
     modeCalendar: string
 }
