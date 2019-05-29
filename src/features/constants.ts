@@ -85,6 +85,10 @@ export const modeCalendar = {
     DAY: 'day',
 }
 
+export const time = {
+    HOUR_IN_MILLISECONDS: 3600000,
+    DAY_IN_MILLISECONDS: 24 * 3600000,
+}
 
 export enum key {
     ESCAPE = 'Escape',
@@ -95,5 +99,8 @@ export enum key {
 
 export enum eventListener {
     KEY_UP = 'keyup',
+    KEY_DOWN = 'keydown',
 }
+
+
 

@@ -17,7 +17,7 @@ export interface IActions {
 export interface ISelectors {
     startDate: Date;
     endDate: Date;
-    isVisibleDialog: boolean;
+    isVisibleDialog?: boolean;
 }
 
 export interface IProps extends IActions, ISelectors{

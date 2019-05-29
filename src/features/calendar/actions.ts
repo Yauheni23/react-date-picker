@@ -4,7 +4,7 @@ import { IAction } from '../../store/interfaces';
 import { viewTaskActions } from './dialog/viewTask';
 import { IDescriptionOfTask } from './types';
 
-export const setListOfTasksFromStorage = ( tasks: any[] ): IAction<IDescriptionOfTask[]> => ( {
+export const setListOfTasksFromStorage = ( tasks: IDescriptionOfTask[] ): IAction<IDescriptionOfTask[]> => ( {
     type: calendarActions.GET_LIST_OF_TASKS_FROM_STORAGE,
     payload: tasks,
 } );

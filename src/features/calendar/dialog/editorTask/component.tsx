@@ -4,13 +4,13 @@ import { NameTask } from './nameTask/component';
 import { SaveTask } from './saveTask/component';
 import { IProps, IStateEntry as IState } from './types';
 import uuidv4 from 'uuid/v4';
-import { className, eventListener, key } from '../../../constants';
+import { className, eventListener, key, time } from '../../../constants';
 
 export class EditorTask extends React.Component<IProps, IState> {
     state = {
         nameTask: '',
-        inputError: false,
         dateError: '',
+        inputError: false,
     };
 
     changeDateError = ( error: string ) => {
@@ -42,7 +42,7 @@ export class EditorTask extends React.Component<IProps, IState> {
     componentWillMount(): void {
         this.props.setDialogInitialState( {
             startDate: this.props.selectedDate,
-            endDate: new Date( this.props.selectedDate.setMilliseconds( 0 ) + 3600000 ),
+            endDate: new Date( this.props.selectedDate.setMilliseconds( 0 ) + time.HOUR_IN_MILLISECONDS ),
         } );
         document.addEventListener( eventListener.KEY_UP, this.closeKeyEscape );
     }

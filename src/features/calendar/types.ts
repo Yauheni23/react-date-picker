@@ -7,8 +7,8 @@ export interface IDescriptionOfTask {
 
 export interface ISelectors {
     selectedDate: Date;
-    isVisibleDialog: boolean;
-    isVisibleViewTask: boolean;
+    isVisibleDialog?: boolean;
+    isVisibleViewTask?: boolean;
     modeCalendar: string;
     listOfTasks: IDescriptionOfTask[];
 }
@@ -32,5 +32,5 @@ export interface IProps extends IActions, ISelectors{
 export interface IState {
     selectedDate: Date;
     modeCalendar: string;
-    listOfTasks: any;
+    listOfTasks: IDescriptionOfTask[];
 }

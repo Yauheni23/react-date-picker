@@ -21,7 +21,6 @@ export function editorTaskReducer( state: IState = initialState, action: IAction
                     state[ changeDate ] ? state[ changeDate ].getMinutes() : 1,
                 ),
             };
-
         case editorTaskActions.SET_DIALOG_INITIAL_STATE:
             return {
                 ...state,

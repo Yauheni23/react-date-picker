@@ -3,14 +3,14 @@ import * as actions from './actions';
 import { EditorTask } from './component';
 import { getStartDate, getEndDate, getIsVisibleDialog } from './selector';
 import { createStructuredSelector, Selector } from 'reselect';
-import { IDispatch } from '../../../../store/interfaces';
+import { IDispatch, IState as IAppState } from '../../../../store/interfaces';
 import { IActions, IDialogDefault, ISelectors } from './types';
 import { IDescriptionOfTask } from '../../types';
 
 export { editorTaskReducer } from './reducer';
 export { editorTaskActions } from './constants';
 
-export const mapStateToProps = (): Selector<any, ISelectors> => {
+export const mapStateToProps = (): Selector<IAppState, ISelectors> => {
     return createStructuredSelector( {
         startDate: getStartDate(),
         endDate: getEndDate(),
