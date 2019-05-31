@@ -23,6 +23,7 @@ export const className = {
     DATE_OF_WEEK: 'dateOfWeek ',
     DATE_OF_DAY: 'dateOfDay ',
     DAY_OF_MONTH: 'dayOfMonth ',
+    TASK_FOR_LIST: 'taskForList ',
     TASK_FOR_MONTH_WRAPPER: 'taskForMonthWrapper ',
     TASK_FOR_MONTH: 'taskForMonth ',
     TASK_FOR_WEEK: 'taskForWeek ',

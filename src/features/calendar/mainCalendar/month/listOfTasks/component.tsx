@@ -21,13 +21,13 @@ export class ListOfTasksForMonth extends Component<IProps> {
         return this.props.listOfTasks.map( ( task ) => {
             return (
                 <div key={task.id}
-                     className={className.TASK_FOR_MONTH}
+                     className={className.TASK_FOR_MONTH + className.TASK_FOR_LIST}
                      onClick={this.openViewTask}
                      data-id={task.id}
                 >
                     <i className={className.MARKER_TASK}/>
                     <span className={className.TASK_TEXT}>
-                        {` ${getTimeFromString( task.startDate )} ${task.nameTask}`}
+                        {` ${getTimeFromString( task.startDate )} ${task.nameTask ? task.nameTask : '(No name)'}`}
                     </span>
                 </div>
 

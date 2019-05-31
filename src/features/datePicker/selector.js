@@ -4,11 +4,6 @@ export const datePickerReducer = (state) => {
   return state.datePickerReducer;
 };
 
-export const getSelectedDate = () => createSelector(
-  datePickerReducer,
-  datePicker => datePicker ? datePicker.selectedDate : null
-);
-
 export const getDisplayedDate = () => createSelector(
   datePickerReducer,
   datePicker => datePicker ? datePicker.displayedDate : null

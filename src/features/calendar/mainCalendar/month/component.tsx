@@ -16,15 +16,10 @@ interface IProps {
 }
 
 export class Month extends Component<IProps> {
-    shouldComponentUpdate( nextProps: Readonly<IProps>, nextState: Readonly<{}>, nextContext: any ): boolean {
-        return this.props.selectedDate.toISOString() !== nextProps.selectedDate.toISOString()
-            || this.props.listOfTasks.length !== nextProps.listOfTasks.length;
-    }
-
     getListOfTasksOnDay = ( day: number ): IDescriptionOfTask[] => {
         return this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
             return new Date( element.startDate ).toDateString() ===
-                new Date( this.props.selectedDate.getFullYear(), this.props.selectedDate.getMonth(), day).toDateString();
+                new Date( this.props.selectedDate.getFullYear(), this.props.selectedDate.getMonth(), day ).toDateString();
         } );
     };
 
@@ -40,7 +35,7 @@ export class Month extends Component<IProps> {
         this.props.openDialog();
     };
 
-    chooseDay = ( event: React.MouseEvent<HTMLElement>  ): void => {
+    chooseDay = ( event: React.MouseEvent<HTMLElement> ): void => {
         this.props.changeModeCalendar( modeCalendar.DAY );
         this.props.chooseDate( new Date(
             this.props.selectedDate.getFullYear(),
@@ -55,8 +50,8 @@ export class Month extends Component<IProps> {
         const today = ( todayDate.getFullYear() === this.props.selectedDate.getFullYear()
             && todayDate.getMonth() === this.props.selectedDate.getMonth()
             && todayDate.getDate() === +day ) ? className.TODAY : '';
-        const date = new Date(this.props.selectedDate.getFullYear(), this.props.selectedDate.getMonth(), +day);
-        const opacity = (+day <= 0 || (numberWeek > 3 && +date.getDate() < 7)) ? 0.4 : 1;
+        const date = new Date( this.props.selectedDate.getFullYear(), this.props.selectedDate.getMonth(), +day );
+        const opacity = ( +day <= 0 || ( numberWeek > 3 && +date.getDate() < 7 ) ) ? 0.4 : 1;
         return (
             <div key={day}
                  className={className.DAY_OF_MONTH + className.ENABLED}
@@ -66,7 +61,7 @@ export class Month extends Component<IProps> {
                 <Link to={modeCalendar.DAY} onClick={this.chooseDay} data-day={day} style={{ color: 'black', opacity }}>
           <span
               className={( ( index === 0 || index === 6 ) ? className.WEEKEND : '' ) + today}>
-            {date.getDate() + ' ' + (date.getDate() === 1 ? calendar.MONTH_SHORT[date.getMonth()] : '') }
+            {date.getDate() + ' ' + ( date.getDate() === 1 ? calendar.MONTH_SHORT[ date.getMonth() ] : '' )}
           </span>
                 </Link>
                 <ListOfTasksForMonth listOfTasks={this.getListOfTasksOnDay( +day )}

@@ -21,11 +21,13 @@ export class CalendarDatePicker extends Component {
     };
 
     chooseDate = (event) => {
-        this.props.chooseDate(new Date(
+        this.props.changeDate(new Date(
             this.props.displayedDate.getFullYear(),
             this.props.displayedDate.getMonth(),
             +event.currentTarget.dataset.day,
-            ), this.props.id,
+            this.props.selectedDate.getHours(),
+            this.props.selectedDate.getMinutes(),
+            )
         );
         this.hideCalendar();
     };
@@ -115,7 +117,7 @@ export class CalendarDatePicker extends Component {
 CalendarDatePicker.propTypes = {
     displayedDate: PropTypes.any.isRequired,
     isVisibleCalendar: PropTypes.bool.isRequired,
-    chooseDate: PropTypes.func.isRequired,
+    changeDate: PropTypes.func.isRequired,
     hideCalendar: PropTypes.func.isRequired,
     changeMonth: PropTypes.func.isRequired,
     changeYear: PropTypes.func.isRequired,

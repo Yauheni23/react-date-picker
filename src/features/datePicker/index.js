@@ -18,7 +18,7 @@ export const mapDispatchToProps = (dispatch) => {
     hideCalendar: () => dispatch(actions.hideCalendar()),
     changeMonth: (month) => dispatch(actions.changeMonth(month)),
     changeYear: (year) => dispatch(actions.changeYear(year)),
-    chooseDate: (date, id) => dispatch(actions.chooseDate(date, id)),
+    chooseDate: (date) => dispatch(actions.chooseDate(date)),
     setDisplayedDate: (date) => dispatch(actions.setDisplayedDate(date)),
   };
 };

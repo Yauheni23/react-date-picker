@@ -26,6 +26,8 @@ export function editorTaskReducer( state: IState = initialState, action: IAction
                 ...state,
                 startDate: action.payload.startDate,
                 endDate: action.payload.endDate,
+                nameTask: action.payload.nameTask,
+                id: action.payload.id
             };
         case editorTaskActions.OPEN_DIALOG:
             return {
@@ -33,10 +35,7 @@ export function editorTaskReducer( state: IState = initialState, action: IAction
                 isVisibleDialog: true,
             };
         case editorTaskActions.CLOSE_DIALOG:
-            return {
-                ...state,
-                isVisibleDialog: false,
-            };
+            return initialState;
         case editorTaskActions.CHANGE_START_DATE:
             return {
                 ...state,
@@ -46,6 +45,11 @@ export function editorTaskReducer( state: IState = initialState, action: IAction
             return {
                 ...state,
                 endDate: action.payload,
+            };
+        case editorTaskActions.CHANGE_NAME_TASK:
+            return {
+                ...state,
+                nameTask: action.payload,
             };
 
         default:

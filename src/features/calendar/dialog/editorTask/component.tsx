@@ -8,7 +8,6 @@ import { className, eventListener, key, time } from '../../../constants';
 
 export class EditorTask extends React.Component<IProps, IState> {
     state = {
-        nameTask: '',
         dateError: '',
         inputError: false,
     };
@@ -19,15 +18,23 @@ export class EditorTask extends React.Component<IProps, IState> {
         } );
     };
 
-    changeNameTask = ( name: string ): void => {
+    changeStartDate = (date: Date) => {
+        this.props.changeStartDate(date, this.props.id || '')
+    }
+
+    changeEndDate = (date: Date) => {
+        this.props.changeEndDate(date, this.props.id || '')
+    }
+
+    changeNameTask = (name: string): void => {
+        this.props.changeNameTask(name, this.props.id || '' );
         this.setState( {
-            nameTask: name,
             inputError: false,
         } );
     };
 
     validateNameTask = (): boolean => {
-        if ( this.state.nameTask && this.state.nameTask.trim() ) {
+        if ( this.props.nameTask && this.props.nameTask.trim() ) {
             this.setState( {
                 inputError: false,
             } );
@@ -43,18 +50,25 @@ export class EditorTask extends React.Component<IProps, IState> {
         this.props.setDialogInitialState( {
             startDate: this.props.selectedDate,
             endDate: new Date( this.props.selectedDate.setMilliseconds( 0 ) + time.HOUR_IN_MILLISECONDS ),
+            nameTask: '',
+            id: uuidv4()
         } );
         document.addEventListener( eventListener.KEY_UP, this.closeKeyEscape );
     }
 
     closeDialog = (): void => {
-        this.props.closeDialog();
+        this.props.closeDialog('');
+        document.removeEventListener( eventListener.KEY_UP, this.closeKeyEscape );
+    };
+
+    closeDialogWithoutSave = (): void => {
+        this.props.closeDialog(this.props.id || '');
         document.removeEventListener( eventListener.KEY_UP, this.closeKeyEscape );
     };
 
     closeKeyEscape = ( event: KeyboardEvent ): void => {
         if ( event.key === key.ESCAPE ) {
-            this.closeDialog();
+            this.closeDialogWithoutSave();
         }
     };
 
@@ -64,22 +78,23 @@ export class EditorTask extends React.Component<IProps, IState> {
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         const task = {
-            nameTask: this.state.nameTask,
+            nameTask: this.props.nameTask || '',
             startDate: this.props.startDate,
             endDate: this.props.endDate,
-            id: uuidv4(),
+            id: this.props.id || '',
         };
         return (
-            <div className={className.OUTSIDE_DIALOG} onMouseDown={this.closeDialog}>
+            <div className={className.OUTSIDE_DIALOG} onMouseDown={this.closeDialogWithoutSave}>
                 <div className={className.DIALOG} onMouseDown={this.clickStop}>
-                    <div className={className.CLOSE} onClick={this.closeDialog}>
+                    <div className={className.CLOSE} onClick={this.closeDialogWithoutSave}>
                         <i className={className.BUTTON_CLOSE}/>
                     </div>
                     <NameTask error={this.state.inputError} changeNameTask={this.changeNameTask}/>
                     <TimeTask startDate={this.props.startDate}
                               endDate={this.props.endDate}
-                              changeStartDate={this.props.changeStartDate}
-                              changeEndDate={this.props.changeEndDate}
+                              changeStartDate={this.changeStartDate}
+                              changeEndDate={this.changeEndDate}
+                              taskId={task.id}
                     />
                     {this.state.dateError
                         ? <div style={{textAlign: 'center', marginTop:'-15px'}}>
@@ -93,6 +108,7 @@ export class EditorTask extends React.Component<IProps, IState> {
                               listOfTasks={this.props.listOfTasks}
                               closeDialog={this.closeDialog}
                               changeDateError={this.changeDateError}
+                              taskId={task.id}
                     />
                 </div>
             </div>

@@ -138,3 +138,7 @@ export function isTaskForDay(currentDate, taskDate) {
             && currentDate <= taskDate.endDate);
 
 }
+
+export function getTimeFormat(date) {
+    return getFormatForInputTime(date.getHours(),date.getMinutes())
+}

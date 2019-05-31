@@ -14,18 +14,27 @@ export const setDialogInitialState = ( data: IDialogDefault ): IAction<IDialogDe
     payload: data,
 } );
 
-export const closeDialog = (): IAction<any> => ( {
+export const closeDialog = (taskId: string): IAction<any> => ( {
     type: editorTaskActions.CLOSE_DIALOG,
+    taskId
 } );
 
-export const changeStartDate = ( date: Date ): IAction<Date> => ( {
+export const changeStartDate = ( date: Date, taskId: string ): IAction<Date> => ( {
     type: editorTaskActions.CHANGE_START_DATE,
     payload: date,
+    taskId
 } );
 
-export const changeEndDate = ( date: Date ): IAction<Date> => ( {
+export const changeEndDate = ( date: Date, taskId: string  ): IAction<Date> => ( {
     type: editorTaskActions.CHANGE_END_DATE,
     payload: date,
+    taskId
+} );
+
+export const changeNameTask = ( name: string, taskId: string ): IAction<string> => ( {
+    type: editorTaskActions.CHANGE_NAME_TASK,
+    payload: name,
+    taskId
 } );
 
 

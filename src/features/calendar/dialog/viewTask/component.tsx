@@ -3,6 +3,7 @@ import { saveTasks } from '../../../../services/services';
 import { IProps } from './types';
 import { IDescriptionOfTask } from '../../types';
 import { className, eventListener, key } from '../../../constants';
+import { getTimeFormat } from '../../../../utils/date';
 
 export class viewTask extends React.Component<IProps> {
     currentTask?: IDescriptionOfTask;
@@ -41,6 +42,15 @@ export class viewTask extends React.Component<IProps> {
     };
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
+        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let optionsTime = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        };
         return (
             <div className={className.OUTSIDE_DIALOG} onMouseDown={this.closeDialog}>
                 <div className={className.DIALOG} onMouseDown={this.clickStop}>
@@ -51,14 +61,29 @@ export class viewTask extends React.Component<IProps> {
                         <i className={className.BUTTON_DELETE}/>
                     </div>
                     <div style={{ overflow: 'hidden' }}>
-                        <span>{this.currentTask ? this.currentTask.nameTask : null}</span>
+                        <span>Name: {this.currentTask ? this.currentTask.nameTask : null}</span>
                     </div>
-                    <div>
-                        <span>Start: {this.currentTask ? this.currentTask.startDate.toString() : null}</span>
-                    </div>
-                    <div>
-                        <span>End: {this.currentTask ? this.currentTask.endDate.toString() : null}</span>
-                    </div>
+                    {this.currentTask ? ( this.currentTask.startDate.toDateString() === this.currentTask.endDate.toDateString()
+                        ? <div>
+                            <div>
+                                <span>
+                                    {this.currentTask.startDate.toLocaleDateString( 'en-US', options )}
+                                </span>
+                                <span>
+                                    {' ' + getTimeFormat( this.currentTask.startDate )} - {getTimeFormat( this.currentTask.endDate )}
+                                </span>
+                            </div>
+                        </div>
+                        : <div>
+                            <div>
+                                <span>Start: {this.currentTask.startDate.toLocaleDateString( 'en-GB', optionsTime )}</span>
+                            </div>
+                            <div>
+                                <span>End: {this.currentTask.endDate.toLocaleDateString( 'en-GB', optionsTime )}</span>
+                            </div>
+                        </div> )
+                        : null
+                    }
                 </div>
             </div>
         );

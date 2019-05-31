@@ -22,17 +22,17 @@ export class ListOfTasksForDaysOfWeek extends React.Component<IProps> {
             return (
                 <div key={task.id}
                      style={{ height: `${heightBlock}px`, top: `${topPosition}px` }}
-                     className={className.TASK_FOR_WEEK}
+                     className={className.TASK_FOR_WEEK + className.TASK_FOR_LIST}
                      onClick={this.openViewTask}
                      data-id={task.id}
                 >
                     {heightBlock <= 24 ?
                         <p className={className.TASK_TEXT}>
-                            {`${task.nameTask}, ${getTimeFromString( task.startDate )}`}
+                            {`${task.nameTask ? task.nameTask : '(No name)'}, ${getTimeFromString( task.startDate )}`}
                         </p> :
                         <div>
                             <p className={className.TASK_TEXT}>
-                                {`${task.nameTask}`}
+                                {`${task.nameTask ? task.nameTask : '(No name)'}`}
                             </p>
                             <p className={className.TASK_TEXT}>
                                 {`${getTimeFromString( task.startDate )}-${getTimeFromString( task.endDate )}`}

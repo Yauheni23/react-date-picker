@@ -11,6 +11,7 @@ interface IProps {
     addTask: ( task: IDescriptionOfTask ) => any;
     validateNameTask: any;
     changeDateError: ( error: string ) => any;
+    taskId: string;
 }
 
 export class SaveTask extends React.Component<IProps> {
@@ -23,23 +24,14 @@ export class SaveTask extends React.Component<IProps> {
     };
 
     createNewTask = ( task: IDescriptionOfTask ): boolean => {
-        const validateTask = {
-            ...task,
-            endDate: ( task.endDate < task.startDate ) ? task.startDate : task.endDate,
-        };
-        if ( !isDateBusy( this.props.listOfTasks, validateTask ) ) {
-            this.addTask( validateTask );
+        if ( !isDateBusy( this.props.listOfTasks.filter(element => element.id !== this.props.taskId), task ) ) {
+            saveTasks( this.props.listOfTasks );
         } else {
             return false;
         }
         return true;
     };
 
-    addTask = ( task: IDescriptionOfTask ): void => {
-        saveTasks( this.props.listOfTasks.concat(task) );
-        this.props.addTask(task)
-        ;
-    };
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (

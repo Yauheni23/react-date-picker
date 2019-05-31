@@ -17,10 +17,10 @@ interface IProps {
 }
 
 export class Week extends React.Component<IProps> {
-    getListOfTasksOnDay = ( day: number ): IDescriptionOfTask[] => {
+    getListOfTasksOnDay = ( date: Date ): IDescriptionOfTask[] => {
         return this.props.listOfTasks.filter( ( element: IDescriptionOfTask ) => {
-            return new Date( element.startDate ).getDate() === day
-                || ( element.startDate.getDate() <= day && day <= element.endDate.getDate() );
+            return element.startDate.getDate() === date.getDate()
+                || ( +element.startDate <= +date && +date <= +element.endDate );
         } );
     };
 
@@ -46,7 +46,7 @@ export class Week extends React.Component<IProps> {
     };
 
     renderDay( day: number ): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
-        const currentDay = new Date(this.props.selectedDate.getFullYear(),this.props.selectedDate.getMonth(), day).getDate();
+        const currentDate = new Date(this.props.selectedDate.getFullYear(),this.props.selectedDate.getMonth(), day);
         return (
             <div key={day}
                  className={className.DAY_FOR_WEEK}
@@ -55,8 +55,8 @@ export class Week extends React.Component<IProps> {
                  style={{ padding: '0 4px' }}
             >
                 <ListOfTasksForDaysOfWeek openViewTask={this.props.openViewTask}
-                                          listOfTask={this.getListOfTasksOnDay( currentDay)}
-                                          currentDay={currentDay}/>
+                                          listOfTask={this.getListOfTasksOnDay( currentDate)}
+                                          currentDay={currentDate.getDate()}/>
             </div>
         );
     };

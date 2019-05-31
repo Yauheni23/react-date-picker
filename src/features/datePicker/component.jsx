@@ -27,7 +27,8 @@ export class DatePickerComponent extends Component {
     getViewInput = () => {
         return ((this.props.selectedDate) ?
                 <InputComponent selectedDate={this.props.selectedDate}
-                                chooseDate={this.props.chooseDate}
+                                changeDate={this.props.changeDate}
+                                taskId={this.props.taskId}
                                 id={this.props.id}
                 /> :
                 <input type="text"/>
@@ -35,13 +36,14 @@ export class DatePickerComponent extends Component {
     };
 
     getViewCalendar() {
-
         return (this.props.isVisibleCalendar && this.state.isVisible === this.props.id) ?
             <CalendarDatePicker displayedDate={this.props.displayedDate}
+                                selectedDate={this.props.selectedDate}
                                 isVisibleCalendar={this.props.isVisibleCalendar}
                                 changeMonth={this.props.changeMonth}
                                 changeYear={this.props.changeYear}
-                                chooseDate={this.props.chooseDate}
+                                changeDate={this.props.changeDate}
+                                taskId={this.props.taskId}
                                 hideCalendar={this.hideCalendar}
                                 id={this.props.id}
             /> : null;

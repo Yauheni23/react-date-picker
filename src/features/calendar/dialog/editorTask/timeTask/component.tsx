@@ -8,13 +8,14 @@ interface IProps {
     endDate: Date;
     changeStartDate: (date: Date) => any;
     changeEndDate: (date: Date) => any;
+    taskId: string;
 }
 
 export class TimeTask extends React.Component<IProps> {
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div className={className.TIME_TASK}>
-                <DatePickerComponent selectedDate={this.props.startDate} id="start"/>
+                <DatePickerComponent selectedDate={this.props.startDate} id="start" taskId={this.props.taskId} changeDate={this.props.changeStartDate}/>
                 <div className={className.TIME_TASK}>
                     <InputTime chooseTime={this.props.changeStartDate}
                                time={this.props.startDate}
@@ -23,7 +24,7 @@ export class TimeTask extends React.Component<IProps> {
                                chooseTime={this.props.changeEndDate}
                     />
                 </div>
-                <DatePickerComponent selectedDate={this.props.endDate} id="end"/>
+                <DatePickerComponent selectedDate={this.props.endDate} id="end" taskId={this.props.taskId} changeDate={this.props.changeEndDate}/>
             </div>
         );
     }

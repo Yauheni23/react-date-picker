@@ -2,6 +2,7 @@
     width: 100%;
     height: 100vh;
     background: #ffffff;
+    min-height: 270px;
 }
 
 .headerCalendar {
@@ -148,10 +149,6 @@
     border: 1px solid rgba(0, 0, 0, 0.18);
 }
 
-.dayOfMonth.enabled:hover {
-    cursor: pointer;
-}
-
 .daysOfMonth .week .dayOfMonth.enabled:hover {
     background: rgba(0, 0, 255, 0.27);
 }
@@ -190,9 +187,9 @@
     align-items: center;
     flex-direction: column;
     background: #ffffff;
-    border-radius: 5px;
-    box-shadow: 5px 15px 75px rgba(0, 0, 0, 0.34), 0 0 10px #000000;
-    padding: 35px 13px 7px;
+    border-radius: 3px;
+    box-shadow: 5px 15px 75px 8px rgba(0, 0, 0, 0.34), 0 0 10px #000000;
+    padding: 40px 15px 20px;
     width: 350px;
     z-index: 5;
 }
@@ -362,6 +359,12 @@
     padding: 0 5px 0 10px;
     height: calc(100% - 28px);
     overflow: hidden;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.listTasks:hover {
+    opacity: 0.8;
 }
 
 .task {
@@ -508,20 +511,6 @@
     position: relative;
 }
 
-.taskForDay {
-    text-align: left;
-    padding: 0 5px;
-    margin: 0 50px 4px 10px;
-    font-size: 14px;
-    background: rgb(3, 155, 229);
-    border-radius: 3px;
-    overflow: hidden;
-    width: calc(100% - 50px);
-    position: absolute;
-    left: 0;
-    z-index: 3;
-}
-
 .taskText {
     margin: 0;
     color: #ffffff;
@@ -536,26 +525,34 @@
     width: 100%;
 }
 
-.taskForMonth {
+.taskForList {
     text-align: left;
-    padding: 5px;
-    margin: 5px 0;
     font-size: 14px;
     background: rgb(3, 155, 229);
     border-radius: 3px;
     overflow: hidden;
+
+}
+
+.taskForMonth {
+    padding: 5px;
+    margin: 5px 0;
     width: 100%;
 }
 
 .taskForWeek {
-    text-align: left;
     padding: 0 5px;
     margin: 0 10px 5px 0;
-    font-size: 14px;
-    background: rgb(3, 155, 229);
-    border-radius: 3px;
-    overflow: hidden;
     width: calc(100% - 10px);
+    position: absolute;
+    left: 0;
+    z-index: 3;
+}
+
+.taskForDay {
+    padding: 0 5px;
+    margin: 0 50px 4px 10px;
+    width: calc(100% - 50px);
     position: absolute;
     left: 0;
     z-index: 3;
@@ -567,6 +564,10 @@
     overflow: hidden;
     width: 100%;
     position: relative;
+}
+
+.taskForMonth:hover, .taskForWeek:hover, .taskForDay:hover {
+    cursor: pointer;
 }
 
 

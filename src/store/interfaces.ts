@@ -6,6 +6,7 @@ export interface IAction<T> {
   type: string;
   payload?: T;
   id?: string;
+  taskId?: string;
 }
 
 export type IDispatch<T> = (action: any) => void;

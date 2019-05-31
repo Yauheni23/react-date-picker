@@ -14,10 +14,7 @@ export function viewTaskReducer( state: IState = initialState, action: IAction<s
             };
 
         case viewTaskActions.CLOSE_DIALOG:
-            return {
-                ...state,
-                isVisibleViewTask: false,
-            };
+            return initialState;
 
         default:
             return state;

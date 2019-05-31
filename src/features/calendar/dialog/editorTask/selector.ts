@@ -19,4 +19,14 @@ export const getIsVisibleDialog = (): OutputSelector<IAppState, boolean | undefi
     editorTask => editorTask.isVisibleDialog,
 );
 
+export const getNameTask = (): OutputSelector<IAppState, string | undefined, ( res: ISelectors ) => ( string | undefined )> => createSelector(
+    editorTaskReducer,
+    editorTask => editorTask.nameTask,
+);
+
+export const getId = (): OutputSelector<IAppState, string | undefined, ( res: ISelectors ) => ( string | undefined )> => createSelector(
+    editorTaskReducer,
+    editorTask => editorTask.id,
+);
+
 

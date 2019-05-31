@@ -1,23 +1,25 @@
 import { IDescriptionOfTask } from '../../types';
 
 export interface IStateEntry {
-    nameTask: string;
     inputError: boolean;
     dateError: string;
 }
 
 export interface IActions {
     setDialogInitialState: ( data: IDialogDefault ) => any;
-    changeStartDate: ( date: Date ) => any;
-    changeEndDate: ( date: Date ) => any;
-    closeDialog: () => any;
+    changeStartDate: ( date: Date, taskId: string ) => any;
+    changeEndDate: ( date: Date, taskId: string ) => any;
+    closeDialog: (taskId: string) => any;
     addTask: ( task: IDescriptionOfTask ) => any;
+    changeNameTask: ( name: string, taskId: string ) => any;
 }
 
 export interface ISelectors {
     startDate: Date;
     endDate: Date;
     isVisibleDialog?: boolean;
+    nameTask?: string;
+    id?: string;
 }
 
 export interface IProps extends IActions, ISelectors{
@@ -27,11 +29,15 @@ export interface IProps extends IActions, ISelectors{
 
 export interface IDialogDefault {
     startDate: Date,
-    endDate: Date
+    endDate: Date,
+    nameTask: string,
+    id: string
 }
 
 export interface IState {
     isVisibleDialog?: boolean;
     startDate?: Date;
     endDate?: Date;
+    nameTask?: string;
+    id?: string;
 }
