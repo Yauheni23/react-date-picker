@@ -43,6 +43,7 @@ export class Day extends Component<IProps> {
                     <ListOfTasksForDay listOfTask={this.props.listOfTasks}
                                        openViewTask={this.props.openViewTask}
                                        currentDay={this.props.selectedDate.getDate()}
+                                       selectedDate={this.props.selectedDate}
                     />
                 </div>
             </section>

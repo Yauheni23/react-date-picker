@@ -3,11 +3,13 @@ import { getTimeFromString } from '../../../../../utils/date';
 import { IDescriptionOfTask } from '../../../types';
 import { getSizeTaskBlock } from '../../../../../utils/size';
 import { className } from '../../../../constants';
+import { LineToday } from '../../lineToday/component';
 
 interface IProps {
     listOfTask: IDescriptionOfTask[];
     openViewTask: ( id: string ) => any;
     currentDay?: number;
+    selectedDate: Date;
 }
 
 export class ListOfTasksForDaysOfWeek extends React.Component<IProps> {
@@ -45,9 +47,14 @@ export class ListOfTasksForDaysOfWeek extends React.Component<IProps> {
     }
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
+        const isToday = new Date().getDate() === this.props.currentDay ;
         return (
             <section className="tasksForWeekWrapper">
                 {this.renderTasks()}
+                {isToday ?
+                    <LineToday />
+                    : null
+                }
             </section>
         );
     }

@@ -56,7 +56,9 @@ export class Week extends React.Component<IProps> {
             >
                 <ListOfTasksForDaysOfWeek openViewTask={this.props.openViewTask}
                                           listOfTask={this.getListOfTasksOnDay( currentDate)}
-                                          currentDay={currentDate.getDate()}/>
+                                          currentDay={currentDate.getDate()}
+                                          selectedDate={this.props.selectedDate}
+                />
             </div>
         );
     };

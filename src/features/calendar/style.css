@@ -506,7 +506,6 @@
     height: 1152px;
     text-align: left;
     padding: 5px;
-    overflow: hidden;
     width: 100%;
     position: relative;
 }
@@ -561,7 +560,6 @@
 .tasksForWeekWrapper{
     height: 1152px;
     text-align: left;
-    overflow: hidden;
     width: 100%;
     position: relative;
 }

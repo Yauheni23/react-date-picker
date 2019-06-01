@@ -14,6 +14,9 @@ export function getSizeTaskBlock(task: IDescriptionOfTask, currentDay: number) {
     } else {
         heightBlock = 1152;
     }
+    if(heightBlock < 24) {
+        heightBlock = 24;
+    }
     return {
         topPosition,
         heightBlock
