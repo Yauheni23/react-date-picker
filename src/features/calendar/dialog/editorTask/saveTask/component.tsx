@@ -23,7 +23,6 @@ export class SaveTask extends React.Component<IProps> {
     };
 
     createNewTask = ( task: IDescriptionOfTask ): boolean => {
-        console.log(task);
         if ( !isDateBusy( this.props.listOfTasks.filter(element => element.id !== this.props.taskId), task ) ) {
             saveTasks( this.props.listOfTasks );
         } else {
