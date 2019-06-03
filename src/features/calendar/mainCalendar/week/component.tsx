@@ -5,7 +5,7 @@ import { DayByHours } from '../day/dayByHours/component';
 import { ListOfTasksForDaysOfWeek } from './listOfTasks/component';
 import { IDescriptionOfTask } from '../../types';
 import { DateWeek } from './topWeek/component';
-import { className, modeCalendar } from '../../../constants';
+import { className, modeCalendar, size } from '../../../constants';
 
 interface IProps {
     selectedDate: Date,
@@ -25,8 +25,8 @@ export class Week extends React.Component<IProps> {
     };
 
     openDialog = ( event: any ): void => {
-        let hours = event.nativeEvent.offsetY / 48 | 0;
-        let minutes = ( event.nativeEvent.offsetY / 24 % 2 | 0 ) === 1 ? 30 : 0;
+        let hours = event.nativeEvent.offsetY / size.heightHour | 0;
+        let minutes = ( event.nativeEvent.offsetY / ( size.heightHour / 2 ) % 2 | 0 ) === 1 ? 30 : 0;
         this.props.openDialog();
         this.props.chooseDate( new Date( this.props.selectedDate.getFullYear(),
             this.props.selectedDate.getMonth(),
@@ -52,11 +52,11 @@ export class Week extends React.Component<IProps> {
                  className={className.DAY_FOR_WEEK}
                  onClick={this.openDialog}
                  data-day={day}
-                 style={{ padding: '0 4px' }}
+                 style={{ padding: '0 4px', height: `${size.heightDay}px` }}
             >
                 <ListOfTasksForDaysOfWeek openViewTask={this.props.openViewTask}
                                           listOfTask={this.getListOfTasksOnDay( currentDate)}
-                                          currentDay={currentDate.getDate()}
+                                          currentDay={currentDate}
                                           selectedDate={this.props.selectedDate}
                 />
             </div>

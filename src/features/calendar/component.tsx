@@ -15,6 +15,7 @@ export class Calendar extends Component<IProps> {
         const tasks = loadTasks();
         this.props.setListOfTasksFromStorage( tasks );
     }
+
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
         return (
             <div className={className.CALENDAR}>

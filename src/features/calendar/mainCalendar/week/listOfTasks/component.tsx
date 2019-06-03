@@ -2,13 +2,13 @@ import React from 'react';
 import { getTimeFromString } from '../../../../../utils/date';
 import { IDescriptionOfTask } from '../../../types';
 import { getSizeTaskBlock } from '../../../../../utils/size';
-import { className } from '../../../../constants';
+import { className, size } from '../../../../constants';
 import { LineToday } from '../../lineToday/component';
 
 interface IProps {
     listOfTask: IDescriptionOfTask[];
     openViewTask: ( id: string ) => any;
-    currentDay?: number;
+    currentDay: Date;
     selectedDate: Date;
 }
 
@@ -20,7 +20,7 @@ export class ListOfTasksForDaysOfWeek extends React.Component<IProps> {
 
     renderTasks(): React.ReactElement<React.JSXElementConstructor<HTMLElement>>[] {
         return this.props.listOfTask.map( ( task ) => {
-            let { heightBlock, topPosition } = { ...getSizeTaskBlock( task, this.props.currentDay || 0 ) };
+            let { heightBlock, topPosition } = { ...getSizeTaskBlock( task, this.props.currentDay || new Date() ) };
             return (
                 <div key={task.id}
                      style={{ height: `${heightBlock}px`, top: `${topPosition}px` }}
@@ -28,7 +28,7 @@ export class ListOfTasksForDaysOfWeek extends React.Component<IProps> {
                      onClick={this.openViewTask}
                      data-id={task.id}
                 >
-                    {heightBlock <= 24 ?
+                    {heightBlock <= ( size.heightHour / 2 ) ?
                         <p className={className.TASK_TEXT}>
                             {`${task.nameTask ? task.nameTask : '(No name)'}, ${getTimeFromString( task.startDate )}`}
                         </p> :
@@ -47,9 +47,11 @@ export class ListOfTasksForDaysOfWeek extends React.Component<IProps> {
     }
 
     render(): React.ReactElement<React.JSXElementConstructor<HTMLElement>> {
-        const isToday = new Date().getDate() === this.props.currentDay ;
+        const isToday = new Date().toDateString() === this.props.currentDay.toDateString() ;
         return (
-            <section className="tasksForWeekWrapper">
+            <section className={className.TASK_FOR_WEEK_WRAPPER}
+                     style={{height: `${size.heightDay}px`}}
+            >
                 {this.renderTasks()}
                 {isToday ?
                     <LineToday />

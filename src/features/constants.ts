@@ -26,6 +26,7 @@ export const className = {
     TASK_FOR_LIST: 'taskForList ',
     TASK_FOR_MONTH_WRAPPER: 'taskForMonthWrapper ',
     TASK_FOR_MONTH: 'taskForMonth ',
+    TASK_FOR_WEEK_WRAPPER: 'tasksForWeekWrapper ',
     TASK_FOR_WEEK: 'taskForWeek ',
     TASK_FOR_DAY_WRAPPER: 'taskForDayWrapper ',
     TASK_FOR_DAY: 'taskForDay ',
@@ -59,6 +60,13 @@ export const className = {
     NAME_TASK: 'nameTask ',
     ERROR_INPUT: 'errorInput ',
     ERROR: 'error ',
+    LINE_TODAY: 'lineToday',
+    LINE_TODAY_CIRCLE: 'lineTodayCircle',
+};
+
+export const size = {
+    heightHour: 48,
+    heightDay: 48 * 24,
 };
 
 export const id = {
@@ -101,6 +109,5 @@ export enum eventListener {
     KEY_UP = 'keyup',
     KEY_DOWN = 'keydown',
 }
-
 
 

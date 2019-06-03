@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DayByHours } from './dayByHours/component';
 import { TimeOfDay } from './timeOfDay/component';
-import { className } from '../../../constants';
+import { className, size } from '../../../constants';
 import { ListOfTasksForDay } from './listOfTasks/component';
 import { IDescriptionOfTask } from '../../types';
 import { HeaderDay } from './headerDay/component';
@@ -17,8 +17,8 @@ interface IProps {
 
 export class Day extends Component<IProps> {
     openDialogWithTime = ( event: React.MouseEvent<HTMLDivElement> ): void => {
-        let startTime = event.nativeEvent.offsetY / 48 | 0;
-        let minutes = (event.nativeEvent.offsetY / 24 % 2 | 0) ===  1 ? 30 : 0;
+        let startTime = event.nativeEvent.offsetY /size.heightHour | 0;
+        let minutes = (event.nativeEvent.offsetY / ( size.heightHour / 2 ) % 2 | 0) ===  1 ? 30 : 0;
         this.props.chooseDate( new Date(
             this.props.selectedDate.getFullYear(),
             this.props.selectedDate.getMonth(),
@@ -42,7 +42,6 @@ export class Day extends Component<IProps> {
                     <DayByHours/>
                     <ListOfTasksForDay listOfTask={this.props.listOfTasks}
                                        openViewTask={this.props.openViewTask}
-                                       currentDay={this.props.selectedDate.getDate()}
                                        selectedDate={this.props.selectedDate}
                     />
                 </div>
