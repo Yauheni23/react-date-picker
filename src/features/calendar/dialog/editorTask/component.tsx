@@ -80,7 +80,7 @@ export class EditorTask extends React.Component<IProps, IState> {
         const task = {
             nameTask: this.props.nameTask || '',
             startDate: this.props.startDate,
-            endDate: this.props.endDate,
+            endDate: this.props.endDate < this.props.startDate ? this.props.startDate : this.props.endDate,
             id: this.props.id || '',
         };
         return (
@@ -104,7 +104,6 @@ export class EditorTask extends React.Component<IProps, IState> {
                     }
                     <SaveTask validateNameTask={this.validateNameTask}
                               taskInfo={task}
-                              addTask={this.props.addTask}
                               listOfTasks={this.props.listOfTasks}
                               closeDialog={this.closeDialog}
                               changeDateError={this.changeDateError}
